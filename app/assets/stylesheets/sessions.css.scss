@@ -1,0 +1,60 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@font-face { font-family: Helveticaneue; src: url('/assets/helveticaneue.otf'); } 
+@font-face { font-family: Helveticaneuebold; src: url('/assets/helveticaneuebold.otf'); }
+@font-face { font-family: Helveticaneuelight; src: url('/assets/helveticaneuelight.otf'); }
+
+.wrapper {
+  width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  .header {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    .logo {
+      img {
+        width: 300px;
+        margin-left: 40px;
+      }
+    }
+  }
+  .form {
+    width: 100%;
+    input {
+      width: 360px;
+      font-size: 15px;
+      line-height: 25px;
+      color: #444;
+      font-family: georgia;
+      font-weight: light;
+      border: 1px solid #dadada;
+      padding: 10px;
+      outline: none;
+      margin-bottom: 15px;
+      -webkit-transition: 0.3s;
+      &:hover {
+        border: 1px solid #bbb;
+      }
+      &:focus {
+        border: 1px solid #bbb;
+      }
+    }
+    .login {
+      width: 382px;
+      background: #a0a0a0;
+      color: #fafafa;
+      font-family: georgia;
+      text-align: center;
+      border: 0px;
+      cursor: pointer;
+      -webkit-transition: 0.5s;
+      &:hover, &:focus {
+        border: 0px;
+        background: #777;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.sidebar
+  .profile
+    .name.user= current_user.name
+    .collapsible.open
+      .info= current_user.school + ', ' + current_user.year
+      .bio= current_user.bio
+    
+  .team_profile
+    .name.team= @team.name
+    .collapsible
+      .description= @team.description
+      .members
+        -@team.users.each do |member|
+          =member.name
+          =member.email
+  .buckets
+    .name.buckets Buckets
+    .collapsible
+  .header
+    .edit_profile Edit Profile
+    %a(href='/logout') Logout

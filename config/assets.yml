@@ -1,0 +1,12 @@
+template_extension: jst.haml
+
+template_function: Haml
+
+javascripts:
+  lib:
+    - public/javascripts/lib/rails.js
+    - public/javascripts/lib/underscore-min.js
+    - public/javascripts/lib/backbone-min.js
+    - public/javascripts/lib/haml.js
+javascript_templates:
+  - app/views/**/*.jst.haml

@@ -1,0 +1,23 @@
+.container
+  .form
+    =form_for @post do |f|
+      //= f.text_field :title
+      = f.text_area :body
+      = f.hidden_field :user_id, :value => current_user.id
+      = f.hidden_field :team_id, :value => @team.id
+      = submit_tag "Add Post", :class => "add_post"
+    
+  -@posts.each do |post|
+    .post
+      =post.body
+      -if post.user == current_user
+        = link_to "", post, confirm: 'Are you sure you want to delete this post?', method: :delete, :class => "close"
+      .info
+        =post.user.name
+        =post.created_at
+        %br
+        Likes: #{post.likes.count}
+        = link_to "Like", like_posts_path(:user_id => current_user.id, :post_id => post.id), :method => :put, :class => "like"
+        
+      
+      

@@ -1,0 +1,105 @@
+class PostsController < ApplicationController
+  
+  before_filter :require_login
+
+  def require_login
+    unless logged_in?
+      redirect_to '/login' # halts request cycle
+    end
+  end
+ 
+  def logged_in?
+    !!current_user
+  end
+  
+  def index
+    @user = current_user
+    
+    @posts = Post.where(:team_id => @user.team_id).order('created_at ASC')
+    
+    @team = current_user.team
+    
+    @post = Post.new
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end    
+  end
+  
+  def create
+    @post = Post.new(params[:post])
+    
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to "/", notice: 'You added a post.' }
+        format.json { render json: @post, status: :created, location: @post }
+      else
+        format.html { redirect_to "/", notice: 'Better luck next time.' }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def likes
+    @likes = Like.where(:post_id => params[:id])
+    @user_ids = @likes.map{ |like| like.user_id }
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @user_ids }
+    end
+  end
+  
+  def like
+    @like = Like.new({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] })
+    @like.save
+    @post = Post.where(:id => params[:post_id]).first
+    if @post.likes.count >= 3
+      @post.promoted == true
+      @post.save
+    end
+      
+    respond_to do |format|
+      format.html
+      format.json { render json: @like }
+    end
+  end
+  
+  def unlike
+    @like = Like.where({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] })
+    @like.destroy
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @like }
+    end
+  end
+  
+  def promoted
+    @user = current_user
+    
+    @posts = Post.where(:promoted => true).order('created_at ASC')
+    
+    @team = @user.team
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end
+  end
+  
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    @likes = Like.where(:post_id => @post.id)
+    @likes.each do |like|
+      like.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to "/", notice: 'Post was deleted' }
+      format.json { head :no_content }
+    end
+  end
+end

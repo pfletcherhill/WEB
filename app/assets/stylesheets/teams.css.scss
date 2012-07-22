@@ -1,0 +1,215 @@
+// Place all the styles related to the Teams controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background: #FCFCFC;
+}
+//Nav partial
+.nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100px;
+  height: 100%;
+  background: #222;
+  #pointer {
+    background: #fafafa;
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    position:absolute;
+    top: 146px;
+    left: 82px;
+    display: none;
+  }
+  .item {
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    -webkit-transition: .15s;
+    position: relative;
+    h5 {
+      font-family: Helveticaneuelight;
+      color: #fafafa;
+      font-size: 13px;
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      text-align: center;
+    }
+    &.home {
+      overflow: hidden;
+      background: #fafafa;
+      &:active {
+        background-color: #E1E1E1;
+      }
+      .background_home {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-image: url('/assets/WEB_icon.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-transition: 1s;
+        &:hover {
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+      }
+    }
+    &.team {
+      background-image: url('/assets/WEB_team.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60px;
+      &:hover {
+        background-color: #444;
+        color: #fff;
+      }
+      &:active {
+        background-color: #555;
+      }
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.likes {
+      background-image: url('/assets/WEB_likes.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60px;
+      &:hover {
+        background-color: #444;
+        color: #fff;
+      }
+      &:active {
+        background-color: #555;
+      }
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.new {
+      display: none;
+      position: absolute;
+      bottom: 0px;
+      color: #fff;
+      line-height: 95px;
+      text-align: center;
+      font-size: 40px;
+      text-shadow: -1px -1px 0px rgba(0,0,0,0.2);
+      background: linear-gradient(top,#66FF66,#5CE65C);
+      background: -o-linear-gradient(top,#66FF66,#5CE65C);
+      background: -ms-linear-gradient(top,#66FF66,#5CE65C);
+      background: -moz-linear-gradient(top,#66FF66,#5CE65C);
+      background: -webkit-gradient(linear,0% 0,0% 100%,from(#66FF66),to(#5CE65C));
+      -webkit-transition: 0s;
+      h1 {
+        margin: 0px;
+        padding: 0px;
+      }
+      &:hover {
+        background: #66FF66;
+        color: #fff;
+      }
+      &:active {
+        background: linear-gradient(top,#5CE65C,#66FF66);
+        background: -o-linear-gradient(top,#5CE65C,#66FF66);
+        background: -ms-linear-gradient(top,#5CE65C,#66FF66);
+        background: -moz-linear-gradient(top,#5CE65C,#66FF66);
+        background: -webkit-gradient(linear,0% 0,0% 100%,from(#5CE65C),to(#66FF66));
+      }
+      &.close_form {
+        background: linear-gradient(top,#ff0000,#E60000);
+        background: -o-linear-gradient(top,#ff0000,#E60000);
+        background: -ms-linear-gradient(top,#ff0000,#E60000);
+        background: -moz-linear-gradient(top,#ff0000,#E60000);
+        background: -webkit-gradient(linear,0% 0,0% 100%,from(#ff0000),to(#E60000));
+      }
+    }
+  }
+}
+//Sidebar partial
+.sidebar {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 300px;
+  height: 100%;
+  background: #dadada;
+  .header {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: #222;
+    margin: 0px;
+    clear: both;
+    height: 45px;
+    width: 300px;
+    .edit_profile, a {
+      display: block;
+      width: 50%;
+      float: left;
+      line-height: 45px;
+      font-size: 14px;
+      color: #fafafa;
+      font-family: Helveticaneuelight;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-transition: 0.3s;
+      &:hover {
+        background: #444;
+        color: #fff;
+      }
+    }
+  }
+  .name {
+    width: 270px;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
+    font-family: Helveticaneuelight;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    &.user {
+      background: #191919;
+      &:hover {
+        background: #4B4B4B;
+      }
+    }
+    &.team {
+      background: #323232;
+      &:hover {
+        background: #646464;
+      }
+    }
+    &.buckets {
+      background: #4B4B4B;
+      &:hover {
+        background: #7D7D7D;
+      }
+    }
+  }
+  .collapsible {
+    display: none;
+    padding: 15px;
+    .info {
+      font-family: Helveticaneuebold;
+      font-size: 15px;
+    }
+    .bio, .description {
+      font-family: Helveticaneuelight;
+      padding: 5px 0px;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+}
