@@ -7,7 +7,7 @@ class WEB.Views.Posts.PostView extends Backbone.View
     
   events:
     "click .destroy" : "destroy"
-    "click .like" : "like"
+    "click .like" : "toggleLike"
 
   tagName: "post"
 
@@ -18,14 +18,14 @@ class WEB.Views.Posts.PostView extends Backbone.View
 
     return false
   
-  like: (event) ->
+  toggleLike: (event) ->
+    postId = $(event.target).data('id')
     if $(event.target).hasClass 'liked'
       @model.unlike(postId)
-      $(event.target).removeClass('liked').html('Like')
+      $(event.target).html('<span class="unicode">&#x2661;</span> Like').removeClass('liked')
     else
-      postId = $(event.target).data('id')
       @model.like(postId)
-      $(event.target).addClass('liked').html('Liked')
+      $(event.target).html('<span class="unicode">&#x2661;</span> Liked').addClass('liked')
 
   render: =>
     userId = @model.get('user_id')
@@ -50,7 +50,4 @@ class WEB.Views.Posts.PostView extends Backbone.View
   
   likePosts: =>
     if $.inArray(WEB.currentUser.id, @model.get('likes')) > -1
-      console.log @model.id
-      $('.post .info').find(".like[data-id=#{@model.id}]").html('Liked').addClass("liked")
-    else
-      console.log 'not liked'
+      $('.post .info').find(".like[data-id=#{@model.id}]").html('<span class="unicode">&#x2661;</span> Liked').addClass("liked")

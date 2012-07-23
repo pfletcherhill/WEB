@@ -21,6 +21,10 @@ jQuery ->
   $(".item.likes").click ->
     $("#pointer").fadeIn(200).animate({"top":"246px"}, 300)
   
+  #Like hover
+  $(".liked").hover ->
+    $(this).html('&#x1f494;	Unlike')
+  
   #Collapse is open
   $(".profile .collapsible").show()
   

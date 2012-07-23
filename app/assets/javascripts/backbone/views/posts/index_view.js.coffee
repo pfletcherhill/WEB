@@ -20,25 +20,13 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @$("form").backboneLink(@post)
 
     return this
-  
-  likeAll: =>
-    $.ajax
-      type: 'GET'
-      dataType: 'json'
-      url: '/user/likes'
-      success: (likes) =>
-        likes.map( (like) ->
-          likeId = like.id
-          $(".post").find('data-id',likeId)
-          $(".post .info .like").addClass 'liked'
-        )
           
   events:
     "submit #new-post": "save"
   
   linkify: (text) ->
     exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-    return text.replace(exp,"<a href='$1'>$1</a>")
+    return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")
   
   spacify: (text) ->
     return text.replace(/\r?\n/g, '<br/>')

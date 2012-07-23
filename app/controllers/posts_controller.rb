@@ -55,6 +55,7 @@ class PostsController < ApplicationController
     @like = Like.new({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] })
     @like.save
     @post = Post.where(:id => params[:post_id]).first
+    
     if @post.likes.count >= 3
       @post.promoted == true
       @post.save
@@ -67,7 +68,7 @@ class PostsController < ApplicationController
   end
   
   def unlike
-    @like = Like.where({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] })
+    @like = Like.where({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] }).first
     @like.destroy
     
     respond_to do |format|

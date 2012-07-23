@@ -5,32 +5,13 @@ class WEB.Models.Post extends Backbone.Model
     'user_id': WEB.currentUser.id
     'team_id': WEB.currentUser.get('team_id')
     'likes': []
-  
-  fetchAttributes: (userId, postId) ->
-    console.log 'fetchAttributes'
-    $.ajax
-      type: 'GET'
-      dataType: 'json'
-      url: '/users/' + userId
-      success: (data) =>
-        console.log 'fetchUser done'
-        @set user: data
-    $.ajax
-      type: 'GET'
-      dataType: 'json'
-      url: '/posts/' + postId + '/likes'
-      success: (data) =>
-        console.log 'fetchLikes done'
-        @set likes: data
         
   fetchUser: (userId) ->
-    console.log 'fetchAttributes'
     $.ajax
       type: 'GET'
       dataType: 'json'
       url: '/users/' + userId
       success: (data) =>
-        console.log 'fetchUser done'
         @set user: data
   
   fetchLikes: (postId) ->
@@ -39,7 +20,6 @@ class WEB.Models.Post extends Backbone.Model
       dataType: 'json'
       url: '/posts/' + postId + '/likes'
       success: (data) =>
-        console.log 'fetchLikes done'
         @set likes: data
   
   asJSON: =>
@@ -54,7 +34,7 @@ class WEB.Models.Post extends Backbone.Model
       
   unlike: (postId) ->
     $.ajax
-      type: 'PUT'
+      type: 'DELETE'
       dataType: 'json'
       url: '/unlike?post_id=' + postId + '&user_id=' + WEB.currentUser.id
     

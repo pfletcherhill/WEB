@@ -21,7 +21,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
       @view = new WEB.Views.Posts.IndexView(posts: teamPosts)
       $("#posts").html(@view.render().el)
       $("#pointer").fadeIn(200).css({"top":"146px"})
-      $(".item.new").fadeIn(100)
+      $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'
   
   likes: ->
     $(".item.new").hide()

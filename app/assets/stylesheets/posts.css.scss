@@ -112,7 +112,7 @@
         }
       }
       .like {
-        -webkit-transition: 0.2s;
+        -webkit-transition: 0.1s;
         cursor: pointer;
         height: 40px;
         width: 110px;
@@ -129,8 +129,8 @@
           opacity: 1;
         }
         &.liked {
-          opacity: 1;
-          background: #66FF99;
+          opacity: 0.7;
+          background: #33D6FF;
         }
         &:active {
           background: #52CC52;
