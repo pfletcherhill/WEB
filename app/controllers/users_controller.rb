@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :require_login, :except => ["onboard", "allow"]
+  #before_filter :require_login, :except => ["onboard", "allow"]
 
   def require_login
     unless logged_in?
