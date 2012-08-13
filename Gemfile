@@ -45,3 +45,7 @@ gem "rails-backbone"
 
 #Jammit
 gem "jammit", :git => 'git://github.com/documentcloud/jammit.git'
+
+#Heroku
+gem 'heroku'
+gem 'thin'

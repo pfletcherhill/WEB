@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_admin
-    @current_admin ||= User.find(session[:user_id]) if session[:user_id] && User.find(session[:user_id]).admin == 'a'
+    @current_admin ||= User.find(session[:user_id]) if session[:user_id] && User.find(session[:user_id]).admin == true
   end
   
 end

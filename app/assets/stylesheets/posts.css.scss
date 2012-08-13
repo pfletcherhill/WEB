@@ -6,141 +6,177 @@
   min-width: 800px;
   padding-right: 310px;
   padding-left: 10px;
+  &.bucket_posts_open {
+    padding-right: 610px;
+  }
   .form {
     display: none;
     width: 250px;
     height: 250px;
     margin: 20px;
     float: left;
-    textarea {
-      width: 228px;
-      height: 193px;
-      margin-bottom: 0px;
-      border: 1px solid #FFD633;
-      outline: none;
-      padding: 10px;
-      resize: none;
-    }
-    input.add_post {
+    .button {
       width: 250px;
-      height: 35px;
+      height: 110px;
       background: #dadada;
-      color: #777;
-      font-family: georgia;
+      color: #fff;
       text-align: center;
-      border: 0px;
+      line-height: 110px;
+      font-family: Helveticaneuebold;
       cursor: pointer;
-      line-height: 35px;
-      padding: 0px;
-      margin-top: -3px;
-      outline: none;
-      font-family: Helveticaneuelight;
-      -webkit-transition: 0.5s;
-      &:hover, &:focus {
-        border: 0px;
+      -webkit-transition: 0.2s;
+      &:hover {
         background: #777;
+      }
+      &:first-child {
+        margin-bottom: 30px;
+      }
+    }
+    .text_form {
+      display: none;
+      position: relative;
+      textarea {
+        width: 230px;
+        height: 230px;
+        margin-bottom: 0px;
+        border: 0px;
+        outline: none;
+        padding: 10px;
+        resize: none;
+        background: #fff;
+        color: #333;
+        font-size: 13px;
+        line-height: 18px;
+        font-family: Helveticaneue;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      }
+      input.add_post {
+        width: 230px;
+        height: 50px;
+        position: absolute;
+        bottom: 14px;
+        left: 10px;
+        background: #6f9;
         color: #fff;
+        font-family: georgia;
+        text-align: center;
+        border: 0px;
+        cursor: pointer;
+        line-height: 35px;
+        padding: 0px;
+        outline: none;
+        font-family: Helveticaneuebold;
+        font-size: 15px;
+        opacity: 0.8;
+        -webkit-transition: 0.5s;
+        &:hover, &:focus {
+          border: 0px;
+          opacity: 1;
+          color: #fff;
+        }
       }
     }
   }
-  #posts {
-    &.loading {
-      height: 500px;
-      background: #e60000;
-    }
-    .post {
-      width: 230px;
-      height: 230px;
-      margin: 20px;
-      background: #fff;
-      color: #333;
-      float: left;
-      padding: 10px;
-      position: relative;
-      font-family: Helveticaneuelight;
-      font-size: 13px;
-      line-height: 18px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+#posts, #bucket_posts {
+  &.loading {
+    height: 500px;
+    background: #e60000;
+  }
+  .post {
+    width: 230px;
+    height: 230px;
+    margin: 20px;
+    background: #fff;
+    color: #333;
+    float: left;
+    padding: 10px;
+    position: relative;
+    font-family: Helveticaneue;
+    font-size: 13px;
+    line-height: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    overflow: hidden;
+    &[draggable=true] {
       cursor: move;
-      overflow: hidden;
-      a {
-        font-family: Helveticaneue;
-        color: #222;
-        white-space: pre;           /* CSS 2.0 */
-        white-space: pre-wrap;      /* CSS 2.1 */
-      	white-space: pre-line;      /* CSS 3.0 */
-      	white-space: -pre-wrap;     /* Opera 4-6 */
-      	white-space: -o-pre-wrap;   /* Opera 7 */
-      	white-space: -moz-pre-wrap; /* Mozilla */
-      	white-space: -hp-pre-wrap;  /* HP Printers */
-      	word-wrap: break-word;      /* IE 5+ */
-      	&:hover {
-      	  color: #000;
-      	}
-      }
-      .info {
-        display: none;
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        width: 210px;
-        padding: 10px;
-        font-family: Helveticaneuebold;
-        font-size: 11px;
-        -webkit-transition: 0.2s;
-      }
-      .close, .name {
-        -webkit-transition: 0.2s;
-        cursor: pointer;
-        height: 40px;
-        width: 110px;
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        background: #bbb;
-        color: #fff;
-        font-size: 15px;
-        text-align: center;
-        line-height: 40px;
-        opacity: 0.6;
-        &:hover {
-          opacity: 0.9;
-        }
-        .unicode {
-          font-size: 20px;
-          line-height: 36px;
-        }
-      }
-      .like {
-        -webkit-transition: 0.1s;
-        cursor: pointer;
-        height: 40px;
-        width: 110px;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        background: #66FF99;
-        opacity: 0.8;
-        color: #fff;
-        font-size: 15px;
-        text-align: center;
-        line-height: 40px;
-        &:hover {
-          opacity: 1;
-        }
-        &.liked {
-          opacity: 0.7;
-          background: #33D6FF;
-        }
-        &:active {
-          background: #52CC52;
-          opacity: 1;
-        }
-      }
+    }
+    a {
+      font-family: Helveticaneue;
+      color: #222;
+      white-space: pre;           /* CSS 2.0 */
+      white-space: pre-wrap;      /* CSS 2.1 */
+    	white-space: pre-line;      /* CSS 3.0 */
+    	white-space: -pre-wrap;     /* Opera 4-6 */
+    	white-space: -o-pre-wrap;   /* Opera 7 */
+    	white-space: -moz-pre-wrap; /* Mozilla */
+    	white-space: -hp-pre-wrap;  /* HP Printers */
+    	word-wrap: break-word;      /* IE 5+ */
+    	&:hover {
+    	  color: #000;
+    	}
+    }
+    .info {
+      display: none;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 210px;
+      padding: 10px;
+      font-family: Helveticaneuebold;
+      font-size: 11px;
+      -webkit-transition: 0.2s;
+    }
+    .close, .name {
+      -webkit-transition: 0.2s;
+      cursor: pointer;
+      height: 40px;
+      width: 110px;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background: #bbb;
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
+      line-height: 40px;
+      opacity: 0.6;
       &:hover {
-        .info {
-          display: block;
-        }
+        opacity: 0.9;
+      }
+      .unicode {
+        font-size: 20px;
+        line-height: 36px;
+      }
+    }
+    .like {
+      -webkit-transition: 0.1s;
+      cursor: pointer;
+      height: 40px;
+      width: 110px;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      background: #66FF99;
+      opacity: 0.8;
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
+      line-height: 40px;
+      &:hover {
+        opacity: 1;
+      }
+      &.liked {
+        opacity: 0.7;
+        background: #33D6FF;
+      }
+      &:active {
+        background: #52CC52;
+        opacity: 1;
+      }
+    }
+    &:hover {
+      .info {
+        display: block;
       }
     }
   }

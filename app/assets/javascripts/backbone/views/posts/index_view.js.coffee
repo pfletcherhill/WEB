@@ -5,7 +5,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
 
   initialize: () ->
     @options.posts.bind('reset', @addAll)
-
+    
   addAll: () =>
     @options.posts.each(@addOne)
 
@@ -20,9 +20,27 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @$("form").backboneLink(@post)
 
     return this
-          
+  
+  drag: (event) ->
+    console.log 'drag'
+  
+  drop: (event) ->
+    event.preventDefault()
+    console.log 'drop'
+           
   events:
     "submit #new-post": "save"
+    "click .button.text": "newText"
+    "dragenter": "dragover"
+    "drop": "drop"
+  
+  dragover: (event) ->
+    console.log 'dragover'
+  
+  drop: (event) ->
+    event.preventDefault()
+    alert 'drop'
+    console.log 'drop'
   
   linkify: (text) ->
     exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
@@ -30,7 +48,12 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   
   spacify: (text) ->
     return text.replace(/\r?\n/g, '<br/>')
-    
+  
+  newText: ->
+    $(".button").hide()
+    $(".text_form").show()
+    $(".text_form textarea").focus()
+   
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()

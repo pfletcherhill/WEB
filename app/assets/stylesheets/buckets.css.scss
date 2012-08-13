@@ -1,0 +1,67 @@
+// Place all the styles related to the Buckets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#containers {
+  #buckets {
+    .bucket {
+      padding: 15px;
+      padding-right: 40px;
+      border-bottom: 1px solid #fff;
+      -webkit-transition: 0.2s;
+      cursor: pointer;
+      position: relative;
+      .text {
+        h5 {
+          font-family: Helveticaneuebold;
+          font-size: 15px;
+          padding: 0px;
+          margin: 0px;
+          padding-bottom: 3px;
+          color: #333;
+        }
+        .user {
+          font-family: Helveticaneuelight;
+          font-size: 12px;
+          color: #333;
+        }
+      }
+      .number {
+        position: absolute;
+        top: 50%;
+        margin-top: -16px;
+        right: 15px;
+        height: 31px;
+        width: 31px;
+        //padding: 0px 10px;
+        background: #444;
+        border-radius: 18px;
+        color: #fff;
+        font-size: 13px;
+        font-family: Helveticaneuebold;
+        line-height: 31px;
+        text-align: center;
+      }
+      &:hover {
+        background: #fafafa;
+      }
+      &.selected {
+        background: #fff;
+      }
+    }
+  }
+}
+#bucket_container {
+  position: fixed;
+  height: 100%;
+  width: 300px;
+  top: 0px;
+  right: 0px;
+  background: #222;
+  display: none;
+  z-index: 10;
+  #bucket_posts {
+    padding-left: 5px;
+    padding-top: 5px;
+    overflow: scroll;
+  }
+}

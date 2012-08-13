@@ -1,0 +1,6 @@
+.container
+  .new
+    =form_for @team do |f|
+      %p=f.text_field :name
+      %p=f.text_area :description
+      %p=f.submit

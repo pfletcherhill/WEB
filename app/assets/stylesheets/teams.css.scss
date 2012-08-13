@@ -144,6 +144,7 @@ body {
   width: 300px;
   height: 100%;
   background: #dadada;
+  z-index: 11;
   .header {
     position: absolute;
     bottom: 0px;
@@ -200,16 +201,18 @@ body {
   }
   .collapsible {
     display: none;
-    padding: 15px;
-    .info {
-      font-family: Helveticaneuebold;
-      font-size: 15px;
-    }
-    .bio, .description {
-      font-family: Helveticaneuelight;
-      padding: 5px 0px;
-      font-size: 13px;
-      line-height: 18px;
+    .collapse {
+      padding: 15px;
+      .info {
+        font-family: Helveticaneuebold;
+        font-size: 15px;
+      }
+      .bio, .description {
+        font-family: Helveticaneuelight;
+        padding: 5px 0px;
+        font-size: 13px;
+        line-height: 18px;
+      }
     }
   }
 }

@@ -1,7 +1,15 @@
 class WEB.Routers.PostsRouter extends Backbone.Router
   initialize: (options) ->
     @posts = new WEB.Collections.PostsCollection()
-    
+    @fetchBuckets()
+  
+  fetchBuckets: =>
+    @buckets = new WEB.Collections.BucketsCollection()
+    @buckets.url = "/team/buckets"
+    @buckets.fetch success: (buckets) =>
+      view = new WEB.Views.Buckets.ListView(buckets: buckets)
+      $("#containers").html(view.render().el)
+        
   routes:
     ".*"        : "index"
     "team"      : "team"

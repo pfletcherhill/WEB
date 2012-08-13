@@ -1,0 +1,10 @@
+.container
+  .edit
+    =link_to "Delete User", @user, confirm: 'Are you sure?', method: :delete
+    =form_for @user do |f|
+      %p=f.text_field :name, :placeholder => "Full Name"
+      %p=f.text_field :email, :placeholder => "Email"
+      %p=f.text_field :school, :placeholder => "School"
+      %p=f.text_field :year, :placeholder => "Year"
+      %p=f.text_area :bio, :placeholder => "Bio"
+      %p=f.submit

@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
   has_many :likes
+  has_many :containments
+  has_many :buckets, :through => :containments
   
   accepts_nested_attributes_for :user 
 end

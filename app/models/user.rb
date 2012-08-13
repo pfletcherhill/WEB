@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
+  attr_accessible :password, :password_confirmation, :bio, :year, :school, :name, :email, :team_id
   attr_accessor :password, :password_confirmation
-  attr_accessible :name, :email, :password, :password_confirmation, :bio, :year, :school
   
   before_save :encrypt_password    
 	
@@ -9,14 +9,15 @@ class User < ActiveRecord::Base
   validates_presence_of :email 
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
   validates_uniqueness_of :email
-  validates_presence_of :password_confirmation, :on => :create
-  validates_presence_of :password, :on => :create
-  validates_confirmation_of :password  
+  validates_presence_of :password_confirmation, :on => :onboard
+  validates_presence_of :password, :on => :onboard
+  validates_confirmation_of :password, :on => :onboard
   validates_presence_of :team_id
 	
 	has_many :posts
 	belongs_to :team
 	has_many :likes
+	has_many :buckets
 		
   def encrypt_password  
     if password.present?  
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
   		self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)  
   	end  
   end 
-   
+  
   def self.authenticate(email, password)
     user = find_by_email(email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
@@ -34,4 +35,11 @@ class User < ActiveRecord::Base
     end
   end
   
+  def activated?
+    if password_salt && password_hash
+      true
+    else
+      false
+    end
+  end
 end

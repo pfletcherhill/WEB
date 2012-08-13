@@ -1,6 +1,5 @@
-<div class="post" draggable=true data-id="<%= id %>">
+<div class="post" draggable=true data-id="<%= id %>" ondragstart="event.dataTransfer.setData('post_id', '<%= id %>');">
   <%= body %>
-  <%= likes %>
   <div class='info'>
     <div class='destroy close'><span class="unicode">&#215;</span> Delete</div>
     <div class='like' data-id="<%= id %>"><span class="unicode">&#x2661;</span> Like</div>

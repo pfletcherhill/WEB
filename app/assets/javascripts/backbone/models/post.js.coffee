@@ -37,6 +37,18 @@ class WEB.Models.Post extends Backbone.Model
       type: 'DELETE'
       dataType: 'json'
       url: '/unlike?post_id=' + postId + '&user_id=' + WEB.currentUser.id
-    
+  
+  addToBucket: (bucketId) ->
+    $.ajax
+      type: 'POST'
+      dataType: 'json'
+      url: '/bucket/' + bucketId + '/add_post/' + @get('id')
+      
+  removeFromBucket: (bucketId) ->
+    $.ajax
+      type: 'DELETE'
+      dataType: 'json'
+      url: '/bucket/' + bucketId + '/remove_post/' + @get('id')
+   
 class WEB.Collections.PostsCollection extends Backbone.Collection
   model: WEB.Models.Post

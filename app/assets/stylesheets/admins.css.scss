@@ -1,0 +1,47 @@
+// Place all the styles related to the Admins controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.container.admin {
+  h1 {
+    font-family: Helveticaneuebold;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    a {
+      float: right;
+      padding-left: 10px;
+      font-size: 20px;
+    }
+  }
+  .teams {
+    h3 {
+      font-family: Helveticaneue;
+      color: #222;
+      a {
+        float: right;
+        padding-left: 10px;
+        font-size: 15px;
+      }
+    }
+    p {
+      font-family: Helveticaneuelight;
+      color: #333;
+      font-size: 14px;
+    }
+    table {
+      border-collapse:collapse;
+      width: 100%;
+      font-family: Helveticaneuelight;
+      font-size: 13px;
+    }
+    table, th, td {
+      border: 1px solid #dadada;
+    }
+    th, td {
+      padding: 5px;
+    }
+    td.bio {
+      font-size: 11px;
+      max-width: 250px;
+    }
+  }
+}

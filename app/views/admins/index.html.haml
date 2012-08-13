@@ -1,0 +1,36 @@
+.container.admin
+  %h1
+    Admin Panel
+    =link_to "Add Team", "/teams/new"
+  .teams
+    -@teams.each do |team|
+      %h3
+        = team.name
+        =link_to "Delete", team, confirm: 'Are you sure?', method: :delete
+        =link_to "Edit", "/teams/#{team.id}/edit"
+        =link_to "Add User", "/teams/#{team.id}/add_user"
+      %p= team.description
+      %table
+        %tbody
+          %tr
+            %th Name
+            %th Email
+            %th School
+            %th Year
+            %th Bio
+            %th
+            %th
+          -team.users.each do |user|
+            %tr
+              %td= user.name
+              %td= user.email
+              %td= user.school
+              %td= user.year
+              %td.bio= user.bio
+              -if user.activated?
+                %td active
+              -else
+                %td
+                  %b inactive
+              %td= link_to "Edit", "/users/#{user.id}/edit"
+          

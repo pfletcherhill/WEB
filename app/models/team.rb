@@ -4,6 +4,7 @@ class Team < ActiveRecord::Base
   
   has_many :users
   has_many :posts
+  has_many :buckets
   
   accepts_nested_attributes_for :posts
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :require_login
+  before_filter :require_login, :except => ["onboard", "allow"]
 
   def require_login
     unless logged_in?
@@ -20,18 +20,20 @@ class UsersController < ApplicationController
   end
   
   def new  
-    @user = User.new  
+    @user = User.new
+    @team = current_user.team
   end  
+ 
+  def create
+    @user = User.new(params[:user])
+    @team = current_user.team
     
-  def create  
-    @user = User.new(params[:user])  
-    if @user.save  
-      session[:user_id] = @user.id   
-      redirect_to "/", :notice => "Welcome #{@user.name}!"  
-    else  
-      render "new"  
-    end  
-  end 
+    if @user.save
+      redirect_to '/admin'
+    else
+      render :action => "new"
+    end
+  end
   
   # GET /users
   # GET /users.json
@@ -59,23 +61,25 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    @attendees = Attendee.where(:user_id => @user.id)
-    @attendees.each do |attendee|
-      attendee.destroy
-    end
 
     respond_to do |format|
-      format.html { redirect_to "/", notice: 'User was deleted' }
+      format.html { redirect_to "/admin" }
       format.json { head :no_content }
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+    @team = current_user.team
+  end
+  
   def update
-    @user = current_user
-
+    @user = User.find(params[:id])
+    @team = current_user.team
+    
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to "/", notice: @user.name + ' was updated.' }
+        format.html { redirect_to "/admin" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -95,4 +99,34 @@ class UsersController < ApplicationController
       format.json { render json: @posts }
     end
   end
+  
+  def onboard
+    @user = User.where(:id => params[:id]).first
+    
+    if @user
+      if @user.activated?
+        redirect_to "/"
+      end
+    else
+      redirect_to "/"
+    end
+  end
+  
+  def allow
+    @user = User.find(params[:id])
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password_confirmation]
+    @user.save
+    
+    user = User.authenticate(params[:email], params[:password])  
+    
+    if user
+      puts 'user: #{user}'
+      session[:user_id] = user.id
+      redirect_to "/" 
+    else
+      redirect_to '/login'
+    end
+  end
+  
 end
