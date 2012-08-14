@@ -102,6 +102,7 @@ class UsersController < ApplicationController
   end
   
   def onboard
+    session[:user_id] = nil
     @user = User.where(:id => params[:id]).first
     
     if @user
