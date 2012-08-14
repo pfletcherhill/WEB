@@ -10,6 +10,7 @@
         =link_to "Edit", "/teams/#{team.id}/edit"
         =link_to "Add User", "/teams/#{team.id}/add_user"
       %p= team.description
+      %h4 Users (#{team.users.count}):
       %table
         %tbody
           %tr
@@ -33,4 +34,21 @@
                 %td
                   %b inactive
               %td= link_to "Edit", "/users/#{user.id}/edit"
+      %h4 Posts (#{team.posts.count}):
+      %table
+        %tbody
+          %tr
+            %th User
+            %th Post
+            %th Likes
+            %th
+          -team.posts.each do |post|
+            %tr
+              %td= post.user.name
+              %td= post.body
+              %td= post.likes.count
+              -if post.promoted
+                %td promoted
+              -else
+                %td
           

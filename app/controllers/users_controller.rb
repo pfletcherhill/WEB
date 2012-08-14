@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @team = current_user.team
     
     if @user.save
+      UserMailer.welcome_email(@user).deliver
       redirect_to '/admin'
     else
       render :action => "new"
