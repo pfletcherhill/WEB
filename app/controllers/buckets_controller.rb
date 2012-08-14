@@ -34,4 +34,18 @@ class BucketsController < ApplicationController
       format.json { render json: @containment }
     end
   end
+  
+  def create
+    @bucket = Bucket.new(params[:bucket])
+    
+    respond_to do |format|
+      if @bucket.save
+        format.html
+        format.json { render json: @bucket }
+      else
+        format.html
+        format.json { render json: @bucket.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

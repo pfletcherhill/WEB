@@ -1,11 +1,7 @@
 WEB::Application.routes.draw do
   
   #Resources
-  resources :users
-  resources :sessions
-  resources :teams
-  resources :posts
-  resources :likes
+  resources :users, :sessions, :teams, :posts, :likes, :buckets
   
   #Root
   root :to => 'posts#index'

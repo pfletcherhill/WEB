@@ -1,10 +1,13 @@
 class WEB.Models.Bucket extends Backbone.Model
+  
+  paramRoot: 'bucket'
+  
+  urlRoot: "/buckets"
     
   defaults: ->
     'name': null
     'user_id': WEB.currentUser.id
     'team_id': WEB.currentUser.get('team_id')
-    'posts': []
         
   fetchUser: (userId) ->
     $.ajax

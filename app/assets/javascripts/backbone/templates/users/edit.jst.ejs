@@ -1,35 +1,23 @@
-<h1>Edit user</h1>
-
-<form id="edit-user" name="user">
-  <div class="field">
-    <label for="name"> name:</label>
-    <input type="text" name="name" id="name" value="<%= name %>" >
+<form id='update-user' name='user'>  
+  <div class="item">
+    <label>Full Name:</label>
+    <input id='name' name='name' value='<%= name %>'/>
   </div>
-
-  <div class="field">
-    <label for="email"> email:</label>
-    <input type="text" name="email" id="email" value="<%= email %>" >
+  <div class="item">
+    <label>Email:</label>
+    <input id='email' name='email' value='<%= email %>'/>
   </div>
-
-  <div class="field">
-    <label for="bio"> bio:</label>
-    <input type="text" name="bio" id="bio" value="<%= bio %>" >
+  <div class="item">
+    <label>School:</label>
+    <input id='school' name='school' value='<%= school %>'/>
   </div>
-
-  <div class="field">
-    <label for="year"> year:</label>
-    <input type="text" name="year" id="year" value="<%= year %>" >
+  <div class="item">
+    <label>Graduation Year:</label>
+    <input id='year' name='year' value='<%= year %>'/>
   </div>
-
-  <div class="field">
-    <label for="school"> school:</label>
-    <input type="text" name="school" id="school" value="<%= school %>" >
+  <div class="item">
+    <label>Bio:</label>
+    <textarea id='bio' name='bio'><%= bio %></textarea>
   </div>
-
-  <div class="actions">
-    <input type="submit" value="Update User" />
-  </div>
-
+  <input type='submit' class="submit" value='Update Profile'/>
 </form>
-
-<a href="#/index">Back</a>

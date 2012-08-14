@@ -1,8 +1,70 @@
 // Place all the styles related to the Buckets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#buckets_form {
+  .show_form {
+    text-align: center;
+    font-family: Helveticaneuebold;
+    color: #aaa;
+    font-size: 15px;
+    padding: 10px 0px;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    border-bottom: 1px solid #fff;
+    &:hover {
+      color: #444;
+      background: #eee;
+    }
+  }
+  .form {
+    display: none;
+    padding: 15px;
+    background: #eee;
+    input, textarea {
+      width: 260px;
+      padding: 5px;
+      font-size: 12px;
+      font-family: Helveticaneuelight;
+      color: #333;
+      border: 1px solid #ccc;
+      outline: none;
+      resize: none;
+      -webkit-transition: 0.2s;
+      &:hover {
+        border: 1px solid #888;
+      }
+      &:focus {
+        border: 1px solid #888;
+      }
+    }
+    textarea {
+      height: 50px;
+    }
+    button {
+      margin-top: 0px;
+      width: 270px;
+      background: #ccc;
+      line-height: 25px;
+      font-size: 13px;
+      color: #fff;
+      text-align: center;
+      border: 0px;
+      font-family: Helveticaneuelight;
+      cursor: pointer;
+      -webkit-transition: 0.2s;
+      outline: none;
+      &:hover {
+        background: #888;
+      }
+      &:focus {
+        background: #888;
+      }
+    }
+  }
+}
 #containers {
   #buckets {
+    overflow: scroll;
     .bucket {
       padding: 15px;
       padding-right: 40px;

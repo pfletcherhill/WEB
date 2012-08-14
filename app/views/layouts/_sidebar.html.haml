@@ -3,10 +3,7 @@
     .name.user= current_user.name
     .collapsible
       .collapse
-        .info
-          =current_user.school + ', ' if current_user.school && current_user.school != ''
-          =current_user.year if current_user.year
-        .bio= current_user.bio if current_user.bio
+        #my_profile
     
   .team_profile
     .name.team= @team.name

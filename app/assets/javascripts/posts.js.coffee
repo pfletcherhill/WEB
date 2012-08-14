@@ -6,16 +6,16 @@ jQuery ->
   #show form
   $(".item.new").click ->
     if $(this).hasClass 'close_form'
-      $(".form textarea").val('')
-      $(".form").stop().animate({"opacity":"0"}, 100).hide(250)
+      $(".container .form textarea").val('')
+      $(".container .form").stop().animate({"opacity":"0"}, 100).hide(250)
       $(".item.new h1").html('+')
       $(".item.new").removeClass('close_form')
       
     else
-      $(".form").stop().show().css({'opacity':"0","width":"0px"}).animate({"width":"250px"}, 300).animate({"opacity":"1"}, 200)
-      $(".form .text_form").hide()
+      $(".container .form").stop().show().css({'opacity':"0","width":"0px"}).animate({"width":"250px"}, 300).animate({"opacity":"1"}, 200)
+      $(".container .form .text_form").hide()
       $(".button").show()
-      $(".form textarea").focus()
+      $(".container .form textarea").focus()
       $(".item.new h1").html('-')
       $(".item.new").addClass('close_form')
       
@@ -28,6 +28,14 @@ jQuery ->
       
   #Sidebar collapse
   $(".sidebar .name").click ->
-    $(".collapsible.open").hide(250)
+    $(".collapsible.open").hide(200)
     div = $(this).parent()
-    $('.collapsible', div).delay(250).show(250).addClass 'open'
+    if $('.collapsible', div).hasClass 'open'
+      $('.collapsible.open').removeClass 'open'
+    else
+      $('.collapsible.open').removeClass 'open'
+      $('.collapsible', div).delay(200).show(250).addClass 'open'
+      $("#buckets_form .show_form").show()
+      $("#buckets_form .form").hide()
+      height = $(window).height() - 240
+      $("#buckets").height(height + 'px')

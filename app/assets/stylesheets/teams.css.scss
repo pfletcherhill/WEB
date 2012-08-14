@@ -28,7 +28,12 @@ body {
     cursor: pointer;
     -webkit-transition: .15s;
     position: relative;
+    a {
+      z-index: 4;
+      position: relative;
+    }
     h5 {
+      z-index: 0;
       font-family: Helveticaneuelight;
       color: #fafafa;
       font-size: 13px;

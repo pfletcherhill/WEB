@@ -8,7 +8,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     @buckets.url = "/team/buckets"
     @buckets.fetch success: (buckets) =>
       view = new WEB.Views.Buckets.ListView(buckets: buckets)
-      $("#containers").html(view.render().el)
+      $("#containers").html(view.render().el)    
         
   routes:
     ".*"        : "index"

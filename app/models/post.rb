@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :title, :body, :team_id, :user_id, :promoted, :user
+  attr_accessible :title, :body, :team_id, :user_id, :promoted
   
   #validates_presence_of :body, :user_id, :team_id
   

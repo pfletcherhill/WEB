@@ -2,25 +2,4 @@
   .header
     .close
     %h1 Edit Profile
-  =form_for @user do |f|
-    -if @user.errors.any?
-      =@user.errors.full_messages.each do |msg|
-        %p= msg
-    .edit
-      .item
-        .label Full Name:
-        = f.text_field :name, :value => @user.name
-      .item
-        .label Email:
-        = f.text_field :email, :value => @user.email
-      .item
-        .label School:
-        = f.text_field :school, :value => @user.school
-      .item
-        .label Graduation Year:
-        = f.text_field :year, :value => @user.year
-      .item
-        .label Bio:
-        = f.text_area :bio, :value => @user.bio
-      
-      = f.submit "Update Profile", :class => 'submit'
+  #edit_user_form

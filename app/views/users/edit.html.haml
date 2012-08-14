@@ -4,6 +4,9 @@
     =form_for @user do |f|
       %p=f.text_field :name, :placeholder => "Full Name"
       %p=f.text_field :email, :placeholder => "Email"
+      %p
+        =f.check_box :admin
+        Admin
       %p=f.text_field :school, :placeholder => "School"
       %p=f.text_field :year, :placeholder => "Year"
       %p=f.text_area :bio, :placeholder => "Bio"

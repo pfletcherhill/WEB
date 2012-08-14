@@ -35,5 +35,6 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
   
   closePosts: (event) ->
     $(".bucket").removeClass 'selected'
-    $("#bucket_container").animate({"right":"0px"})
+    $("#bucket_container").animate({"right":"0px"}, 300, ->
+      $('#bucket_container').hide())
     $(".container").removeClass 'bucket_posts_open'
