@@ -22,12 +22,18 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
   events:
     "click .bucket:not(.selected)": "openPosts"
     "click .bucket.selected": "closePosts"
+    "drop" : "dropPost"
+  
+  dropPost: (event) =>
+    event.preventDefault()
+    postId = event.dataTransfer.getData('post_id')
+    @model.addPost(@model.get('id'), postId).then @completeDrop
   
   openPosts: (event) ->
     $('.bucket').removeClass 'selected'
     $(event.target).parent().parent().addClass 'selected'
     $("#bucket_container").show().animate({"right":"300px"})
-    $(".container").addClass 'bucket_posts_open'
+    $(".container").width($(window).width() - 720 + 'px')
     @posts.fetch success: (bucketPosts) =>
       view = new WEB.Views.Posts.BucketView(posts: bucketPosts, bucket: @model)
       $("#bucket_container").html(view.render().el)
@@ -37,4 +43,4 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
     $(".bucket").removeClass 'selected'
     $("#bucket_container").animate({"right":"0px"}, 300, ->
       $('#bucket_container').hide())
-    $(".container").removeClass 'bucket_posts_open'
+    $(".container").removeAttr 'style'

@@ -31,28 +31,17 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @renderProfile(WEB.currentUser)
 
     return this
-  
-  drag: (event) ->
-    console.log 'drag'
-  
-  drop: (event) ->
-    event.preventDefault()
-    console.log 'drop'
            
   events:
     "submit #new-post" : "save"
     "click .button.text" : "newText"
-    "dragenter" : "dragover"
-    "drop" : "drop"
     "submit #update-user" : 'saveUser'
-  
-  dragover: (event) ->
-    console.log 'dragover'
-  
-  drop: (event) ->
-    event.preventDefault()
-    console.log 'drop'
-  
+    "dragstart" : 'dragstartPost'
+    
+  dragstartPost: (event) ->
+    postId = $(event.target).data('post_id')
+    event.dataTransfer.setData('post_id',postId)
+      
   linkify: (text) ->
     exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
     return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")

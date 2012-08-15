@@ -1,10 +1,12 @@
 WEB.Views.Buckets ||= {}
+WEB.event = _.extend({}, Backbone.Events)
 
 class WEB.Views.Buckets.ListView extends Backbone.View
   template: JST["backbone/templates/buckets/list"]
 
   initialize: () ->
     @options.buckets.bind('reset', @addAll)
+    _.bindAll(@)
     
   addAll: () =>
     @options.buckets.each(@addOne)

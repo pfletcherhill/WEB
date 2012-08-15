@@ -23,6 +23,14 @@ class BucketsController < ApplicationController
   end
   
   def add_post
+    @containment = Containment.new(:bucket_id => params[:bucket_id], :post_id => params[:post_id])
+    
+    respond_to do |format|
+      if @containment.save
+        format.html
+        format.json { render json: @containment }
+      end
+    end
   end
   
   def remove_post

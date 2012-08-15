@@ -121,9 +121,9 @@
   background: #222;
   display: none;
   z-index: 10;
+  overflow: scroll;
   #bucket_posts {
     padding-left: 5px;
     padding-top: 5px;
-    overflow: scroll;
   }
 }

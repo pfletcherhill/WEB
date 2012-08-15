@@ -24,7 +24,13 @@ class WEB.Models.Bucket extends Backbone.Model
       url: '/bucket/' + bucketId + '/posts'
       success: (data) =>
         @set posts: data
-  
+        
+  addPost: (id, postId) ->
+    $.ajax
+      type: 'POST'
+      dataType: 'json'
+      url: '/bucket/' + id + '/add_post/' + postId
+      
   asJSON: =>
     post = _.clone this.attributes
     return _.extend post, {user: this.get('user'), posts: this.get('posts')}

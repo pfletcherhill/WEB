@@ -3,12 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .container {
   margin-left: 100px;
-  min-width: 800px;
-  padding-right: 310px;
   padding-left: 10px;
-  &.bucket_posts_open {
-    padding-right: 610px;
-  }
+  width: -webkit-calc(100% - 420px);
+  width: -moz-calc(100% - 420px);
+  width: calc(100% - 420px);
   .form {
     display: none;
     width: 250px;
