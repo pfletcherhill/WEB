@@ -22,16 +22,34 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
   events:
     "click .bucket:not(.selected)": "openPosts"
     "click .bucket.selected": "closePosts"
-    "drop" : "dropPost"
+    "drop .bucket" : "dropPost"
+    "dragenter .bucket" : "dragoverBucket"
+    "dragleave .bucket" : "dragleaveBucket"
   
+  dragoverBucket: (event) =>
+    $target = $(event.target)
+    $target.addClass 'dragover'
+  
+  dragleaveBucket: (event) =>
+    $target = $(event.target)
+    $target.removeClass 'dragover'
+      
   dropPost: (event) =>
     event.preventDefault()
     postId = event.dataTransfer.getData('post_id')
-    @model.addPost(@model.get('id'), postId).then @completeDrop
+    @model.addPost(@model.get('id'), postId).then @completeDrop(event)
+  
+  completeDrop: (event) ->
+    @render()
+    $(event.target).trigger 'click'
   
   openPosts: (event) ->
     $('.bucket').removeClass 'selected'
-    $(event.target).parent().parent().addClass 'selected'
+    $target = $(event.target)
+    if $target.is('h5') || $target.is('.user')
+      $target.parent().parent().addClass 'selected'
+    else
+      $target.addClass 'selected'
     $("#bucket_container").show().animate({"right":"300px"})
     $(".container").width($(window).width() - 720 + 'px')
     @posts.fetch success: (bucketPosts) =>

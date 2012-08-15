@@ -109,6 +109,9 @@
       &.selected {
         background: #fff;
       }
+      &.dragover {
+        background: #000;
+      }
     }
   }
 }
