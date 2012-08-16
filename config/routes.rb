@@ -37,4 +37,5 @@ WEB::Application.routes.draw do
   
   #Admin
   match "/admin" => "admins#index"
+  match "/new_notice" => "posts#new_notice"
 end

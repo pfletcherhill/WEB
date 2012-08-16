@@ -1,0 +1,8 @@
+.container
+  .new_notice
+    =form_for @post do |f|
+      %p=f.text_area :body, :placeholder => "Post body"
+      %p=f.hidden_field :promoted, :value => true
+      %P=f.hidden_field :user_id, :value => current_user.id
+      %p=f.hidden_field :team_id, :value => current_user.team_id
+      %p=f.submit
