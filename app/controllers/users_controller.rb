@@ -123,7 +123,6 @@ class UsersController < ApplicationController
     user = User.authenticate(params[:email], params[:password])  
     
     if user
-      puts 'user: #{user}'
       session[:user_id] = user.id
       redirect_to "/" 
     else

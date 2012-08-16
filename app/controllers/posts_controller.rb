@@ -109,5 +109,9 @@ class PostsController < ApplicationController
     @post = Post.new
     @user = current_user
     @team = @user.team
+    if current_admin
+    else
+      redirect_to '/'
+    end
   end
 end
