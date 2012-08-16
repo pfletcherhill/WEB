@@ -22,9 +22,17 @@ class WEB.Models.Post extends Backbone.Model
       success: (data) =>
         @set likes: data
   
+  fetchTeam: (teamId) ->
+    $.ajax
+      type: 'GET'
+      dataType: 'json'
+      url: '/teams/' + teamId
+      success: (data) =>
+        @set team: data
+  
   asJSON: =>
     post = _.clone this.attributes
-    return _.extend post, {user: this.get('user'), likes: this.get('likes')}
+    return _.extend post, {user: this.get('user'), likes: this.get('likes'), team: this.get('team')}
     
   like: (postId) ->
     $.ajax

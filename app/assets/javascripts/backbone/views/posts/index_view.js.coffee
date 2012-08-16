@@ -35,6 +35,8 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   events:
     "submit #new-post" : "save"
     "click .button.text" : "newText"
+    "click .button.image" : "newImage"
+    "click .image.submit" : "upload"
     "submit #update-user" : 'saveUser'
     "dragstart" : 'dragstartPost'
     
@@ -53,6 +55,22 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     $(".button").hide()
     $(".text_form").show()
     $(".text_form textarea").focus()
+  
+  newImage: ->
+    $(".button").hide()
+    $(".image_form").show()
+  
+  upload: ->
+    $(".image_form #fileupload").fileupload(
+      dataType: 'json',
+      autoUpload: true,
+      done: (event, data) ->
+        $.each(data.result, (index, file) ->
+          console.log index
+          console.log file
+        )
+    )
+    
   
   saveUser: (event) ->
         

@@ -30,6 +30,9 @@
         margin-bottom: 30px;
       }
     }
+    .image_form {
+      display: none;
+    }
     .text_form {
       display: none;
       position: relative;
@@ -77,6 +80,91 @@
   }
 }
 #posts, #bucket_posts {
+  &.centered {
+    width: 700px;
+    margin: 0px auto;
+    padding: 20px 0;
+    .promoted_post {
+      width: 680px;
+      margin: 0px;
+      padding: 10px 0;
+      position: relative;
+      .body {
+        background: #fff;
+        border: 1px solid #eee;
+        width: 460px;
+        min-height: 100px;
+        padding: 20px;
+        padding-bottom: 30px;
+        font-family: Helveticaneuelight;
+        font-size: 15px;
+        color: #111;
+        line-height: 24px;
+      }
+      .details {
+        position: absolute;
+        top: 10px;
+        right: 0px;
+        width: 170px;
+        padding-left: 10px;
+        .user {
+          border-bottom: 1px solid #eee;
+          width: 100%;
+          .thumbnail {
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            background: #dadada;
+            float: left;
+            margin-top: 5px;
+          }
+          h4 {
+            font-family: Helveticaneuebold;
+            color: #222;
+            padding: 5px 0;
+            margin: 0px;
+            font-size: 14px;
+            margin-left: 23px;
+          }
+        }
+        .team {
+          font-family: Helveticaneuelight;
+          color:#333;
+          width: 100%;
+          border-bottom: 1px solid #eee;
+          padding: 5px 0;
+        }
+        .likes {
+          padding-top: 5px;
+          font-family: Helveticaneuelight;
+          font-size: 30px;
+          line-height: 35px;
+          color: #66FF99;
+          -webkit-transition: 0.2s;
+          &.liked {
+            color: #3399FF;
+            span.unicode {
+              &:hover {
+                color: #e60000;
+              }
+            }
+          }
+          span.unicode {
+            font-size: 30px;
+            line-height: 35px;
+            padding-right: 5px;
+            cursor: pointer;
+            &:hover {
+              color: #3399FF;
+            }
+            &:active {
+              font-style: bold;
+            }
+          }
+        }
+      }
+    }
+  }
   &.loading {
     height: 500px;
     background: #e60000;

@@ -15,7 +15,7 @@ jQuery ->
       
     else
       $(".container .form").stop().show().css({'opacity':"0","width":"0px"}).animate({"width":"250px"}, 300).animate({"opacity":"1"}, 200)
-      $(".container .form .text_form").hide()
+      $(".container .form .text_form .image_form").hide()
       $(".button").show()
       $(".container .form textarea").focus()
       $(".item.new h1").html('-')

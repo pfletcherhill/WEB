@@ -3,6 +3,10 @@
     <form id='new-post' name='post'>
       <div class="button image">Upload an image</div>
       <div class="button text">Write a note</div>
+      <div class="image_form">
+        <input id="fileupload" type="file" name="files[]" data-url="" multiple>
+        <input type="submit">
+      </div>
       <div class="text_form">
         <textarea name='body' id='body'></textarea>
         <input type='submit' class="add_post" value='Add Post'/>

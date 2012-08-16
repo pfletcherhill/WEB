@@ -54,10 +54,11 @@ class PostsController < ApplicationController
   def like
     @like = Like.new({ 'user_id' => params[:user_id], 'post_id' => params[:post_id] })
     @like.save
-    @post = Post.where(:id => params[:post_id]).first
+    @post = Post.find(params[:post_id])
+    likes_count = @post.likes.count
     
-    if @post.likes.count >= 3
-      @post.promoted == true
+    if likes_count >= 3
+      @post.promoted = true
       @post.save
     end
       

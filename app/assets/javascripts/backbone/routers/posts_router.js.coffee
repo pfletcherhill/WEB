@@ -19,7 +19,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     $("#posts").html('loading')
     @posts.url = "/promoted"
     @posts.fetch success: (promotedPosts) =>
-      @view = new WEB.Views.Posts.IndexView(posts: promotedPosts)
+      @view = new WEB.Views.Posts.PromotedView(posts: promotedPosts)
       $("#posts").html(@view.render().el)
     
   team: ->
