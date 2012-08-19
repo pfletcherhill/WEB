@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818223617) do
+ActiveRecord::Schema.define(:version => 20120819003223) do
 
   create_table "buckets", :force => true do |t|
     t.string   "name"
@@ -48,12 +48,8 @@ ActiveRecord::Schema.define(:version => 20120818223617) do
     t.integer  "user_id"
     t.integer  "team_id"
     t.boolean  "promoted"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-    t.string   "thumbnail_file_name"
-    t.string   "thumbnail_content_type"
-    t.integer  "thumbnail_file_size"
-    t.datetime "thumbnail_updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "image_id"
   end
 
