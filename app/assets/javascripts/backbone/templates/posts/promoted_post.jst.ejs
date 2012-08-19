@@ -1,11 +1,14 @@
 <div class="promoted_post">
-  <div class="body"><%= body %></div>
+  <div class="body">
+    <p><%= body %></p>
+    <%= image ? '<img src=' + image.image.url + ' />' : '' %>
+  </div>
   <div class="details">
     <div class="user">
       <div class="thumbnail"></div>
-      <h4 class="name"><%= user.name %></h4>
+      <h4 class="name"><%= user ? user.name : '' %></h4>
     </div>
-    <div class="team"><%= team.name %></div>
-    <div class="likes" data-id="<%= id %>"><span class="unicode">&#x2661;</span><%= likes.length %></div>
+    <div class="team"><%= team ? team.name : '' %></div>
+    <div class="likes" data-id="<%= id %>"><span class="unicode">&#x2661;</span><%= likes ? likes.length : '' %></div>
   </div>
 </div>

@@ -49,3 +49,14 @@ gem "jammit", :git => 'git://github.com/documentcloud/jammit.git'
 #Heroku
 gem 'heroku'
 gem 'thin'
+
+#Paperclip
+#gem "paperclip", "~> 3.0"
+
+gem 'carrierwave'
+gem 'fog'
+gem 'mini_magick'
+
+#Amazon S3
+gem 'aws-s3'
+gem 'aws-sdk'

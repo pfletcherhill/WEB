@@ -4,7 +4,6 @@
 jQuery.event.props.push('dataTransfer')
 
 jQuery ->
-
   #show form
   $(".item.new").click ->
     if $(this).hasClass 'close_form'
@@ -12,11 +11,10 @@ jQuery ->
       $(".container .form").stop().animate({"opacity":"0"}, 100).hide(250)
       $(".item.new h1").html('+')
       $(".item.new").removeClass('close_form')
-      
     else
       $(".container .form").stop().show().css({'opacity':"0","width":"0px"}).animate({"width":"250px"}, 300).animate({"opacity":"1"}, 200)
-      $(".container .form .text_form .image_form").hide()
-      $(".button").show()
+      $(".button.image").show().removeClass('failed')
+      $(".button.image .message").html('Add an Image')
       $(".container .form textarea").focus()
       $(".item.new h1").html('-')
       $(".item.new").addClass('close_form')

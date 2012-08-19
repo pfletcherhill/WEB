@@ -1,7 +1,7 @@
 <div class="bucket" ondragover="event.preventDefault()" dragenter="event.preventDefault()" ondrop="event.preventDefault()">
   <div class="text">
     <h5><%= name %></h5>
-    <div class="user"><%= user.name %></div>
+    <div class="user"><%= user ? user.name : '' %></div>
   </div>
-  <div class="number"><%= posts.length %></div>
+  <div class="number"><%= posts ? posts.length : '' %></div>
 </div>

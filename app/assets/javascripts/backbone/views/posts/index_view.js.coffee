@@ -21,7 +21,24 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   
   renderProfile: (user) ->
     $("#my_profile").html(@profile( user.toJSON() ))
-    
+  
+  renderUpload: =>
+    $("#new_image").fileupload
+      dataType: "json"
+      autoUpload: true
+      done: (e, data) =>
+        $(".button.image .message").html('Loaded!')
+        $.each data.result, (index, file) =>
+          url = file.thumbnail_url
+          $(".button.image").removeClass 'empty'
+          $(".button.image").html('<div class="preview"><img src=' + url + ' />Image Added</div>')
+          @image = file
+      fail: (e, data) ->
+        $(".button.image .message").html('Upload Failed')
+      start: (e, data) ->
+        $(".button.image .message").html('Processing...')
+        $('.button.image .image_loader').animate({"width":"160px"}, 1100)
+              
   render: =>
     @post = new @options.posts.model()
     $(@el).html(@template())
@@ -29,27 +46,26 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @$("form#new-user").backboneLink(@post)
     @renderEditProfile(WEB.currentUser)
     @renderProfile(WEB.currentUser)
-
+    @renderUpload()
     return this
-           
+
+  linkify: (text) ->
+    exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+    return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")
+
+  spacify: (text) ->
+    return text.replace(/\r?\n/g, '<br/>')
+    
   events:
-    "submit #new-post" : "save"
-    "click .button.text" : "newText"
-    "click .button.image" : "newImage"
-    "click .image.submit" : "upload"
-    "submit #update-user" : 'saveUser'
     "dragstart" : 'dragstartPost'
+    "click .button.text" : "newText"
+    "click .button.image.empty" : "newImage"
+    "submit form#update-user" : 'saveUser'
+    "submit form#new_post" : "save"
     
   dragstartPost: (event) ->
     postId = $(event.target).data('post_id')
     event.dataTransfer.setData('post_id',postId)
-      
-  linkify: (text) ->
-    exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
-    return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")
-  
-  spacify: (text) ->
-    return text.replace(/\r?\n/g, '<br/>')
   
   newText: ->
     $(".button").hide()
@@ -57,29 +73,15 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     $(".text_form textarea").focus()
   
   newImage: ->
-    $(".button").hide()
-    $(".image_form").show()
-  
-  upload: ->
-    $(".image_form #fileupload").fileupload(
-      dataType: 'json',
-      autoUpload: true,
-      done: (event, data) ->
-        $.each(data.result, (index, file) ->
-          console.log index
-          console.log file
-        )
-    )
+    @renderUpload()
+    $(".upload input[type='file']").click()
+    false
     
-  
   saveUser: (event) ->
-        
     event.preventDefault()
     event.stopPropagation()
-
     user = WEB.currentUser
     user.unset("errors")
-        
     user.set
       name: $('#edit_user_form input#name').val(),
       email: $('#edit_user_form input#email').val(),
@@ -87,29 +89,24 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       year: $('#edit_user_form input#year').val(),
       bio: $('#edit_user_form textarea#bio').html()
      
-  save: (e) ->
+  save: (e) -> 
     e.preventDefault()
     e.stopPropagation()
-
     @post.unset("errors")
-    
     string = @spacify $(".form form textarea").val()
     body = @linkify string
-    
     @post.set
       user_id: WEB.currentUser.id
       team_id: WEB.currentUser.get('team_id')
       body: body
-    
+      image_id: @image.id if @image
     @post.save
-            
     @options.posts.create(@post,
       success: (post) =>
-        @post = post
         $(".item.new").removeClass "close_form"
         $(".item.new h1").html("+")
         @render()
-
+        
       error: (post, jqXHR) =>
         @post.set({errors: $.parseJSON(jqXHR.responseText)})
     )

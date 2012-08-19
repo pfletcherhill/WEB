@@ -12,9 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-file-upload/jquery.iframe-transport
+//= require jquery-file-upload/jquery.ui.widget
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/web
+//= require jquery-file-upload/jquery.fileupload
 //= require_tree .

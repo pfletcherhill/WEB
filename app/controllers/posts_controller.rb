@@ -32,12 +32,32 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.save
-        format.html { redirect_to "/", notice: 'You added a post.' }
-        format.json { render json: @post, status: :created, location: @post }
+        format.html { redirect_to "/" }
+        format.json { render json: @post }
       else
         format.html { redirect_to "/", notice: 'Better luck next time.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
+  end
+  
+  def upload
+    @post = Post.new(params[:post])
+    @team = current_user.team
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @post }
+        format.json { render json: @post }
+      end
+    end
+  end
+  
+  def show
+    @post = Post.find(params[:id])
+    @team = current_user.team
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
     end
   end
   
@@ -93,11 +113,13 @@ class PostsController < ApplicationController
   
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
     @likes = Like.where(:post_id => @post.id)
     @likes.each do |like|
       like.destroy
     end
+    @image = Image.where(:id => @post.image_id).first
+    @image.destroy if @image
+    @post.destroy
 
     respond_to do |format|
       format.html { redirect_to "/", notice: 'Post was deleted' }
@@ -112,6 +134,16 @@ class PostsController < ApplicationController
     if current_admin
     else
       redirect_to '/'
+    end
+  end
+  
+  def image
+    @post = Post.find(params[:id])
+    @image = @post.image
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @image }
     end
   end
 end

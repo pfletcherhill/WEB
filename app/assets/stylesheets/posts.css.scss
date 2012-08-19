@@ -13,65 +13,100 @@
     height: 250px;
     margin: 20px;
     float: left;
-    .button {
-      width: 250px;
-      height: 110px;
-      background: #dadada;
+    position: relative;
+    .button.image {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 160px;
+      height: 60px;
       color: #fff;
-      text-align: center;
-      line-height: 110px;
       font-family: Helveticaneuebold;
-      cursor: pointer;
-      -webkit-transition: 0.2s;
-      &:hover {
-        background: #777;
+      text-align: center;
+      -webkit-transition: background 0.2s;
+      z-index: 4;
+      line-height: 60px;
+      &.empty {
+        background: #dadada;
+        &:hover {
+          background: #777;
+          cursor: pointer;
+        }
       }
-      &:first-child {
-        margin-bottom: 30px;
+      .image_loader {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 0px;
+        background: #333;
+        z-index: 4;
+        height: 60px;
+      }
+      .preview {
+        width: 56px;
+        height: 56px;
+        border: 2px solid #333;
+        img {
+          height: 56px;
+          width: 56px;
+          background: #dadada;
+        }
+      }
+      .message {
+        z-index: 5;
+        position: relative;
       }
     }
-    .image_form {
-      display: none;
+    .upload {
+      height: 0px;
+      width: 0px;
+      opacity: 0;
+      overflow: hidden;
     }
-    .text_form {
-      display: none;
+    .post_form {
       position: relative;
+      width: 230px;
+      height: 230px;
+      padding: 10px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       textarea {
+        height: 160px;
         width: 230px;
-        height: 230px;
+        padding: 0px;
         margin-bottom: 0px;
         border: 0px;
         outline: none;
-        padding: 10px;
         resize: none;
-        background: #fff;
         color: #333;
         font-size: 13px;
         line-height: 18px;
         font-family: Helveticaneue;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       }
       input.add_post {
-        width: 230px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         position: absolute;
-        bottom: 14px;
-        left: 10px;
-        background: #6f9;
+        bottom: 10px;
+        right: 10px;
+        background-color: #6f9;
         color: #fff;
-        font-family: georgia;
         text-align: center;
         border: 0px;
         cursor: pointer;
-        line-height: 35px;
+        line-height: 60px;
         padding: 0px;
         outline: none;
         font-family: Helveticaneuebold;
-        font-size: 15px;
+        font-size: 40px;
         opacity: 0.8;
         -webkit-transition: 0.5s;
+        background-image: url('/assets/WEB_check.jpg');
+        background-size: 55px 60px;
+        background-position: center;
         &:hover, &:focus {
           border: 0px;
+          background-color: #19D1A3;
           opacity: 1;
           color: #fff;
         }
@@ -95,11 +130,26 @@
         width: 460px;
         min-height: 100px;
         padding: 20px;
-        padding-bottom: 30px;
         font-family: Helveticaneuelight;
         font-size: 15px;
         color: #111;
         line-height: 24px;
+        &.loaded {
+          img {
+            opacity: 1;
+          }
+        }
+        p {
+          margin: 0px;
+          padding: 0px;
+          margin-bottom: 20px;
+        }
+        img {
+          width: 454px;
+          border: 2px solid #333;
+          opacity: 0;
+          -webkit-transition: 2s;
+        }
       }
       .details {
         position: absolute;
@@ -174,15 +224,10 @@
     height: 230px;
     margin: 20px;
     background: #fff;
-    color: #333;
     float: left;
     padding: 10px;
     position: relative;
-    font-family: Helveticaneue;
-    font-size: 13px;
-    line-height: 18px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    overflow: hidden;
     &[draggable=true] {
       cursor: move;
     }
@@ -201,68 +246,65 @@
     	  color: #000;
     	}
     }
-    .info {
-      display: none;
+    .body {
+      color: #333;
+      font-family: Helveticaneue;
+      font-size: 13px;
+      line-height: 18px;
+      overflow: scroll;
+      width: 230px;
+      height: 160px;
+    }
+    img {
       position: absolute;
       bottom: 10px;
       left: 10px;
-      width: 210px;
-      padding: 10px;
-      font-family: Helveticaneuebold;
-      font-size: 11px;
-      -webkit-transition: 0.2s;
+      border: 2px solid #333;
     }
-    .close, .name {
-      -webkit-transition: 0.2s;
-      cursor: pointer;
-      height: 40px;
-      width: 110px;
+    .details {
       position: absolute;
-      bottom: 0px;
-      right: 0px;
-      background: #bbb;
-      color: #fff;
-      font-size: 15px;
-      text-align: center;
-      line-height: 40px;
-      opacity: 0.6;
-      &:hover {
-        opacity: 0.9;
+      bottom: 10px;
+      right: 10px;
+      text-align: right;
+      .likes {
+        font-size: 28px;
+        color: #66FF99;
+        line-height: 30px;
+        font-family: Helveticaneue;
+        &.liked {
+          color: #3399FF;
+          span.unicode {
+            &:hover {
+              color: #e60000;
+              font-family: Helveticaneuelight;
+            }
+          }
+        }
+        span.unicode {
+          -webkit-transition: 0.2s;
+          padding-right: 3px;
+          cursor: pointer;
+          &:hover {
+            color: #3399FF;
+          }
+          &:active {
+            font-style: bold;
+          }
+        }
       }
-      .unicode {
-        font-size: 20px;
-        line-height: 36px;
-      }
-    }
-    .like {
-      -webkit-transition: 0.1s;
-      cursor: pointer;
-      height: 40px;
-      width: 110px;
-      position: absolute;
-      bottom: 0px;
-      left: 0px;
-      background: #66FF99;
-      opacity: 0.8;
-      color: #fff;
-      font-size: 15px;
-      text-align: center;
-      line-height: 40px;
-      &:hover {
-        opacity: 1;
-      }
-      &.liked {
-        opacity: 0.7;
-        background: #33D6FF;
-      }
-      &:active {
-        background: #52CC52;
-        opacity: 1;
-      }
-    }
-    &:hover {
-      .info {
-        display: block;
+      .author {
+        font-family: Helveticaneuelight;
+        font-size: 18px;
+        line-height: 20px;
+        padding-bottom: 3px;
+        margin-bottom: 7px;
+        border-bottom: 1px solid #dadada;
+        color: #444;
+        cursor: pointer;
+        -webkit-transition: 0.2s;
+        &:hover {
+          color: #000;
+        }
       }
     }
   }

@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Listing images</h1>
+  
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Team</th>
+      <th>Image</th>
+      <th>Full Image</th>
+    </tr>
+
+  <% @images.each do |image| %>
+    <tr>
+      <td><%= image.title %></td>
+      <td><%= image.post_id %></td>
+      <td><%= image_tag(image.image_url(:thumb)) if image.image.present? %></td>
+      <td><%= image_tag(image.image_url) if image.image.present? %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>

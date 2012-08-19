@@ -5,4 +5,5 @@
       %p=f.hidden_field :promoted, :value => true
       %P=f.hidden_field :user_id, :value => current_user.id
       %p=f.hidden_field :team_id, :value => current_user.team_id
+      %p=f.file_field :thumbnail
       %p=f.submit

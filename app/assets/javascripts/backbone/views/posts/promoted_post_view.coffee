@@ -9,7 +9,7 @@ class WEB.Views.Posts.PromotedPostView extends Backbone.View
     "click .likes span.unicode" : "toggleLike"
 
   tagName: "post"
-
+    
   destroy: () ->
     if confirm "Are you sure you want to delete your post?"
       @model.destroy()
@@ -32,12 +32,16 @@ class WEB.Views.Posts.PromotedPostView extends Backbone.View
     teamId = @model.get('team_id')
     @model.fetchTeam(teamId).then @applyTemplate
     @model.fetchUser(userId).then @applyTemplate
+    @model.fetchImage(postId).then @applyTemplate
     @model.fetchLikes(postId).then @applyTemplate
     return this
 
-  applyTemplate: _.after(3, ->
+  applyTemplate: _.after(4, ->
     $(@el).html(@template( @model.asJSON() ))
     @likePosts()
+    $(".body").addClass "loading"
+    $(".body img").on 'load', ->
+      $(".body").removeClass('loading').addClass('loaded')
   )
   
   likePosts: =>

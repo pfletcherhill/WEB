@@ -5,6 +5,7 @@ class WEB.Models.Post extends Backbone.Model
     'user_id': WEB.currentUser.id
     'team_id': WEB.currentUser.get('team_id')
     'likes': []
+    'image_id': null
         
   fetchUser: (userId) ->
     $.ajax
@@ -30,9 +31,17 @@ class WEB.Models.Post extends Backbone.Model
       success: (data) =>
         @set team: data
   
+  fetchImage: (postId) ->
+    $.ajax
+      type: 'GET'
+      dataType: 'json'
+      url: '/posts/' + postId + '/image'
+      success: (data) =>
+        @set image: data
+  
   asJSON: =>
     post = _.clone this.attributes
-    return _.extend post, {user: this.get('user'), likes: this.get('likes'), team: this.get('team')}
+    return _.extend post, {user: this.get('user'), likes: this.get('likes'), team: this.get('team'), image: this.get('image')}
     
   like: (postId) ->
     $.ajax

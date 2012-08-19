@@ -7,7 +7,7 @@ class WEB.Views.Posts.PostView extends Backbone.View
     
   events:
     "click .destroy" : "destroy"
-    "click .like" : "toggleLike"
+    "click .likes span.unicode" : "toggleLike"
 
   tagName: "post"
 
@@ -19,13 +19,13 @@ class WEB.Views.Posts.PostView extends Backbone.View
     return false
   
   toggleLike: (event) ->
-    postId = $(event.target).data('id')
-    if $(event.target).hasClass 'liked'
-      @model.unlike(postId)
-      $(event.target).html('<span class="unicode">&#x2661;</span> Like').removeClass('liked')
+    postId = $(event.target).parent().data('id')
+    if $(event.target).parent().hasClass 'liked'
+      @model.unlike(postId).then @render
+      $(event.target).parent().removeClass 'liked'
     else
-      @model.like(postId)
-      $(event.target).html('<span class="unicode">&#x2661;</span> Liked').addClass('liked')
+      @model.like(postId).then @render
+      $(event.target).parent().addClass 'liked'
 
   render: =>
     userId = @model.get('user_id')
@@ -33,21 +33,23 @@ class WEB.Views.Posts.PostView extends Backbone.View
     if userId == WEB.currentUser.id
       @model.fetchUser(userId).then @applyMyTemplate
       @model.fetchLikes(postId).then @applyMyTemplate
+      @model.fetchImage(postId).then @applyMyTemplate
     else
       @model.fetchUser(userId).then @applyPostTemplate
       @model.fetchLikes(postId).then @applyPostTemplate
+      @model.fetchImage(postId).then @applyPostTemplate
     return this
   
-  applyPostTemplate: _.after(2, ->
+  applyPostTemplate: _.after(3, ->
     $(@el).html(@postTemplate( @model.asJSON() ))
     @likePosts()
   )
   
-  applyMyTemplate: _.after(2, ->
+  applyMyTemplate: _.after(3, ->
     $(@el).html(@myTemplate( @model.asJSON() ))
     @likePosts()
   )
   
   likePosts: =>
     if $.inArray(WEB.currentUser.id, @model.get('likes')) > -1
-      $('.post .info').find(".like[data-id=#{@model.id}]").html('<span class="unicode">&#x2661;</span> Liked').addClass("liked")
+      $('.post .details').find(".likes[data-id=#{@model.id}]").addClass("liked")

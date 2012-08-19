@@ -1,7 +1,7 @@
 WEB::Application.routes.draw do
-  
+
   #Resources
-  resources :users, :sessions, :teams, :posts, :likes, :buckets
+  resources :users, :sessions, :teams, :posts, :likes, :buckets, :images
   
   #Root
   root :to => 'posts#index'
@@ -22,6 +22,9 @@ WEB::Application.routes.draw do
   match "/posts" => "posts#index"
   match "/promoted" => "posts#promoted"
   match "/posts/:id/likes" => "posts#likes"
+  match "/posts/upload" => "posts#upload"
+  match "/posts/:id/image" => "posts#image"
+  match "/posts/:id/thumbnail" => "posts#thumbnail"
   
   #Users
   match "/preferences" => "users#edit"
@@ -38,4 +41,5 @@ WEB::Application.routes.draw do
   #Admin
   match "/admin" => "admins#index"
   match "/new_notice" => "posts#new_notice"
+  match "/new_image" => "images#new"
 end
