@@ -12,11 +12,11 @@ class WEB.Views.Buckets.ListView extends Backbone.View
     @options.buckets.each(@addOne)
 
   addOne: (bucket) =>
-    view = new WEB.Views.Buckets.BucketView({model : bucket})
+    view = new WEB.Views.Buckets.BucketView({model : bucket, currentId: @options.id })
     @$("#buckets").prepend(view.render().el)
-
+    
   render: =>
-    $(@el).html(@template(buckets: @options.buckets.toJSON() ))
+    $(@el).html(@template(buckets: @options.buckets.toJSON()))
     @addAll()
     return this
     

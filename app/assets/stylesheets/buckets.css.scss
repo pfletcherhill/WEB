@@ -66,42 +66,47 @@
   #buckets {
     overflow: scroll;
     .bucket {
-      padding: 15px;
-      padding-right: 40px;
       border-bottom: 1px solid #fff;
       -webkit-transition: 0.2s;
       cursor: pointer;
       position: relative;
-      .text {
-        h5 {
+      a {
+        padding: 15px;
+        padding-right: 40px;
+        display: block;
+        position: relative;
+        text-decoration: none;
+        .text {
+          h5 {
+            font-family: Helveticaneuebold;
+            font-size: 15px;
+            padding: 0px;
+            margin: 0px;
+            padding-bottom: 3px;
+            color: #333;
+          }
+          .user {
+            font-family: Helveticaneuelight;
+            font-size: 12px;
+            color: #333;
+          }
+        }
+        .number {
+          position: absolute;
+          top: 50%;
+          margin-top: -16px;
+          right: 15px;
+          height: 31px;
+          width: 31px;
+          //padding: 0px 10px;
+          background: #444;
+          border-radius: 18px;
+          color: #fff;
+          font-size: 13px;
           font-family: Helveticaneuebold;
-          font-size: 15px;
-          padding: 0px;
-          margin: 0px;
-          padding-bottom: 3px;
-          color: #333;
+          line-height: 31px;
+          text-align: center;
         }
-        .user {
-          font-family: Helveticaneuelight;
-          font-size: 12px;
-          color: #333;
-        }
-      }
-      .number {
-        position: absolute;
-        top: 50%;
-        margin-top: -16px;
-        right: 15px;
-        height: 31px;
-        width: 31px;
-        //padding: 0px 10px;
-        background: #444;
-        border-radius: 18px;
-        color: #fff;
-        font-size: 13px;
-        font-family: Helveticaneuebold;
-        line-height: 31px;
-        text-align: center;
       }
       &:hover {
         background: #fafafa;

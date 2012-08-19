@@ -215,6 +215,14 @@
       }
     }
   }
+  .no_posts {
+    text-align: center;
+    padding-top: 100px;
+    font-family: Helveticaneuebold;
+    color: #dadada;
+    font-size: 30px;
+    display: none;
+  }
   &.loading {
     height: 500px;
     background: #e60000;

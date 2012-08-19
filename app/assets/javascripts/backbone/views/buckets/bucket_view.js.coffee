@@ -5,23 +5,21 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
   
   initialize: ->
     _.bindAll(@)
-    @posts = new WEB.Collections.PostsCollection()
-    @posts.url = "/bucket/" + @model.get('id') + "/posts"
   
   render: =>
     userId = @model.get('user_id')
     bucketId = @model.get('id')
     @model.fetchUser(userId).then @applyTemplate
     @model.fetchPosts(bucketId).then @applyTemplate
+    console.log @options.currentId
     return this
 
   applyTemplate: _.after(2, ->
     $(@el).html(@template(@model.asJSON()))
+    $(@el).find('.bucket[data-id=' + @options.currentId + ']').addClass 'selected'
   )
 
   events:
-    "click .bucket:not(.selected)": "openPosts"
-    "click .bucket.selected": "closePosts"
     "drop .bucket" : "dropPost"
     "dragenter .bucket" : "dragoverBucket"
     "dragleave .bucket" : "dragleaveBucket"

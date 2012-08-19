@@ -38,7 +38,11 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       start: (e, data) ->
         $(".button.image .message").html('Processing...')
         $('.button.image .image_loader').animate({"width":"160px"}, 1100)
-              
+  
+  noPosts: =>
+    if @options.posts.length == 0
+      @$("#posts").html("<div class='no_posts'>No Posts Yet</div>")      
+      @$("#posts .no_posts").fadeIn(300)      
   render: =>
     @post = new @options.posts.model()
     $(@el).html(@template())
@@ -47,6 +51,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @renderEditProfile(WEB.currentUser)
     @renderProfile(WEB.currentUser)
     @renderUpload()
+    @noPosts()
     return this
 
   linkify: (text) ->
