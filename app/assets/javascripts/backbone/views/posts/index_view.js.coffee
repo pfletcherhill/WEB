@@ -79,7 +79,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     $("#photobox .image").html(@photobox( post.asJSON() ))
     $("#photobox .image").addClass 'loading'
     $("#photobox .image img").on 'load', ->
-      #$("#photobox .image").removeClass 'loading'
+      $("#photobox .image").removeClass 'loading'
   
   closeImage: (event) ->
     $("#photobox").removeClass 'active'
