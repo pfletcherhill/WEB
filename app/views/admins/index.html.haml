@@ -43,6 +43,7 @@
             %th Post
             %th Likes
             %th
+            %th
           -team.posts.each do |post|
             %tr
               %td= post.user.name
@@ -52,4 +53,5 @@
                 %td promoted
               -else
                 %td
+              %td= link_to "Delete", "/posts/#{post.id}", confirm: 'Are you sure?', method: :delete
           
