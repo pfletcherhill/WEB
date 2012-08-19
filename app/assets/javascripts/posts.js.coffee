@@ -40,5 +40,3 @@ jQuery ->
       $("#buckets_form .form").hide()
       height = $(window).height() - 240
       $("#buckets").height(height + 'px')
-      if $(this).hasClass "buckets"
-        $(".post").attr 'draggable', true
