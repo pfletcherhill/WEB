@@ -28,13 +28,13 @@ jQuery ->
       
   #Sidebar collapse
   $(".sidebar .name").click ->
-    $(".collapsible.open").hide(200)
+    $(".collapsible.open").slideUp(200)
     div = $(this).parent()
     if $('.collapsible', div).hasClass 'open'
       $('.collapsible.open').removeClass 'open'
     else
       $('.collapsible.open').removeClass 'open'
-      $('.collapsible', div).delay(200).show(250).addClass 'open'
+      $('.collapsible', div).delay(200).slideDown(250).addClass 'open'
       $("#buckets_form .show_form").show()
       $("#buckets_form .form").hide()
       height = $(window).height() - 240

@@ -1,9 +1,6 @@
-<div class="bucket" ondragover="event.preventDefault()" data-id=<%= id %> dragenter="event.preventDefault()" ondrop="event.preventDefault()">
-  <a href="#bucket/<%= id %>">
-    <div class="text">
-      <h5><%= name %></h5>
-      <div class="user"><%= user ? user.name : '' %></div>
-    </div>
-    <div class="number"><%= posts ? posts.length : '' %></div>
-  </a>
+<div class="bucket" data-id=<%= id %> >
+  <a href="#bucket/<%= id %>" class="dropzone" ondragover="event.preventDefault()" data-id=<%= id %> dragenter="event.preventDefault()" ondrop="event.preventDefault()"></a>
+  <h5 data-id=<%= id %>><%= name %></h5>
+  <div class="user" data-id=<%= id %>><%= user ? user.name : '' %></div>
+  <div class="number" data-id=<%= id %>><%= posts ? posts.length : '' %></div>
 </div>

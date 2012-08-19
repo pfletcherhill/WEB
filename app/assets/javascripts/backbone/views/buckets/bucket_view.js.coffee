@@ -11,7 +11,6 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
     bucketId = @model.get('id')
     @model.fetchUser(userId).then @applyTemplate
     @model.fetchPosts(bucketId).then @applyTemplate
-    console.log @options.currentId
     return this
 
   applyTemplate: _.after(2, ->
@@ -23,14 +22,18 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
     "drop .bucket" : "dropPost"
     "dragenter .bucket" : "dragoverBucket"
     "dragleave .bucket" : "dragleaveBucket"
-  
+    
   dragoverBucket: (event) =>
-    $target = $(event.target)
+    $target = $(event.target).parent()
     $target.addClass 'dragover'
+    #height = $target.height() - 6
+    #$target.height(height)
   
   dragleaveBucket: (event) =>
-    $target = $(event.target)
+    $target = $(event.target).parent()
     $target.removeClass 'dragover'
+    #height = $target.height() + 6
+    #$target.height(height)
       
   dropPost: (event) =>
     event.preventDefault()
@@ -40,23 +43,3 @@ class WEB.Views.Buckets.BucketView extends Backbone.View
   completeDrop: (event) ->
     @render()
     $(event.target).trigger 'click'
-  
-  openPosts: (event) ->
-    $('.bucket').removeClass 'selected'
-    $target = $(event.target)
-    if $target.is('h5') || $target.is('.user')
-      $target.parent().parent().addClass 'selected'
-    else
-      $target.addClass 'selected'
-    $("#bucket_container").show().animate({"right":"300px"})
-    $(".container").width($(window).width() - 720 + 'px')
-    @posts.fetch success: (bucketPosts) =>
-      view = new WEB.Views.Posts.BucketView(posts: bucketPosts, bucket: @model)
-      $("#bucket_container").html(view.render().el)
-    
-  
-  closePosts: (event) ->
-    $(".bucket").removeClass 'selected'
-    $("#bucket_container").animate({"right":"0px"}, 300, ->
-      $('#bucket_container').hide())
-    $(".container").removeAttr 'style'

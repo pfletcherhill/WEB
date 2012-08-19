@@ -31,6 +31,9 @@ class WEB.Routers.PostsRouter extends Backbone.Router
       $("#posts").html(@view.render().el)
       $("#pointer").fadeIn(200).css({"top":"146px"})
       $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'
+      # $("#posts").load(
+      #       alert 'posts loaded'
+      #     )
   
   likes: ->
     $("#buckets .bucket").removeClass 'selected'
