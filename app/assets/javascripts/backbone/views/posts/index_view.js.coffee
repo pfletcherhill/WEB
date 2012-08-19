@@ -4,6 +4,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   template: JST["backbone/templates/posts/index"]
   profile: JST["backbone/templates/users/profile"]
   editUserForm: JST["backbone/templates/users/edit"]
+  photobox: JST["backbone/templates/posts/photobox"]
 
   initialize: () ->
     @options.posts.bind('reset', @addAll)
@@ -42,7 +43,8 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   noPosts: =>
     if @options.posts.length == 0
       @$("#posts").html("<div class='no_posts'>No Posts Yet</div>")      
-      @$("#posts .no_posts").fadeIn(300)      
+      @$("#posts .no_posts").fadeIn(300)   
+         
   render: =>
     @post = new @options.posts.model()
     $(@el).html(@template())
@@ -67,6 +69,21 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     "click .button.image.empty" : "newImage"
     "submit form#update-user" : 'saveUser'
     "submit form#new_post" : "save"
+    "click .post img" : "openImage"
+    "click #photobox .opacity" : "closeImage"
+  
+  openImage: (event) ->
+    $("#photobox").addClass('active')
+    id = $(event.target).data('id')
+    post = @options.posts.get(id)
+    $("#photobox .image").html(@photobox( post.asJSON() ))
+    $("#photobox .image").addClass 'loading'
+    $("#photobox .image img").on 'load', ->
+      #$("#photobox .image").removeClass 'loading'
+  
+  closeImage: (event) ->
+    $("#photobox").removeClass 'active'
+    $("#photobox .image").html('')
     
   dragstartPost: (event) ->
     postId = $(event.target).data('post_id')

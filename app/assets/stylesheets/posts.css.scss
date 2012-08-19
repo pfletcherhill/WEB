@@ -268,6 +268,11 @@
       bottom: 10px;
       left: 10px;
       border: 2px solid #333;
+      cursor: pointer;
+      -webkit-transition: 0.2s;
+      &:hover {
+        border: 2px solid #000;
+      }
     }
     .details {
       position: absolute;
@@ -313,6 +318,55 @@
         &:hover {
           color: #000;
         }
+      }
+    }
+  }
+}
+#photobox {
+  position: fixed;
+  top: 0px;
+  left: 100px;
+  .opacity {
+    opacity: 0;
+    -webkit-transition: opacity 0.7s;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  .image {
+    &.loading {
+      img {
+        opacity: 0;
+      }
+    }
+    img {
+      display: none;
+      -webkit-transition: opacity 0.3s;
+      -webkit-transition: box-shadow 0.3s;
+    }
+  }
+  &.active {
+    height: 100%;
+    width: -webkit-calc(100% - 400px);
+    width: -moz-calc(100% - 400px);
+    width: calc(100% - 400px);
+    .opacity {
+      background: #000;
+      opacity: 0.9;
+    }
+    .image {
+      img {
+        box-shadow: 0 0 40px #000;
+        max-width: -webkit-calc(100% - 200px);
+        max-width: -moz-calc(100% - 200px);
+        max-width: calc(100% - 200px);
+        display: block;
+        margin: auto;
+        margin-top: 30px;
+        position: relative;
+        z-index: 5;
       }
     }
   }

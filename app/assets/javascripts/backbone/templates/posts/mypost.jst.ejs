@@ -1,6 +1,6 @@
-<div class="post" draggable=true data-id="<%= id %>" data-post_id="<%= id %>">
+<div class="post" data-id="<%= id %>" data-post_id="<%= id %>">
   <div class="body"><%= body %></div>
-  <%= image ? '<img src=' + image.image.thumb.url + ' />' : '' %>
+  <%= image ? '<img data-id="' + id + '" src=' + image.image.thumb.url + ' />' : '' %>
   <div class="details">
     <div class="author"><%= user ? user.name : '' %></div>
     <div class="likes" data-id="<%= id %>"><span class="unicode">&#x2661;</span><%= likes ? likes.length : '' %></div>

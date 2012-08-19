@@ -23,7 +23,7 @@ class WEB.Views.Buckets.ListView extends Backbone.View
   events: 
     "click #buckets_form .show_form" : "showForm"
     "click #buckets_form .form button" : "newBucket"
-  
+    
   showForm: (event) ->
     $(event.target).hide()
     $("#buckets_form .form").fadeIn(300)

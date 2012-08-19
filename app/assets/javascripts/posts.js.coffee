@@ -28,6 +28,7 @@ jQuery ->
       
   #Sidebar collapse
   $(".sidebar .name").click ->
+    $(".post").attr 'draggable', false
     $(".collapsible.open").slideUp(200)
     div = $(this).parent()
     if $('.collapsible', div).hasClass 'open'
@@ -39,3 +40,5 @@ jQuery ->
       $("#buckets_form .form").hide()
       height = $(window).height() - 240
       $("#buckets").height(height + 'px')
+      if $(this).hasClass "buckets"
+        $(".post").attr 'draggable', true
