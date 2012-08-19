@@ -17,7 +17,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @$("#posts").prepend(view.render().el)
   
   renderEditProfile: (user) ->
-    $("#edit_user_form").html(@editUserForm( user.toJSON() ))
+    @$(".preferences #edit_user_form").html(@editUserForm( user.toJSON() ))
     @$("form#update-user").backboneLink(user)
   
   renderProfile: (user) ->
@@ -71,7 +71,12 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     "submit form#new_post" : "save"
     "click .post img" : "openImage"
     "click #photobox .opacity" : "closeImage"
+    "click .preferences .header .close" : "closePreferences"
   
+  closePreferences: ->
+    $('.preferences').animate({'right':'-300px'}, 400)
+    $('.sidebar').delay(500).animate({'right':'0px'}, 400)
+    
   openImage: (event) ->
     $("#photobox").addClass('active')
     id = $(event.target).data('id')
@@ -102,15 +107,15 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   saveUser: (event) ->
     event.preventDefault()
     event.stopPropagation()
+        
     user = WEB.currentUser
-    user.unset("errors")
-    user.set
-      name: $('#edit_user_form input#name').val(),
-      email: $('#edit_user_form input#email').val(),
-      school: $('#edit_user_form input#school').val(),
-      year: $('#edit_user_form input#year').val(),
-      bio: $('#edit_user_form textarea#bio').html()
-     
+    user.url = '/users/' + user.get('id')
+    user.save user.changed,
+      success: (user) =>
+        @closePreferences()
+        @renderProfile(user)
+        $(".profile .name.user").click()
+
   save: (e) -> 
     e.preventDefault()
     e.stopPropagation()
@@ -122,7 +127,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       team_id: WEB.currentUser.get('team_id')
       body: body
       image_id: @image.id if @image
-    @post.save
     @options.posts.create(@post,
       success: (post) =>
         $(".item.new").removeClass "close_form"
