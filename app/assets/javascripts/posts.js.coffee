@@ -28,7 +28,6 @@ jQuery ->
       
   #Sidebar collapse
   $(".sidebar .name").click ->
-    $(".post").attr 'draggable', false
     $(".collapsible.open").slideUp(200)
     div = $(this).parent()
     if $('.collapsible', div).hasClass 'open'
