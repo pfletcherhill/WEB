@@ -21,6 +21,5 @@ class WEB.Views.Posts.PromotedView extends Backbone.View
     @post = new @options.posts.model()
     $(@el).html(@template())
     @addAll()
-    $(window).on 'load', =>
-      @preloader()
+    _.delay @preloader, 1000
     return this
