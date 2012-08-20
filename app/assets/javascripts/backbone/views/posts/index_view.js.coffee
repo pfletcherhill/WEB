@@ -35,13 +35,19 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     if @options.posts.length == 0
       @$("#posts").html("<div class='no_posts'>No Posts Yet</div>")      
       @$("#posts .no_posts").fadeIn(300)   
-         
-  render: =>
+  
+  preloader: =>
+    $("#posts").removeClass 'loading'
+    @setPostsWidth()
+             
+  render: () =>
+    $("#posts").addClass 'loading'
     @post = new @options.posts.model()
-    $(@el).html(@template())
+    $(@el).html(@template( title: 'The Tangible Digital Team Workspace' ))
     @addAll()
     @renderUpload()
     @noPosts()
+    _.delay @preloader, 700
     return this
 
   linkify: (text) ->
@@ -58,7 +64,13 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     "submit form#new_post" : "save"
     "click .post img" : "openImage"
     "click #photobox .opacity" : "closeImage"
-        
+  
+  setPostsWidth: ->
+    width = $(window).width() - 400
+    number = width / 300
+    integer = Math.floor(number) * 290
+    @$(".container .items").width(integer)
+    
   openImage: (event) ->
     $("#photobox").addClass('active')
     id = $(event.target).data('id')

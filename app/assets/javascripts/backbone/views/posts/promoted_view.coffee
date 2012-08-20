@@ -12,9 +12,15 @@ class WEB.Views.Posts.PromotedView extends Backbone.View
   addOne: (post) =>
     view = new WEB.Views.Posts.PromotedPostView({model : post})
     @$("#posts").prepend(view.render().el)
-    
+  
+  preloader: =>
+    $("#posts").removeClass 'loading'
+      
   render: =>
+    $("#posts").addClass 'loading'
     @post = new @options.posts.model()
     $(@el).html(@template())
     @addAll()
+    $(window).on 'load', =>
+      @preloader()
     return this

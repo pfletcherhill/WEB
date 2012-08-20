@@ -1,23 +1,27 @@
 <div class='container'>
-  <div class='form'>
-    <div class="button image empty">
-      <div class="image_loader"></div>
-      <div class="message">Add an Image</div>
-    </div>
-    <div class="upload">
-      <form accept-charset="UTF-8" action="/images" enctype="multipart/form-data" id="new_image" method="post">
-        <input id="image_image" name="image[image]" type="file" value="Upload an Image">
+  <div class="workspace_label"><%= title %></div>
+  <div class="items">
+    <div class='form'>
+      <div class="button image empty">
+        <div class="image_loader"></div>
+        <div class="message">Add an Image</div>
+      </div>
+      <div class="upload">
+        <form accept-charset="UTF-8" action="/images" enctype="multipart/form-data" id="new_image" method="post">
+          <input id="image_image" name="image[image]" type="file" value="Upload an Image">
+        </form>
+      </div>
+      <form id='new_post' name='post' class="post_form">
+        <textarea name='body' id='body'></textarea>
+        <input type='submit' class="add_post" value=""/>
       </form>
     </div>
-    <form id='new_post' name='post' class="post_form">
-      <textarea name='body' id='body'></textarea>
-      <input type='submit' class="add_post" value=""/>
-    </form>
-  </div>
-  <div id='posts'>
+    <div id='posts'>
+    </div>
   </div>
 </div>
 <div id='photobox'>
   <div class="image"></div>
   <div class="opacity"></div>
 </div>
+<div id="preloader">Loading...</div>
