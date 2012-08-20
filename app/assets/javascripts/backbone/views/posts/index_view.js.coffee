@@ -37,8 +37,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       @$("#posts .no_posts").fadeIn(300)   
   
   preloader: =>
-    $("#posts").removeClass 'loading'
-    @setPostsWidth()
+    $("#posts").stop().removeClass 'loading'
              
   render: () =>
     $("#posts").addClass 'loading'
@@ -47,6 +46,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @addAll()
     @renderUpload()
     @noPosts()
+    @setPostsWidth()
     _.delay @preloader, 700
     return this
 
