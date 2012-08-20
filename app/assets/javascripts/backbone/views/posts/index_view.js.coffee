@@ -42,7 +42,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   render: () =>
     $("#posts").addClass 'loading'
     @post = new @options.posts.model()
-    $(@el).html(@template( title: 'The Tangible Digital Team Workspace' ))
+    $(@el).html(@template( title: 'WEB Administrator Workspace' ))
     @addAll()
     @renderUpload()
     @noPosts()
