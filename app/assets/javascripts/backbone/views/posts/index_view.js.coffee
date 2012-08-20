@@ -47,7 +47,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @renderUpload()
     @noPosts()
     @setPostsWidth()
-    _.delay @preloader, 700
+    _.delay @preloader, 1000
     return this
 
   linkify: (text) ->
