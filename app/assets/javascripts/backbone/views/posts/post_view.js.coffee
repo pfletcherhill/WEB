@@ -15,7 +15,6 @@ class WEB.Views.Posts.PostView extends Backbone.View
     if confirm "Are you sure you want to delete your post?"
       @model.destroy()
       this.remove()
-
     return false
   
   toggleLike: (event) ->

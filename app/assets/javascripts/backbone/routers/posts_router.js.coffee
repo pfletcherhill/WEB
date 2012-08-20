@@ -1,5 +1,7 @@
 class WEB.Routers.PostsRouter extends Backbone.Router
+  
   initialize: (options) ->
+    @fetchUser()
     @posts = new WEB.Collections.PostsCollection()
     @fetchBuckets()
   
@@ -8,7 +10,14 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     @buckets.url = "/team/buckets"
     @buckets.fetch success: (buckets) =>
       view = new WEB.Views.Buckets.ListView(buckets: buckets, id: @bucketId)
-      $("#containers").html(view.render().el)         
+      $("#containers").html(view.render().el)     
+  
+  fetchUser: =>
+    @user = new WEB.Models.User()
+    @user.url = "/me"
+    @user.fetch success: (user) =>
+      view = new WEB.Views.Users.IndexView()
+      view.render()
         
   routes:
     ".*"         : "index"

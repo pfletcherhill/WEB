@@ -1,10 +1,14 @@
 #posts
+#user
 
 :javascript
   $(function() {
     WEB.currentUser = new WEB.Models.User();
     WEB.currentUser.url = '/me';
-    WEB.currentUser.fetch();
-    window.router = new WEB.Routers.PostsRouter({posts: #{@posts.to_json.html_safe}});
-    Backbone.history.start();
+    WEB.currentUser.fetch({
+      success: function() {
+        window.router = new WEB.Routers.PostsRouter();
+        Backbone.history.start();
+      }
+    });
   });

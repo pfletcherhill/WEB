@@ -2,10 +2,8 @@ WEB.Views.Posts ||= {}
 
 class WEB.Views.Posts.IndexView extends Backbone.View
   template: JST["backbone/templates/posts/index"]
-  profile: JST["backbone/templates/users/profile"]
-  editUserForm: JST["backbone/templates/users/edit"]
   photobox: JST["backbone/templates/posts/photobox"]
-
+  
   initialize: () ->
     @options.posts.bind('reset', @addAll)
     
@@ -15,13 +13,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   addOne: (post) =>
     view = new WEB.Views.Posts.PostView({model : post})
     @$("#posts").prepend(view.render().el)
-  
-  renderEditProfile: (user) ->
-    @$(".preferences #edit_user_form").html(@editUserForm( user.toJSON() ))
-    @$("form#update-user").backboneLink(user)
-  
-  renderProfile: (user) ->
-    $("#my_profile").html(@profile( user.toJSON() ))
   
   renderUpload: =>
     $("#new_image").fileupload
@@ -49,9 +40,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @post = new @options.posts.model()
     $(@el).html(@template())
     @addAll()
-    @$("form#new-user").backboneLink(@post)
-    @renderEditProfile(WEB.currentUser)
-    @renderProfile(WEB.currentUser)
     @renderUpload()
     @noPosts()
     return this
@@ -67,16 +55,10 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     "dragstart" : 'dragstartPost'
     "click .button.text" : "newText"
     "click .button.image.empty" : "newImage"
-    "submit form#update-user" : 'saveUser'
     "submit form#new_post" : "save"
     "click .post img" : "openImage"
     "click #photobox .opacity" : "closeImage"
-    "click .preferences .header .close" : "closePreferences"
-  
-  closePreferences: ->
-    $('.preferences').animate({'right':'-300px'}, 400)
-    $('.sidebar').delay(500).animate({'right':'0px'}, 400)
-    
+        
   openImage: (event) ->
     $("#photobox").addClass('active')
     id = $(event.target).data('id')
@@ -103,18 +85,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @renderUpload()
     $(".upload input[type='file']").click()
     false
-    
-  saveUser: (event) ->
-    event.preventDefault()
-    event.stopPropagation()
-        
-    user = WEB.currentUser
-    user.url = '/users/' + user.get('id')
-    user.save user.changed,
-      success: (user) =>
-        @closePreferences()
-        @renderProfile(user)
-        $(".profile .name.user").click()
 
   save: (e) -> 
     e.preventDefault()

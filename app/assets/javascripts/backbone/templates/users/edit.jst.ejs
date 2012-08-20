@@ -1,23 +1,23 @@
 <form id='update-user' name='user'>  
   <div class="item">
     <label>Full Name:</label>
-    <input id='name' name='name' value='<%= name %>'/>
+    <input id='name' name='name' value='<%= name ? name : '' %>'/>
   </div>
   <div class="item">
     <label>Email:</label>
-    <input id='email' name='email' value='<%= email %>'/>
+    <input id='email' name='email' value='<%= email ? email : '' %>'/>
   </div>
   <div class="item">
     <label>School:</label>
-    <input id='school' name='school' value='<%= school %>'/>
+    <input id='school' name='school' value='<%= school ? school : '' %>'/>
   </div>
   <div class="item">
     <label>Graduation Year:</label>
-    <input id='year' name='year' value='<%= year %>'/>
+    <input id='year' name='year' value='<%= year ? year : '' %>'/>
   </div>
   <div class="item">
     <label>Bio:</label>
-    <textarea id='bio' name='bio'><%= bio %></textarea>
+    <textarea id='bio' name='bio'><%= bio ? bio : '' %></textarea>
   </div>
   <input type='submit' class="submit" value='Update Profile'/>
 </form>
