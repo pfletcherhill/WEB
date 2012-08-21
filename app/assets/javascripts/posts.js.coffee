@@ -15,6 +15,7 @@ jQuery ->
       $(".container .form").stop().show().css({'opacity':"0","width":"0px"}).animate({"width":"250px"}, 300).animate({"opacity":"1"}, 200)
       $(".button.image").show().removeClass('failed')
       $(".button.image .message").html('Add an Image')
+      $(".container .form input").attr('disabled', null)
       $(".container .form textarea").focus()
       $(".item.new h1").html('-')
       $(".item.new").addClass('close_form')

@@ -24,6 +24,11 @@
       width: 280px;
       margin-top: 10px;
       background: #dadada;
+      cursor: pointer;
+      -webkit-transition: opacity 0.3s;
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
   .header {

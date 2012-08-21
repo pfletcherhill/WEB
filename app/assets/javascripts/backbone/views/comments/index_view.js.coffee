@@ -4,6 +4,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
   commentTemplate: JST["backbone/templates/comments/comment"]
   postTemplate: JST["backbone/templates/comments/post"]
   form: JST["backbone/templates/comments/form"]
+  photobox: JST["backbone/templates/posts/photobox"]
 
   el: 'body'
   
@@ -23,6 +24,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
   renderPost: (postId) =>
     @selectedPost.url = "/posts/" + postId
     @selectedPost.fetch success: (post) =>
+      @selectedPost = post
       @renderPostTemplate()
       post.fetchImage(post.id).then @renderPostTemplate
       post.fetchUser(post.get('user_id')).then @setHeader
@@ -51,6 +53,15 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     "click .likes .comments" : "openComments"
     "click #comments .header .close" : "closeComments"
     'keypress form#new_comment textarea' : 'newComment'
+    "click #comments .post img" : "openImage"
+ 
+  openImage: (event) ->
+    $("#photobox").addClass('active')
+    post = @selectedPost
+    $("#photobox .image").html(@photobox( post.asJSON() ))
+    $("#photobox .image").addClass 'loading'
+    $("#photobox .image img").on 'load', ->
+      $("#photobox .image").removeClass 'loading'
   
   openComments: (event) ->
     $('.sidebar').animate({'right':'-300px'}, 300)
