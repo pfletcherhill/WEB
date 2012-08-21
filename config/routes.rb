@@ -1,5 +1,7 @@
 WEB::Application.routes.draw do
 
+  resources :comments
+
   #Resources
   resources :users, :sessions, :teams, :posts, :likes, :buckets, :images
   
@@ -24,7 +26,7 @@ WEB::Application.routes.draw do
   match "/posts/:id/likes" => "posts#likes"
   match "/posts/upload" => "posts#upload"
   match "/posts/:id/image" => "posts#image"
-  match "/posts/:id/thumbnail" => "posts#thumbnail"
+  match "/posts/:id/comments" => "posts#comments"
   
   #Users
   match "/preferences" => "users#edit"

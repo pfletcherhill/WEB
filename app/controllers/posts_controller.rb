@@ -146,4 +146,14 @@ class PostsController < ApplicationController
       format.json { render json: @image }
     end
   end
+  
+  def comments
+    @post = Post.find(params[:id])
+    @comments = @post.comments
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @comments }
+    end
+  end
 end

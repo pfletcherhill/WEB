@@ -3,6 +3,11 @@
   <%= image ? '<img data-id="' + id + '" src=' + image.image.thumb.url + ' />' : '' %>
   <div class="details">
     <div class="author"><%= user ? user.name : '' %></div>
-    <div class="likes" data-id="<%= id %>"><span class="unicode">&#x2661;</span><%= likes ? likes.length : '' %></div>
+    <div class="likes" data-id="<%= id %>">
+      <span class="comments" data-id="<%= id %>">&#9998;</span>
+      <%= comments ? comments.length : '' %>
+      <span class="unicode">&#x2661;</span>
+      <%= likes ? likes.length : '' %>
+    </div>
   </div>
 </div>

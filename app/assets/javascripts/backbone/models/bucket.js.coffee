@@ -35,5 +35,5 @@ class WEB.Models.Bucket extends Backbone.Model
     post = _.clone this.attributes
     return _.extend post, {user: this.get('user'), posts: this.get('posts')}
     
-class WEB.Collections.BucketsCollection extends Backbone.Collection
+class WEB.Collections.Buckets extends Backbone.Collection
   model: WEB.Models.Bucket

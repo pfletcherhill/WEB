@@ -356,6 +356,38 @@
     }
   }
 }
+#posts {
+  .post {
+    .likes {
+      padding-top: 5px;
+      font-family: Helveticaneuelight;
+      font-size: 30px;
+      line-height: 35px;
+      color: #66FF99;
+      -webkit-transition: 0.2s;
+      &.liked {
+        color: #3399FF;
+        span.unicode {
+          &:hover {
+            color: #e60000;
+          }
+        }
+      }
+      span.unicode, span.comments {
+        font-size: 30px;
+        line-height: 35px;
+        cursor: pointer;
+        margin-right: -5px;
+        &:hover {
+          color: #3399FF;
+        }
+        &:active {
+          font-style: bold;
+        }
+      }
+    }
+  }
+}
 #photobox {
   position: fixed;
   top: 0px;

@@ -33,18 +33,20 @@ class WEB.Views.Posts.PostView extends Backbone.View
       @model.fetchUser(userId).then @applyMyTemplate
       @model.fetchLikes(postId).then @applyMyTemplate
       @model.fetchImage(postId).then @applyMyTemplate
+      @model.fetchComments(postId).then @applyMyTemplate
     else
       @model.fetchUser(userId).then @applyPostTemplate
       @model.fetchLikes(postId).then @applyPostTemplate
       @model.fetchImage(postId).then @applyPostTemplate
+      @model.fetchComments(postId).then @applyPostTemplate
     return this
   
-  applyPostTemplate: _.after(3, ->
+  applyPostTemplate: _.after(4, ->
     $(@el).html(@postTemplate( @model.asJSON() ))
     @likePosts()
   )
   
-  applyMyTemplate: _.after(3, ->
+  applyMyTemplate: _.after(4, ->
     $(@el).html(@myTemplate( @model.asJSON() ))
     @likePosts()
   )

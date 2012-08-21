@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 	belongs_to :team
 	has_many :likes
 	has_many :buckets
+	has_many :comments
 		
   def encrypt_password  
     if password.present?  

@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   has_many :containments
   has_many :buckets, :through => :containments
   belongs_to :image
+  has_many :comments
   
   # has_attached_file :thumbnail, 
   #     :styles => { :large => "500x", :medium => "250x" },

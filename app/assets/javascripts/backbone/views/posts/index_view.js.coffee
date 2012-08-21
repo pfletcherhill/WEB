@@ -15,6 +15,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @$("#posts").prepend(view.render().el)
   
   renderUpload: =>
+    $("input.add_post").attr('disabled','disabled')
     $("#new_image").fileupload
       dataType: "json"
       autoUpload: true
@@ -23,7 +24,8 @@ class WEB.Views.Posts.IndexView extends Backbone.View
         $.each data.result, (index, file) =>
           url = file.thumbnail_url
           $(".button.image").removeClass 'empty'
-          $(".button.image").html('<div class="preview"><img src=' + url + ' />Image Added</div>')
+          $(".button.image").html('<div class="preview"><img src=' + url + ' /></div>')
+          $("input.add_post").attr('disabled',null)
           @image = file
       fail: (e, data) ->
         $(".button.image .message").html('Upload Failed')
@@ -39,10 +41,10 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   preloader: =>
     $("#posts").stop().removeClass 'loading'
              
-  render: () =>
+  render: (title) =>
     $("#posts").addClass 'loading'
     @post = new @options.posts.model()
-    $(@el).html(@template( title: 'WEB Administrator Workspace' ))
+    $(@el).html(@template( title: title ))
     @addAll()
     @renderUpload()
     @noPosts()
@@ -64,7 +66,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     "submit form#new_post" : "save"
     "click .post img" : "openImage"
     "click #photobox .opacity" : "closeImage"
-  
+    
   setPostsWidth: ->
     width = $(window).width() - 400
     number = width / 300

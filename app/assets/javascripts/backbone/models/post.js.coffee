@@ -40,9 +40,17 @@ class WEB.Models.Post extends Backbone.Model
       success: (data) =>
         @set image: data
   
+  fetchComments: (postId) ->
+    $.ajax
+      type: 'GET'
+      dataType: 'json'
+      url: '/posts/' + postId + '/comments'
+      success: (data) =>
+        @set comments: data
+  
   asJSON: =>
     post = _.clone this.attributes
-    return _.extend post, {user: this.get('user'), likes: this.get('likes'), team: this.get('team'), image: this.get('image')}
+    return _.extend post, {user: this.get('user'), likes: this.get('likes'), team: this.get('team'), image: this.get('image'), comments: this.get('comments')}
     
   like: (postId) ->
     $.ajax
@@ -68,5 +76,5 @@ class WEB.Models.Post extends Backbone.Model
       dataType: 'json'
       url: '/bucket/' + bucketId + '/remove_post/' + @get('id')
    
-class WEB.Collections.PostsCollection extends Backbone.Collection
+class WEB.Collections.Posts extends Backbone.Collection
   model: WEB.Models.Post
