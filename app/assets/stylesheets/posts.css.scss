@@ -342,9 +342,9 @@
       .author {
         font-family: Helveticaneuelight;
         font-size: 18px;
-        line-height: 20px;
+        line-height: 18px;
         padding-bottom: 3px;
-        margin-bottom: 7px;
+        margin-bottom: 2px;
         border-bottom: 1px solid #dadada;
         color: #444;
         cursor: pointer;
@@ -358,6 +358,18 @@
 }
 #posts {
   .post {
+    .author {
+      line-height: 18px;
+      padding-bottom: 3px;
+      margin-bottom: 2px;
+      border-bottom: 1px solid #dadada;
+      color: #444;
+      cursor: pointer;
+      -webkit-transition: 0.2s;
+      &:hover {
+        color: #000;
+      }
+    }
     .likes {
       padding-top: 5px;
       font-family: Helveticaneuelight;
@@ -370,6 +382,11 @@
         span.unicode {
           &:hover {
             color: #e60000;
+          }
+        }
+        span.comments {
+          &:hover {
+            color: #222;
           }
         }
       }
