@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hi <%= @user.name %>,</p>
+    <p><b><%= @post.user.name %></b> added a post to your workspace:</p>
+    <div style="border-top: 1px solid #dadada; border-bottom: 1px solid #dadada; width: 100%; padding: 15px 0; text-align: center;">
+      <p style="font-size: 1.3em">"<%= @post.body %>"</p>
+    </div>
+    <br/>
+    <a href="http://thewebproject.org/#team">Go to your workspace</a>
+    <span> or </span>
+    <a href="http://thewebproject.org/#post/<%= @post.id %>">See the post</a>
+  </body>
+</html>

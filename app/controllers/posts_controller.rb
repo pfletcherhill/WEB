@@ -29,7 +29,6 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(params[:post])
-    
     respond_to do |format|
       if @post.save
         format.html { redirect_to "/" }
@@ -38,6 +37,16 @@ class PostsController < ApplicationController
         format.html { redirect_to "/", notice: 'Better luck next time.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
+  end
+  
+  def new_post_mailer
+    @post = Post.find(params[:id])
+    @post.team.users.map{ |user| UserMailer.new_post_email(user, @post).deliver }
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
     end
   end
   
@@ -149,7 +158,7 @@ class PostsController < ApplicationController
   
   def comments
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @comments = @post.comments.order('created_at ASC')
     
     respond_to do |format|
       format.html

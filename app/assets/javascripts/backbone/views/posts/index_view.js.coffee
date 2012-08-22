@@ -43,15 +43,21 @@ class WEB.Views.Posts.IndexView extends Backbone.View
              
   render: (title) =>
     $("#posts").addClass 'loading'
-    @post = new @options.posts.model()
     $(@el).html(@template( title: title ))
     @addAll()
-    @renderUpload()
+    @setupWorkspace()
     @noPosts()
     @setPostsWidth()
     _.delay @preloader, 1000
     return this
 
+  setupWorkspace: =>
+    $("#posts").removeClass 'adding'
+    @post = new WEB.Models.Post()
+    @renderUpload()
+    $(".container .form textarea").val('')
+    $(".container .form").hide()
+    
   linkify: (text) ->
     exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
     return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")
@@ -106,17 +112,22 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @post.unset("errors")
     string = @spacify $(".form form textarea").val()
     body = @linkify string
+    @post.url = "/posts"
     @post.set
       user_id: WEB.currentUser.id
       team_id: WEB.currentUser.get('team_id')
       body: body
       image_id: @image.id if @image
+    $("#posts").addClass 'adding'
     @options.posts.create(@post,
       success: (post) =>
         $(".item.new").removeClass "close_form"
         $(".item.new h1").html("+")
-        @render()
+        @addOne(post)
+        @setupWorkspace()
+        post.sendNewPostEmail()
         
       error: (post, jqXHR) =>
+        $("#posts").removeClass 'adding'
         @post.set({errors: $.parseJSON(jqXHR.responseText)})
     )

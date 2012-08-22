@@ -27,6 +27,7 @@ class WEB.Views.Posts.PostView extends Backbone.View
       $(event.target).parent().addClass 'liked'
 
   render: =>
+    @$(".post").addClass "processing"
     userId = @model.get('user_id')
     postId = @model.get('id')
     if userId == WEB.currentUser.id
@@ -44,11 +45,13 @@ class WEB.Views.Posts.PostView extends Backbone.View
   applyPostTemplate: _.after(4, ->
     $(@el).html(@postTemplate( @model.asJSON() ))
     @likePosts()
+    _.delay @$(".post").removeClass 'processing', 500
   )
   
   applyMyTemplate: _.after(4, ->
     $(@el).html(@myTemplate( @model.asJSON() ))
     @likePosts()
+    _.delay @$(".post").removeClass 'processing', 500
   )
   
   likePosts: =>

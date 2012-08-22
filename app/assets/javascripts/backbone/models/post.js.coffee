@@ -75,6 +75,12 @@ class WEB.Models.Post extends Backbone.Model
       type: 'DELETE'
       dataType: 'json'
       url: '/bucket/' + bucketId + '/remove_post/' + @get('id')
+  
+  sendNewPostEmail: () ->
+    $.ajax
+      type: 'POST'
+      dataType: 'json'
+      url: '/new_post_mailer/' + @get('id')
    
 class WEB.Collections.Posts extends Backbone.Collection
   model: WEB.Models.Post

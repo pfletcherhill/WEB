@@ -21,6 +21,19 @@
   .items {
     min-width: 290px;
     margin: auto;
+    #post_loader {
+      display: none;
+      width: 250px;
+      height: 250px;
+      margin: 20px;
+      float: left;
+      position: relative;
+      text-align: center;
+      line-height: 250px;
+      color: #dadada;
+      font-family: Helveticaneuebold;
+      font-size: 20px;
+    }
     .form {
       display: none;
       width: 250px;
@@ -261,6 +274,12 @@
       opacity: 1;
     }
   }
+  &.adding {
+    #post_loader {
+      display: block;
+      opacity: 1;
+    }
+  }
   .post {
     width: 230px;
     height: 230px;
@@ -270,8 +289,12 @@
     padding: 10px;
     position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    -webkit-transition: opacity 0.3s;
     &[draggable=true] {
       cursor: move;
+    }
+    &.processing {
+      opacity: 0;
     }
     a {
       font-family: Helveticaneue;
