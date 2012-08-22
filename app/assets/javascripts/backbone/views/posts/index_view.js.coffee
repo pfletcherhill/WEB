@@ -48,11 +48,10 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @setupWorkspace()
     @noPosts()
     @setPostsWidth()
-    _.delay @preloader, 1000
     return this
 
   setupWorkspace: =>
-    $("#posts").removeClass 'adding'
+    _.delay @preloader, 1000
     @post = new WEB.Models.Post()
     @renderUpload()
     $(".container .form textarea").val('')
@@ -118,7 +117,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       team_id: WEB.currentUser.get('team_id')
       body: body
       image_id: @image.id if @image
-    $("#posts").addClass 'adding'
+    $("#posts").addClass 'loading'
     @options.posts.create(@post,
       success: (post) =>
         $(".item.new").removeClass "close_form"
@@ -128,6 +127,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
         post.sendNewPostEmail()
         
       error: (post, jqXHR) =>
-        $("#posts").removeClass 'adding'
+        $("#posts").removeClass 'loading'
         @post.set({errors: $.parseJSON(jqXHR.responseText)})
     )

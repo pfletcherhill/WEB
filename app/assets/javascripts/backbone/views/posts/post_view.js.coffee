@@ -45,13 +45,11 @@ class WEB.Views.Posts.PostView extends Backbone.View
   applyPostTemplate: _.after(4, ->
     $(@el).html(@postTemplate( @model.asJSON() ))
     @likePosts()
-    _.delay @$(".post").removeClass 'processing', 500
   )
   
   applyMyTemplate: _.after(4, ->
     $(@el).html(@myTemplate( @model.asJSON() ))
     @likePosts()
-    _.delay @$(".post").removeClass 'processing', 500
   )
   
   likePosts: =>

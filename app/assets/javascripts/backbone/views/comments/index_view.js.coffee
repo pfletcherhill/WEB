@@ -14,9 +14,21 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     @selectedPost = new WEB.Models.Post
   
   addAll: (comments) =>
-    comments.each(@addOne)
+    @comments = comments
     $("#comments").removeClass "loading"
-
+    if comments.length != 0
+      renderAll = _.after(comments.length, @renderComments)
+    else
+      return
+    _.each(comments.models, (comment) =>
+      comment.fetchUser().then renderAll
+    )
+    
+  renderComments: =>
+    @$("#comments .items").append (@comments.map (comment) =>
+      @commentTemplate( comment.asJSON() )
+    ).join('')
+  
   addOne: (comment) =>
     comment.fetchUser().then =>
       @$("#comments .items").append(@commentTemplate( comment.asJSON() ))
