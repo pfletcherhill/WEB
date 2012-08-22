@@ -31,9 +31,10 @@ WEB::Application.routes.draw do
   
   #Users
   match "/preferences" => "users#edit"
-  match "/user/likes" => "users#likes"
+  match "/user/likes" => "users#liked_posts"
   match "/me" => "users#me"
   match "/teams/:team_id/add_user" => "users#new"
+  match "/users/:id/likes" => "users#likes"
   
   #Buckets
   match "/team/buckets" => "teams#buckets" 

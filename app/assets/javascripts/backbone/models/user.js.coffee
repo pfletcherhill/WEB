@@ -9,5 +9,13 @@ class WEB.Models.User extends Backbone.Model
     'team_id': null
     'bio': null
   
+  fetchLikes: ->
+    $.ajax
+      type: 'GET'
+      dataType: 'json'
+      url: '/users/' + @get('id') + '/likes'
+      success: (data) =>
+        @set likes: data
+  
 class WEB.Collections.Users extends Backbone.Collection
   model: WEB.Models.User

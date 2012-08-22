@@ -1,5 +1,8 @@
 class WEB.Models.Post extends Backbone.Model
-    
+  
+  initialize: ->
+    _.bindAll(@)
+     
   defaults: ->
     'body': null
     'title': null
@@ -7,22 +10,34 @@ class WEB.Models.Post extends Backbone.Model
     'team_id': WEB.currentUser.get('team_id')
     'likes': []
     'image_id': null
-        
-  fetchUser: (userId) ->
+  
+  postReady: _.after(4, ->
+    @trigger 'postReady'
+  )
+    
+  setup: ->
+    @fetchUser()
+    @fetchLikes()
+    @fetchImage()
+    @fetchComments()
+    
+  fetchUser: ->
     $.ajax
       type: 'GET'
       dataType: 'json'
-      url: '/users/' + userId
+      url: '/users/' + @get('user_id')
       success: (data) =>
         @set user: data
+        @postReady()
   
-  fetchLikes: (postId) ->
+  fetchLikes: ->
     $.ajax
       type: 'GET'
       dataType: 'json'
-      url: '/posts/' + postId + '/likes'
+      url: '/posts/' + @get('id') + '/likes'
       success: (data) =>
         @set likes: data
+        @postReady()
   
   fetchTeam: (teamId) ->
     $.ajax
@@ -32,21 +47,23 @@ class WEB.Models.Post extends Backbone.Model
       success: (data) =>
         @set team: data
   
-  fetchImage: (postId) ->
+  fetchImage: ->
     $.ajax
       type: 'GET'
       dataType: 'json'
-      url: '/posts/' + postId + '/image'
+      url: '/posts/' + @get('id') + '/image'
       success: (data) =>
         @set image: data
+        @postReady()
   
-  fetchComments: (postId) ->
+  fetchComments: ->
     $.ajax
       type: 'GET'
       dataType: 'json'
-      url: '/posts/' + postId + '/comments'
+      url: '/posts/' + @get('id') + '/comments'
       success: (data) =>
         @set comments: data
+        @postReady()
   
   asJSON: =>
     post = _.clone this.attributes

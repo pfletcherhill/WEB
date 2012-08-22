@@ -8,7 +8,11 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @options.posts.bind('reset', @addAll)
     
   addAll: () =>
+    removeLoadingClass = _.after(@options.posts.length, @preloader)
     @options.posts.each(@addOne)
+    _.each(@options.posts.models, (post) =>
+      post.on 'postReady', removeLoadingClass
+    )
 
   addOne: (post) =>
     view = new WEB.Views.Posts.PostView({model : post})
@@ -39,7 +43,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       @$("#posts .no_posts").fadeIn(300)   
   
   preloader: =>
-    $("#posts").stop().removeClass 'loading'
+    $("#posts").removeClass 'loading'
              
   render: (title) =>
     $("#posts").addClass 'loading'
@@ -51,7 +55,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     return this
 
   setupWorkspace: =>
-    _.delay @preloader, 1000
     @post = new WEB.Models.Post()
     @renderUpload()
     $(".container .form textarea").val('')

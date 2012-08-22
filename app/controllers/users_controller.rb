@@ -89,7 +89,7 @@ class UsersController < ApplicationController
     end
   end  
   
-  def likes
+  def liked_posts
     @user = current_user
     @likes = @user.likes.order('created_at ASC')
     @post_ids = @likes.map{|like| like.post_id}
@@ -127,6 +127,16 @@ class UsersController < ApplicationController
       redirect_to "/" 
     else
       redirect_to '/login'
+    end
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.likes
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @likes }
     end
   end
   
