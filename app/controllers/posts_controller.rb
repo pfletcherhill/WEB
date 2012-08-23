@@ -72,11 +72,10 @@ class PostsController < ApplicationController
   
   def likes
     @likes = Like.where(:post_id => params[:id])
-    @user_ids = @likes.map{ |like| like.user_id }
     
     respond_to do |format|
       format.html
-      format.json { render json: @user_ids }
+      format.json { render json: @likes }
     end
   end
   

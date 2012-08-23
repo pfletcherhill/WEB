@@ -20,15 +20,16 @@ class WEB.Views.Posts.PostView extends Backbone.View
   toggleLike: (event) ->
     postId = $(event.target).parent().data('id')
     if $(event.target).parent().hasClass 'liked'
-      @model.unlike(postId).then @reset
-      $(event.target).parent().removeClass 'liked'
+      @model.unlike(postId).then @resetLikes
+      console.log $(event.target).parent()
+      #$(event.target).parent().removeClass 'liked'
     else
-      @model.like(postId).then @reset
-      $(event.target).parent().addClass 'liked'
+      @model.like(postId).then @resetLikes
+      console.log $(event.target).parent()
+      #$(event.target).parent().addClass 'liked'
 
-  reset: =>
-    @model.fetch success: (post) =>
-      @render()
+  resetLikes: =>
+    @model.fetchLikes().then @applyTemplate
     
   render: =>
     userId = @model.get('user_id')
@@ -38,10 +39,11 @@ class WEB.Views.Posts.PostView extends Backbone.View
   
   applyTemplate: =>
     $(@el).html(@postTemplate( @model.asJSON() ))
-    @fetchLikes()
+    @renderLiked()
 
-  fetchLikes: =>
+  renderLiked: =>
     ids = @model.get('likes').map (like) =>
       like.user_id
+    console.log ids
     if $.inArray(WEB.currentUser.id, ids) > -1
       @$('.post .details .likes').addClass 'liked'

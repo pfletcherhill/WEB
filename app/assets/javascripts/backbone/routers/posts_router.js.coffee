@@ -48,7 +48,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     
   team: =>
     $("#buckets .bucket").removeClass 'selected'
-    $("#posts").html('').addClass 'loading'
+    $("#posts").html('<div id="preloader">Loading...</div>').addClass 'loading'
     @posts.url = "/posts"
     @posts.fetch success: (teamPosts) =>
       @view = new WEB.Views.Posts.IndexView(posts: teamPosts)
@@ -60,7 +60,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
   likes: =>
     $("#buckets .bucket").removeClass 'selected'
     $(".item.new").hide()
-    $("#posts").html('').addClass 'loading'
+    $("#posts").html('<div id="preloader">Loading...</div>').addClass 'loading'
     @posts.url = "/user/likes"
     @posts.fetch success: (likedPosts) =>
       @view = new WEB.Views.Posts.IndexView(posts: likedPosts)

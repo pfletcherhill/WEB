@@ -28,7 +28,6 @@ class WEB.Models.Post extends Backbone.Model
       url: '/users/' + @get('user_id')
       success: (data) =>
         @set user: data
-        @postReady()
   
   fetchLikes: ->
     $.ajax
@@ -36,8 +35,8 @@ class WEB.Models.Post extends Backbone.Model
       dataType: 'json'
       url: '/posts/' + @get('id') + '/likes'
       success: (data) =>
+        console.log data
         @set likes: data
-        @postReady()
   
   fetchTeam: (teamId) ->
     $.ajax
