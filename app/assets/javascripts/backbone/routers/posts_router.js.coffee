@@ -38,6 +38,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     "team"               : "team"
     "likes"              : "likes"
     "bucket/:id"         : "bucket"
+    "post/:id"           : "post"
 
   index: =>
     $("#buckets .bucket").removeClass 'selected'
@@ -80,3 +81,14 @@ class WEB.Routers.PostsRouter extends Backbone.Router
       $("#pointer").fadeOut(100)
       $(".buckets .collapsible").show().addClass 'open'
       $("#buckets").find(".bucket[data-id='#{id}']").addClass 'selected'
+  
+  post: (id) =>
+    $("#posts").html('').addClass 'loading'
+    $(".item.new").hide()
+    @postId = id
+    @post = new WEB.Models.Post
+    @post.url = "/posts/" + id
+    @post.fetch success: (post) =>
+      @view = new WEB.Views.Posts.ShowView(model: post)
+      $("#posts").html(@view.render().el)
+      $("#pointer").fadeOut(100)

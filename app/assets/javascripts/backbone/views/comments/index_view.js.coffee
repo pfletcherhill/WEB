@@ -62,7 +62,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     return text.replace(exp,"<a href='$1' target='_blank'>$1</a>")
       
   events: 
-    "click .likes .comments" : "openComments"
+    "click .post .likes .comments" : "openComments"
     "click #comments .header .close" : "closeComments"
     'keypress form#new_comment textarea' : 'newComment'
     "click #comments .post img" : "openImage"

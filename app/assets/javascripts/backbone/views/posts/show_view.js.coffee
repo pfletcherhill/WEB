@@ -1,8 +1,11 @@
-class WEB.Views.Posts.PostView extends Backbone.View
-  postTemplate: JST["backbone/templates/posts/post"]
+class WEB.Views.Posts.ShowView extends Backbone.View
+  template: JST["backbone/templates/posts/show"]
+  commentTemplate: JST["backbone/templates/comments/comment"]
   
   initialize: () ->
-    _.bindAll(@)    
+    _.bindAll(@)  
+    @comments = new WEB.Collections.Comments
+    @comments.add @model.get('comments')
     
   events:
     "click .destroy" : "destroy"
@@ -27,17 +30,24 @@ class WEB.Views.Posts.PostView extends Backbone.View
     @model.fetchLikes().then @applyTemplate
     
   render: =>
-    userId = @model.get('user_id')
-    postId = @model.get('id')
     @applyTemplate()
     return this
   
   applyTemplate: =>
-    $(@el).html(@postTemplate( @model.asJSON() ))
+    $(@el).html(@template( @model.asJSON() ))
+    $("#posts").removeClass 'loading'
+    $(".container").children().on 'load', ->
+      alert 'loaded'
+    @renderComments()
     @renderLiked()
+  
+  renderComments: =>
+    $(".container #comments .items").append (@comments.map (comment) =>
+      @commentTemplate( comment.asJSON() )
+    ).join('')
 
   renderLiked: =>
     ids = @model.get('likes').map (like) =>
       like.user_id
     if $.inArray(WEB.currentUser.id, ids) > -1
-      @$('.post .details .likes').addClass 'liked'
+      @$('.single_post .details .likes').addClass 'liked'

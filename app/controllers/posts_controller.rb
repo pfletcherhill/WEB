@@ -162,7 +162,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @comments }
+      format.json { render json: @comments.as_json }
     end
   end
 end

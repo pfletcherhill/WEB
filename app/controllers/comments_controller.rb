@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @comments }
+      format.json { render json: @comments.as_json }
     end
   end
 
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @comment }
+      format.json { render json: @comment.as_json }
     end
   end
 
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @comment }
+      format.json { render json: @comment.as_json }
     end
   end
 
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html
-        format.json { render json: @comment, status: :created, location: @comment }
+        format.json { render json: @comment.as_json }
       else
         format.html
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -88,7 +88,7 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @comment }
+      format.json { render json: @comment.as_json }
     end
   end
 end

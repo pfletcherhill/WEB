@@ -1,0 +1,19 @@
+<div class='container'>
+  <div class="single_post" data-id="<%= id %>" data-post_id="<%= id %>" draggable=true>
+    <div class="details">
+      <div class="user"><%= user ? user.name : '' %></div>
+      <div class="likes" data-id="<%= id %>">
+        <span class="comments" data-id="<%= id %>">&#9998;</span>
+        <%= comments ? comments.length : '' %>
+        <span class="unicode">&#x2661;</span>
+        <%= likes ? likes.length : '' %>
+      </div>
+    </div>
+    <div class="body"><%= body %></div>
+    <%= image ? '<img data-id="' + id + '" src=' + image.image.url + ' />' : '' %>
+  </div>
+  <div id='comments'>
+    <div class='items'></div>
+  </div>
+</div>
+<div id="preloader">Loading...</div>
