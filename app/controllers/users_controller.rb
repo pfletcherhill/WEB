@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def me
     @user = current_user
     respond_to do |format|
-      format.json { render json: @user, :except => [ :created_at, :password_hash, :password_salt, :updated_at ] }
+      format.json { render json: @user.as_json }
     end
   end
   
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 	
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render json: @user.as_json }
     end
   end
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html
-        format.json { render json: @user, :except => [ :created_at, :password_hash, :password_salt, :updated_at ] }
+        format.json { render json: @user.as_json }
       else
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

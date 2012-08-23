@@ -8,7 +8,7 @@
       <div class="thumbnail"></div>
       <h4 class="name"><%= user ? user.name : '' %></h4>
     </div>
-    <div class="team"><%= team ? team.name : '' %></div>
+    <div class="team"><%= user.team ? user.team.name : '' %></div>
     <div class="likes" data-id="<%= id %>"><span class="unicode">&#x2661;</span><%= likes ? likes.length : '' %></div>
   </div>
 </div>

@@ -17,5 +17,9 @@ class WEB.Models.User extends Backbone.Model
       success: (data) =>
         @set likes: data
   
+  asJSON: =>
+    user = _.clone this.attributes
+    return _.extend user, { team: this.get('team') }
+  
 class WEB.Collections.Users extends Backbone.Collection
   model: WEB.Models.User

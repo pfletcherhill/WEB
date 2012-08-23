@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
     "id" => read_attribute(:id),
     "title" => read_attribute(:title),
     "body" => read_attribute(:body),
-    "user" => user,
+    "user" => user.as_json,
     "likes" => likes,
     "comments" => comments.as_json,
     "image" => image,

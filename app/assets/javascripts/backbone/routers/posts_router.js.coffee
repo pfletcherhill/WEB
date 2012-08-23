@@ -83,7 +83,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
       $("#buckets").find(".bucket[data-id='#{id}']").addClass 'selected'
   
   post: (id) =>
-    $("#posts").html('').addClass 'loading'
+    $("#posts").html('<div id="preloader">Loading...</div>').addClass 'loading'
     $(".item.new").hide()
     @postId = id
     @post = new WEB.Models.Post

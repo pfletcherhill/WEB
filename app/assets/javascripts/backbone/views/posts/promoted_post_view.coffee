@@ -27,22 +27,15 @@ class WEB.Views.Posts.PromotedPostView extends Backbone.View
       $(event.target).parent().addClass 'liked'
   
   render: =>
-    userId = @model.get('user_id')
-    postId = @model.get('id')
-    teamId = @model.get('team_id')
-    @model.fetchTeam(teamId).then @applyTemplate
-    @model.fetchUser(userId).then @applyTemplate
-    @model.fetchImage(postId).then @applyTemplate
-    @model.fetchLikes(postId).then @applyTemplate
+    @applyTemplate()
     return this
 
-  applyTemplate: _.after(4, ->
+  applyTemplate: =>
     $(@el).html(@template( @model.asJSON() ))
     @likePosts()
-    $(".body").addClass "loading"
-    $(".body img").on 'load', ->
+    @$(".body").addClass "loading"
+    @$(".body img").on 'load', ->
       $(".body").removeClass('loading').addClass('loaded')
-  )
   
   likePosts: =>
     if $.inArray(WEB.currentUser.id, @model.get('likes')) > -1

@@ -43,4 +43,17 @@ class User < ActiveRecord::Base
       false
     end
   end
+  
+  def as_json
+  {
+    "id" => read_attribute(:id),
+    "name" => read_attribute(:name),
+    "email" => read_attribute(:email),
+    "bio" => read_attribute(:bio),
+    "school" => read_attribute(:school),
+    "year" => read_attribute(:year),
+    "team_id" => read_attribute(:team_id),
+    "team" => team
+   }
+  end
 end
