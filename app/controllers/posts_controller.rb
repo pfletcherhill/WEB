@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: @posts.as_json }
     end    
   end
   
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to "/" }
-        format.json { render json: @post }
+        format.json { render json: @post.as_json }
       else
         format.html { redirect_to "/", notice: 'Better luck next time.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @post }
+      format.json { render json: @post.as_json }
     end
   end
   
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
     @team = current_user.team
     respond_to do |format|
       format.html
-      format.json { render json: @post }
+      format.json { render json: @post.as_json }
     end
   end
   
@@ -116,7 +116,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: @posts.as_json }
     end
   end
   

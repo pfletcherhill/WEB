@@ -19,7 +19,7 @@ jQuery ->
       $(".container .form textarea").focus()
       $(".item.new h1").html('-')
       $(".item.new").addClass('close_form')
-      
+        
   #Nav pointer
   $(".item.team").click ->
     $("#pointer").fadeIn(200).animate({"top":"146px"}, 300)

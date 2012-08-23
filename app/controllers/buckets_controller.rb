@@ -18,7 +18,7 @@ class BucketsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: @posts.as_json }
     end
   end
   

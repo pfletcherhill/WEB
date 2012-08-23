@@ -3,17 +3,17 @@ WEB.Views.Posts ||= {}
 class WEB.Views.Posts.IndexView extends Backbone.View
   template: JST["backbone/templates/posts/index"]
   photobox: JST["backbone/templates/posts/photobox"]
+  form: JST["backbone/templates/posts/form"]
   
   initialize: () ->
     @options.posts.bind('reset', @addAll)
     
   addAll: () =>
-    removeLoadingClass = _.after(@options.posts.length, @preloader)
-    @options.posts.each(@addOne)
-    _.each(@options.posts.models, (post) =>
-      post.on 'postReady', removeLoadingClass
-    )
-
+    _.each @options.posts.models, (post) =>
+      view = new WEB.Views.Posts.PostView({model : post})
+      @$("#posts").prepend(view.render().el)
+    _.delay @preloader, 500
+  
   addOne: (post) =>
     view = new WEB.Views.Posts.PostView({model : post})
     @$("#posts").prepend(view.render().el)
@@ -56,6 +56,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
 
   setupWorkspace: =>
     @post = new WEB.Models.Post()
+    @$(".container .form").html(@form())
     @renderUpload()
     $(".container .form textarea").val('')
     $(".container .form").hide()
@@ -120,13 +121,12 @@ class WEB.Views.Posts.IndexView extends Backbone.View
       team_id: WEB.currentUser.get('team_id')
       body: body
       image_id: @image.id if @image
-    $("#posts").addClass 'loading'
     @options.posts.create(@post,
       success: (post) =>
         $(".item.new").removeClass "close_form"
         $(".item.new h1").html("+")
-        @addOne(post)
         @setupWorkspace()
+        @addOne(post)
         post.sendNewPostEmail()
         
       error: (post, jqXHR) =>

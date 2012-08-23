@@ -29,24 +29,17 @@ class WEB.Views.Posts.PostView extends Backbone.View
   render: =>
     userId = @model.get('user_id')
     postId = @model.get('id')
-    @model.setup()
-    @model.on 'postReady', @applyTemplate
+    @applyTemplate()
+    @model.on 'render', ->
+      console.log 'rendered'
     return this
   
   applyTemplate: =>
     $(@el).html(@postTemplate( @model.asJSON() ))
     @likePosts()
-    
-  applyPostTemplate: _.after(4, ->
-    $(@el).html(@postTemplate( @model.asJSON() ))
-    @likePosts()
-  )
-  
-  applyMyTemplate: _.after(4, ->
-    $(@el).html(@myTemplate( @model.asJSON() ))
-    @likePosts()
-  )
-  
+
   likePosts: =>
     if $.inArray(WEB.currentUser.id, @model.get('likes')) > -1
       $('.post .details').find(".likes[data-id=#{@model.id}]").addClass("liked")
+    @model.trigger('rendered')
+    console.log @model

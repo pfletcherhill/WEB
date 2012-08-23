@@ -11,18 +11,17 @@ class Post < ActiveRecord::Base
   belongs_to :image
   has_many :comments
   
-  # has_attached_file :thumbnail, 
-  #     :styles => { :large => "500x", :medium => "250x" },
-  #     :storage => :s3,
-  #         :s3_credentials => {
-  #           :access_key_id => 'AKIAIGVNEJUWP6KDGC6A',
-  #           :secret_access_key => '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',
-  #           :bucket => 'The_WEB_Project'
-  #         }
-  
-  accepts_nested_attributes_for :user 
-
-  # def thumbnail_url
-  #     thumbnail.url(:large)
-  #   end
+  def as_json
+  {
+    "id" => read_attribute(:id),
+    "title" => read_attribute(:title),
+    "body" => read_attribute(:body),
+    "user" => user,
+    "likes" => likes,
+    "comments" => comments,
+    "image" => image,
+    "promoted" => read_attribute(:promoted),
+    "created_at" => read_attribute(:created_at)
+   }
+  end
 end
