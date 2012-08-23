@@ -98,6 +98,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
         success: (comment) =>
           $("form#new_comment textarea").val('')
           @addOne(comment)
+          comment.sendNewCommentEmail()
         error: (post, jqXHR) =>
           newComment.set({errors: $.parseJSON(jqXHR.responseText)})
       )

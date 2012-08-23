@@ -28,6 +28,7 @@ WEB::Application.routes.draw do
   match "/posts/:id/image" => "posts#image"
   match "/posts/:id/comments" => "posts#comments"
   match "/new_post_mailer/:id" => "posts#new_post_mailer"
+  match "/new_comment_mailer/:id" => "comments#new_comment_mailer"
   
   #Users
   match "/preferences" => "users#edit"

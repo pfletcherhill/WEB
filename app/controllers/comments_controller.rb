@@ -80,4 +80,15 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def new_comment_mailer
+    @comment = Comment.find(params[:id])
+    @post_user = @comment.user
+    UserMailer.new_comment_email(@post_user, @comment).deliver
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @comment }
+    end
+  end
 end

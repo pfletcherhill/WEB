@@ -14,7 +14,13 @@ class WEB.Models.Comment extends Backbone.Model
       url: '/users/' + @get('user_id')
       success: (data) =>
         @set user: data
-  
+        
+  sendNewCommentEmail: () ->
+    $.ajax
+      type: 'POST'
+      dataType: 'json'
+      url: '/new_comment_mailer/' + @get('id')
+            
   asJSON: =>
     comment = _.clone @.attributes
     return _.extend comment, { user: @get('user') }
