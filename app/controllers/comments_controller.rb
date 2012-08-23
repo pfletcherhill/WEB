@@ -83,7 +83,7 @@ class CommentsController < ApplicationController
   
   def new_comment_mailer
     @comment = Comment.find(params[:id])
-    @post_user = @comment.user
+    @post_user = @comment.post.user
     UserMailer.new_comment_email(@post_user, @comment).deliver
     
     respond_to do |format|
