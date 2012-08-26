@@ -18,4 +18,10 @@ class UserMailer < ActionMailer::Base
     @comment = comment
     mail(:to => user.email, :subject => "#{comment.user.name} commented on your post")
   end
+  
+  def new_related_comment_email(user, comment)
+    @user = user
+    @comment = comment
+    mail(:to => user.email, :subject => "#{comment.user.name} responded to your comment")
+  end
 end

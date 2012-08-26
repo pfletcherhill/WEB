@@ -83,8 +83,19 @@ class CommentsController < ApplicationController
   
   def new_comment_mailer
     @comment = Comment.find(params[:id])
-    @post_user = @comment.post.user
-    UserMailer.new_comment_email(@post_user, @comment).deliver
+    #Get post author
+    post_user = @comment.post.user
+    puts "post_user: #{post_user}"
+    post_id = @comment.post_id
+    related_comments = Comment.where(:post_id => post_id)
+    #Get unique related users
+    related_users = related_comments.map{|comment| comment.user}.uniq
+    puts "related_users: #{related_users}"
+    all_users = related_users - [@comment.user]
+    users = all_users - [post_user]
+    puts "users: #{users}"
+    users.map{ |user| UserMailer.new_related_comment_email(user, @comment).deliver }
+    UserMailer.new_comment_email(post_user, @comment).deliver
     
     respond_to do |format|
       format.html
