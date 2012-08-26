@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def as_json
+  def as_embedded_json
   {
     "id" => read_attribute(:id),
     "name" => read_attribute(:name),

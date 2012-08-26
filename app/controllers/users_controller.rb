@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def me
     @user = current_user
     respond_to do |format|
-      format.json { render json: @user.as_json }
+      format.json { render json: @user.as_embedded_json }
     end
   end
   

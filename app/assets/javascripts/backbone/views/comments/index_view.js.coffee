@@ -14,39 +14,25 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     @selectedPost = new WEB.Models.Post
   
   addAll: (comments) =>
-    @comments = comments
     $("#comments").removeClass "loading"
-    if comments.length != 0
-      renderAll = _.after(comments.length, @renderComments)
-    else
-      return
-    _.each(comments.models, (comment) =>
-      comment.fetchUser().then renderAll
-    )
-    
-  renderComments: =>
-    @$("#comments .items").append (@comments.map (comment) =>
+    @$("#comments .items").append (comments.map (comment) =>
       @commentTemplate( comment.asJSON() )
     ).join('')
   
   addOne: (comment) =>
-    comment.fetchUser().then =>
-      @$("#comments .items").append(@commentTemplate( comment.asJSON() ))
+    @$("#comments .items").append(@commentTemplate( comment.asJSON() ))
       
   renderPost: (postId) =>
     @selectedPost.url = "/posts/" + postId
     @selectedPost.fetch success: (post) =>
-      @selectedPost = post
-      @renderPostTemplate()
-      post.fetchImage(post.id).then @renderPostTemplate
-      post.fetchUser(post.get('user_id')).then @setHeader
+      @renderPostTemplate(post)
+      @setHeader(post)
   
-  renderPostTemplate: _.after(2, ->
-    $("#comments .post").html @postTemplate( @selectedPost.asJSON() )
-  )
+  renderPostTemplate: (post) =>
+    $("#comments .post").html @postTemplate( post.asJSON() )
     
-  setHeader: =>
-    name = @selectedPost.get('user').name
+  setHeader: (post) =>
+    name = post.get('user').name
     $("#comments .header h1").html name + ":"    
         
   render: (postId) =>

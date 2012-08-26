@@ -53,7 +53,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     @posts.url = "/posts"
     @posts.fetch success: (teamPosts) =>
       @view = new WEB.Views.Posts.IndexView(posts: teamPosts)
-      title = @team.get('name') + " Workspace"
+      title = WEB.currentUser.get('team').name + " Workspace"
       $("#posts").html(@view.render(title).el)
       $("#pointer").fadeIn(200).css({"top":"146px"})
       $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'

@@ -21,7 +21,7 @@ WEB::Application.routes.draw do
   match "unlike" => "posts#unlike", :as => "unlike_posts"
   
   #Posts
-  match "/posts" => "posts#index"
+  match "/posts" => "posts#promoted"
   match "/promoted" => "posts#promoted"
   match "/posts/:id/likes" => "posts#likes"
   match "/posts/upload" => "posts#upload"
