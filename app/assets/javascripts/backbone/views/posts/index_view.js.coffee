@@ -6,13 +6,12 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   form: JST["backbone/templates/posts/form"]
   
   initialize: () ->
-    @options.posts.bind('reset', @addAll)
     
   addAll: () =>
     _.each @options.posts.models, (post) =>
       view = new WEB.Views.Posts.PostView({model : post})
       @$("#posts").prepend(view.render().el)
-    _.delay @preloader, 500
+    _.delay @preloader, 300
   
   addOne: (post) =>
     view = new WEB.Views.Posts.PostView({model : post})

@@ -2,7 +2,6 @@ class WEB.Routers.PostsRouter extends Backbone.Router
   
   initialize: (options) ->
     @fetchUser()
-    @posts = new WEB.Collections.Posts()
     @fetchBuckets()
     @initializeComments()
   
@@ -34,36 +33,47 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     view.initialize()
       
   routes:
-    ".*"                 : "index"
-    "team"               : "team"
+    "team/:id"           : "team"
     "likes"              : "likes"
     "bucket/:id"         : "bucket"
     "post/:id"           : "post"
+    ".*"                 : "index"
 
   index: =>
     $("#buckets .bucket").removeClass 'selected'
-    @posts.url = "/promoted"
-    @posts.fetch success: (promotedPosts) =>
-      @view = new WEB.Views.Posts.PromotedView(posts: promotedPosts)
-      $("#posts").html(@view.render().el)
+    posts = new WEB.Collections.Posts
+    posts.url = "/promoted"
+    posts.fetch success: (posts) =>
+      view = new WEB.Views.Posts.PromotedView(posts: posts)
+      $("#posts").html(view.render().el)
     
-  team: =>
+  team: (id) =>
     $("#buckets .bucket").removeClass 'selected'
     $("#posts").html('<div id="preloader">Loading...</div>').addClass 'loading'
-    @posts.url = "/posts"
-    @posts.fetch success: (teamPosts) =>
-      @view = new WEB.Views.Posts.IndexView(posts: teamPosts)
-      title = WEB.currentUser.get('team').name + " Workspace"
-      $("#posts").html(@view.render(title).el)
-      $("#pointer").fadeIn(200).css({"top":"146px"})
-      $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'
+    team = new WEB.Models.Team
+    team.url = "/teams/" + id
+    team.fetch
+      success: (team) =>
+        posts = new WEB.Collections.Posts
+        posts.url = "teams/" + id + "/posts"
+        posts.fetch
+          success: (posts) =>
+            view = new WEB.Views.Posts.IndexView(posts: posts)
+            title = team.get('name')
+            $("#posts").html(view.render(title).el)
+            $("#pointer").fadeIn(200).css({"top":"146px"})
+            $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'
+          error: =>
+            console.log 'error'
+      
   
   likes: =>
     $("#buckets .bucket").removeClass 'selected'
     $(".item.new").hide()
     $("#posts").html('<div id="preloader">Loading...</div>').addClass 'loading'
-    @posts.url = "/user/likes"
-    @posts.fetch success: (likedPosts) =>
+    posts = new WEB.Collections.Posts
+    posts.url = "/user/likes"
+    posts.fetch success: (likedPosts) =>
       @view = new WEB.Views.Posts.IndexView(posts: likedPosts)
       $("#pointer").fadeIn(200).css({"top":"246px"})
       $("#posts").html(@view.render('Your Likes').el)

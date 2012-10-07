@@ -17,10 +17,6 @@ class PostsController < ApplicationController
     
     @posts = Post.where(:team_id => @user.team_id).order('created_at ASC')
     
-    @team = current_user.team
-    
-    @post = Post.new
-    
     respond_to do |format|
       format.html
       format.json { render json: @posts.as_json }
@@ -64,11 +60,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    @team = current_user.team
-    respond_to do |format|
-      format.html
-      format.json { render json: @post.as_json }
-    end
+    render json: @post.as_json
   end
   
   def likes
@@ -107,17 +99,9 @@ class PostsController < ApplicationController
     end
   end
   
-  def promoted
-    @user = current_user
-    
+  def promoted    
     @posts = Post.where(:promoted => true).order('created_at ASC')
-    
-    @team = @user.team
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts.as_json }
-    end
+    render json: @posts.as_json
   end
   
   def destroy

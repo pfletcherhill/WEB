@@ -16,12 +16,14 @@ class Post < ActiveRecord::Base
     "id" => read_attribute(:id),
     "title" => read_attribute(:title),
     "body" => read_attribute(:body),
-    "user" => user.as_embedded_json,
+    "user" => user,
     "likes" => likes,
     "comments" => comments.as_json,
     "image" => image,
+    "team" => team,
     "promoted" => read_attribute(:promoted),
     "created_at" => read_attribute(:created_at)
    }
   end
+  
 end

@@ -30,6 +30,9 @@ WEB::Application.routes.draw do
   match "/new_post_mailer/:id" => "posts#new_post_mailer"
   match "/new_comment_mailer/:id" => "comments#new_comment_mailer"
   
+  #Teams
+  match "/teams/:id/posts" => "teams#posts"
+  
   #Users
   match "/preferences" => "users#edit"
   match "/user/likes" => "users#liked_posts"

@@ -32,6 +32,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     $("#comments .post").html @postTemplate( post.asJSON() )
     
   setHeader: (post) =>
+    console.log post
     name = post.get('user').name
     $("#comments .header h1").html name + ":"    
         

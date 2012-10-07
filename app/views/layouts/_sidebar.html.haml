@@ -1,22 +1,23 @@
 .sidebar
   .profile
-    .name.user= current_user.name
-    .collapsible
+    .name.user( data-id="user" )= current_user.name
+    .collapsible( data-id="user" )
       .collapse
         #my_profile
     
   .team_profile
-    .name.team= @team.name
-    .collapsible
-      .collapse
-        .description= @team.description
-        .members
-          -@team.users.each do |member|
-            =member.name
-            =member.email
+    -current_user.teams.each do |team|
+      .name.team( data-id="#{team.id}" )= team.name
+      .collapsible( data-id="#{team.id}" )
+        .collapse
+          .description= team.description
+          %ul.members
+            -team.users.each do |member|
+              %li.member
+                =member.name
   .buckets
-    .name.buckets Buckets
-    .collapsible
+    .name.buckets( data-id="buckets" ) Buckets
+    .collapsible( data-id="buckets" )
       #containers
     
   .header

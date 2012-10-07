@@ -13,15 +13,17 @@ class TeamsController < ApplicationController
   end
   
   def posts
+    @posts = Post.where(:team_id => params[:id])
+    @posts = @posts.order('created_at ASC')   
+    render json: @posts.as_json 
+  end
+  
+  def team_posts
     @user = current_user
-    
-    @posts = Post.where(:team_id => @user.team_id).order('created_at ASC')
-    
+    @posts = Post.where(:team_id => params[:id]).order('created_at ASC')
     @post = Post.new
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts }
+    if @posts
+      render json: @posts.as_json
     end
   end
   
@@ -72,11 +74,7 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @team }
-    end
+    render json: @team
   end
   
   def destroy

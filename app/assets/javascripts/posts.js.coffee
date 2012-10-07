@@ -21,7 +21,7 @@ jQuery ->
       $(".item.new").addClass('close_form')
         
   #Nav pointer
-  $(".item.team").click ->
+  $(".item.team a").click ->
     $("#pointer").fadeIn(200).animate({"top":"146px"}, 300)
   
   $(".item.likes").click ->
@@ -31,11 +31,14 @@ jQuery ->
   $(".sidebar .name").click ->
     $(".collapsible.open").slideUp(200)
     div = $(this).parent()
+    console.log(div)
+    id = $(this).data('id')
+    console.log(id)
     if $('.collapsible', div).hasClass 'open'
       $('.collapsible.open').removeClass 'open'
     else
       $('.collapsible.open').removeClass 'open'
-      $('.collapsible', div).delay(200).slideDown(250).addClass 'open'
+      $('.collapsible[data-id=' + id + ']', div).delay(200).slideDown(250).addClass 'open'
       $("#buckets_form .show_form").show()
       $("#buckets_form .form").hide()
       height = $(window).height() - 240

@@ -83,6 +83,31 @@ body {
         width: 100%;
         height: 100%;
       }
+      .teams {
+        position: relative;
+        left: 100px;
+        display: none;
+        z-index: 100;
+        .team_link {
+          display: block;
+          width: 100px;
+          padding: 10px;
+          background: #222;
+          color: white;
+          text-decoration: none;
+          font-family: Helveticaneuelight;
+          font-size: 12px;
+          -webkit-transition: background 0.2s;
+          &:hover {
+            background: #444;
+          }
+        }
+      }
+      &:hover {
+        .teams {
+          display: block;
+        }
+      }
     }
     &.likes {
       background-image: url('/assets/WEB_likes.png');
@@ -218,6 +243,16 @@ body {
         padding: 5px 0px;
         font-size: 13px;
         line-height: 18px;
+      }
+      ul.members {
+        list-style-type: circle;
+        padding-left: 0px;
+        margin-left: 20px;
+        li.member {
+          font-family: Helveticaneuelight;
+          color: #333;
+          padding: 3px 0;
+        }
       }
     }
   }

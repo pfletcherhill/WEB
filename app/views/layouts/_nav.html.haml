@@ -2,8 +2,15 @@
   .item.home
     %a.background_home( href='/' )
   .item.team
-    %h5 Team
-    %a( href='#team' )
+    -if current_user.teams.length == 1
+      %h5 Team
+      %a( href='#team/#{current_user.teams.first.id}' )
+    -else
+      %h5 Teams
+      .teams
+        -current_user.teams.each do |team|
+          %a( href='#team/#{team.id}' class="team_link") #{team.name}
+            
   .item.likes
     %h5 Likes
     %a( href='#likes' )

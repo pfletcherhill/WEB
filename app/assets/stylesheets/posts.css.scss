@@ -147,6 +147,7 @@
   #preloader {
     display: none;
     position: fixed;
+    z-index: -1;
     top: 40%;
     width: -webkit-calc(100% - 400px);
     width: -moz-calc(100% - 400px);
@@ -282,6 +283,7 @@
     }
   }
   .post {
+    z-index: -1;
     width: 230px;
     height: 230px;
     margin: 20px;

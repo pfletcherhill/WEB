@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :password, :password_confirmation, :bio, :year, :school, :name, :email, :team_id, :admin
+  attr_accessible :password, :password_confirmation, :bio, :year, :school, :name, :email, :admin
   attr_accessor :password, :password_confirmation
   
   before_save :encrypt_password    
@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
   validates_presence_of :password_confirmation, :on => :onboard
   validates_presence_of :password, :on => :onboard
   validates_confirmation_of :password, :on => :onboard
-  validates_presence_of :team_id
+  validates_presence_of :access_controls
 	
 	has_many :posts
-	belongs_to :team
+	has_many :access_controls
+	has_many :teams, :through => :access_controls
 	has_many :likes
 	has_many :buckets
 	has_many :comments
@@ -53,7 +54,7 @@ class User < ActiveRecord::Base
     "school" => read_attribute(:school),
     "year" => read_attribute(:year),
     "team_id" => read_attribute(:team_id),
-    "team" => team
+    "teams" => teams
    }
   end
 end
