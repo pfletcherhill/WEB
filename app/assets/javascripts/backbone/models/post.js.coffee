@@ -7,7 +7,7 @@ class WEB.Models.Post extends Backbone.Model
     'body': null
     'title': null
     'user_id': WEB.currentUser.id
-    'team_id': WEB.currentUser.get('team_id')
+    'team_id': null
     'likes': []
     'image_id': null
   

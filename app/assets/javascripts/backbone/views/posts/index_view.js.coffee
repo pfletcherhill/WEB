@@ -6,6 +6,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
   form: JST["backbone/templates/posts/form"]
   
   initialize: () ->
+    @team = @options.team
     
   addAll: () =>
     _.each @options.posts.models, (post) =>
@@ -117,7 +118,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     @post.url = "/posts"
     @post.set
       user_id: WEB.currentUser.id
-      team_id: WEB.currentUser.get('team_id')
+      team_id: @team.id
       body: body
       image_id: @image.id if @image
     @options.posts.create(@post,

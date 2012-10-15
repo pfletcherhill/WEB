@@ -58,7 +58,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
         posts.url = "teams/" + id + "/posts"
         posts.fetch
           success: (posts) =>
-            view = new WEB.Views.Posts.IndexView(posts: posts)
+            view = new WEB.Views.Posts.IndexView(posts: posts, team: team)
             title = team.get('name')
             $("#posts").html(view.render(title).el)
             $("#pointer").fadeIn(200).css({"top":"146px"})

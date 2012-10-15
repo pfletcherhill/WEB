@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
   def new_post_email(user, post)
     @user = user
     @post = post
-    mail(:to => user.email, :subject => "#{post.user.name} posted in #{user.team.name} Workspace")
+    mail(:to => user.email, :subject => "#{post.user.name} posted in #{post.team.name} Workspace")
   end
   
   def new_comment_email(user, comment)
