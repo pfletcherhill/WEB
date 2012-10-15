@@ -4,54 +4,15 @@
     =link_to "Add Team", "/teams/new"
     =link_to "Add Notice", "/new_notice"
   .teams
-    -@teams.each do |team|
-      %h3
-        = team.name
-        =link_to "Delete", team, confirm: 'Are you sure?', method: :delete
-        =link_to "Edit", "/teams/#{team.id}/edit"
-        =link_to "Add User", "/teams/#{team.id}/add_user"
-      %p= team.description
-      %h4 Users (#{team.users.count}):
-      %table
-        %tbody
+    %table
+      %tbody
+        %tr
+          %th Team
+          %th Users
+          %th Posts
+        -@teams.each do |team|
           %tr
-            %th Name
-            %th Email
-            %th School
-            %th Year
-            %th Bio
-            %th
-            %th
-          -team.users.each do |user|
-            %tr
-              %td= user.name
-              %td= user.email
-              %td= user.school
-              %td= user.year
-              %td.bio= user.bio
-              -if user.activated?
-                %td active
-              -else
-                %td
-                  %b inactive
-              %td= link_to "Edit", "/users/#{user.id}/edit"
-      %h4 Posts (#{team.posts.count}):
-      %table
-        %tbody
-          %tr
-            %th User
-            %th Post
-            %th Likes
-            %th
-            %th
-          -team.posts.each do |post|
-            %tr
-              %td= post.user.name
-              %td= post.body
-              %td= post.likes.count
-              -if post.promoted
-                %td promoted
-              -else
-                %td
-              %td= link_to "Delete", "/posts/#{post.id}", confirm: 'Are you sure?', method: :delete
+            %td= link_to team.name, "admin/teams/#{team.id}"
+            %td= team.users.count
+            %td= team.posts.count
           

@@ -13,15 +13,15 @@ class AdminsController < ApplicationController
   end
   
   def index
-    @user = current_user
-    @team = @user.team
     @teams = Team.all
-    
     @post = Post.new
-    
     respond_to do |format|
       format.html
       format.json { render json: @posts }
     end
+  end
+  
+  def team
+    @team = Team.find(params[:id])
   end
 end

@@ -1,0 +1,49 @@
+.container.admin
+  .back=link_to "← Back to Admin Panel", "/admin"
+  .teams
+    %h3
+      = @team.name
+      =link_to "Delete", @team, confirm: 'Are you sure?', method: :delete
+      =link_to "Edit", "/teams/#{@team.id}/edit"
+      =link_to "Add User", "/teams/#{@team.id}/add_user"
+    %p= @team.description
+    %h4 Users (#{@team.users.count}):
+    %table
+      %tbody
+        %tr
+          %th Name
+          %th Email
+          %th Year
+          %th School
+          %th Posts
+          %th Status
+        -@team.users.each do |user|
+          %tr
+            %td= user.name
+            %td= user.email
+            %td= user.year
+            %td= user.school
+            %td= user.posts.where(:team_id => @team.id).count
+            - if user.activated?
+              %td Active
+            - else
+              %td Inactive
+    %h4 Posts (#{@team.posts.count}):
+    %table
+      %tbody
+        %tr
+          %th User
+          %th Post
+          %th Likes
+          %th
+          %th
+        -@team.posts.each do |post|
+          %tr
+            %td= post.user.name
+            %td= post.body
+            %td= post.likes.count
+            -if post.promoted
+              %td promoted
+            -else
+              %td
+            %td= link_to "Delete", "/posts/#{post.id}", confirm: 'Are you sure?', method: :delete

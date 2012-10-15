@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .container.admin {
+  .back {
+    margin-top: 10px;
+    a {
+      font-family: Helveticaneuebold;
+      color: #333;
+      &:hover {
+        background: #000;
+        color: #fff;
+      }
+    }
+  }
   h1 {
     font-family: Helveticaneuebold;
     width: 100%;
@@ -42,6 +53,7 @@
     }
     th, td {
       padding: 5px;
+      text-align: left;
     }
     td.bio {
       font-size: 11px;

@@ -49,7 +49,6 @@ class PostsController < ApplicationController
   
   def upload
     @post = Post.new(params[:post])
-    @team = current_user.team
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post }
@@ -123,7 +122,6 @@ class PostsController < ApplicationController
   def new_notice
     @post = Post.new
     @user = current_user
-    @team = @user.team
     if current_admin
     else
       redirect_to '/'

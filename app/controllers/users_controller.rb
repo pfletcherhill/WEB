@@ -21,12 +21,10 @@ class UsersController < ApplicationController
   
   def new  
     @user = User.new
-    @team = current_user.team
   end  
  
   def create
     @user = User.new(params[:user])
-    @team = current_user.team
     
     if @user.save
       UserMailer.welcome_email(@user).deliver
@@ -71,12 +69,10 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-    @team = current_user.team
   end
   
   def update
     @user = User.find(params[:id])
-    @team = current_user.team
     
     respond_to do |format|
       if @user.update_attributes(params[:user])
