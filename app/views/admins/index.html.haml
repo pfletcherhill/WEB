@@ -1,13 +1,13 @@
 .container.admin
   %h1
     Admin Panel
-    =link_to "Add Team", "/teams/new"
+    =link_to "Add Workspace", "/teams/new"
     =link_to "Add Notice", "/new_notice"
   .teams
     %table
       %tbody
         %tr
-          %th Team
+          %th Workspace
           %th Users
           %th Posts
         -@teams.each do |team|

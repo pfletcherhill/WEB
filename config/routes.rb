@@ -3,7 +3,7 @@ WEB::Application.routes.draw do
   resources :comments
 
   #Resources
-  resources :users, :sessions, :teams, :posts, :likes, :buckets, :images
+  resources :users, :sessions, :teams, :posts, :likes, :buckets, :images, :access_controls
   
   #Root
   root :to => 'posts#index'

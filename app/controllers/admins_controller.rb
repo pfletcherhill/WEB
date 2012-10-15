@@ -23,5 +23,7 @@ class AdminsController < ApplicationController
   
   def team
     @team = Team.find(params[:id])
+    @users = User.all - @team.users
+    @access = AccessControl.new
   end
 end

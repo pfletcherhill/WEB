@@ -5,9 +5,14 @@
       = @team.name
       =link_to "Delete", @team, confirm: 'Are you sure?', method: :delete
       =link_to "Edit", "/teams/#{@team.id}/edit"
-      =link_to "Add User", "/teams/#{@team.id}/add_user"
+      =link_to "Create User", "/teams/#{@team.id}/add_user"
+      =form_for @access do |f|
+        =f.select :user_id, options_from_collection_for_select(@users, :id, :name), {:include_blank => true}
+        =f.hidden_field :team_id, :value => params[:id]
+        =f.submit "Add Access"
     %p= @team.description
-    %h4 Users (#{@team.users.count}):
+    %h4
+      Users (#{@team.users.count}):
     %table
       %tbody
         %tr
