@@ -56,4 +56,9 @@ class BucketsController < ApplicationController
       end
     end
   end
+  
+  def show
+    @bucket = Bucket.find(params[:id])
+    render json: @bucket.as_json
+  end
 end

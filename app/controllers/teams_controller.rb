@@ -29,12 +29,12 @@ class TeamsController < ApplicationController
   
   def buckets
     @user = current_user
-    @team_id = @user.team_id
+    @team_id = params[:team_id]
     @buckets = Bucket.where(:team_id => @team_id).order('name DESC')
     
     respond_to do |format|
       format.html
-      format.json { render json: @buckets }
+      format.json { render json: @buckets.as_json }
     end
   end
   

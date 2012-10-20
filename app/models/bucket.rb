@@ -7,4 +7,15 @@ class Bucket < ActiveRecord::Base
   has_many :posts, :through => :containments
   
   validates_uniqueness_of(:name, :scope => :team_id)
+  
+  def as_json
+  {
+    "id" => read_attribute(:id),
+    "name" => read_attribute(:name),
+    "description" => read_attribute(:description),
+    "team_id" => read_attribute(:team_id),
+    "user_id" => read_attribute(:user_id),
+    "posts" => posts.as_json
+   }
+  end
 end

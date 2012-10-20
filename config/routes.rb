@@ -41,7 +41,7 @@ WEB::Application.routes.draw do
   match "/users/:id/likes" => "users#likes"
   
   #Buckets
-  match "/team/buckets" => "teams#buckets" 
+  match "/team/:team_id/buckets" => "teams#buckets" 
   match "/bucket/:bucket_id/posts" => "buckets#posts"
   match "/bucket/:bucket_id/add_post/:post_id" => "buckets#add_post"
   match "/bucket/:bucket_id/remove_post/:post_id" => "buckets#remove_post"

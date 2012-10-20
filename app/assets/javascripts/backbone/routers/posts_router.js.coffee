@@ -2,12 +2,11 @@ class WEB.Routers.PostsRouter extends Backbone.Router
   
   initialize: (options) ->
     @fetchUser()
-    @fetchBuckets()
     @initializeComments()
   
-  fetchBuckets: =>
+  fetchBuckets: (teamId) =>
     @buckets = new WEB.Collections.Buckets()
-    @buckets.url = "/team/buckets"
+    @buckets.url = "/team/" + teamId + "/buckets"
     @buckets.fetch success: (buckets) =>
       @buckets = buckets
       view = new WEB.Views.Buckets.ListView(buckets: buckets, id: @bucketId)
@@ -54,6 +53,7 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     team.url = "/teams/" + id
     team.fetch
       success: (team) =>
+        @fetchBuckets(team.id)
         posts = new WEB.Collections.Posts
         posts.url = "teams/" + id + "/posts"
         posts.fetch
@@ -64,8 +64,6 @@ class WEB.Routers.PostsRouter extends Backbone.Router
             $("#pointer").fadeIn(200).css({"top":"146px"})
             $(".item.new").fadeIn(100).html('<h1>+</h1>').removeClass 'close_form'
           error: =>
-            console.log 'error'
-      
   
   likes: =>
     $("#buckets .bucket").removeClass 'selected'
@@ -83,9 +81,12 @@ class WEB.Routers.PostsRouter extends Backbone.Router
     $("#posts").html('').addClass 'loading'
     $(".item.new").hide()
     @bucketId = id
-    @posts.url = "/bucket/" + id + "/posts"
-    @posts.fetch success: (bucketPosts) =>
-      title = @buckets.get(id).get('name') + " Posts"
+    bucket = new WEB.Models.Bucket()
+    bucket.url = "/buckets/" + id
+    bucket.fetch success: (bucket) =>
+      title = bucket.get('name') + " Posts"
+      bucketPosts = new WEB.Collections.Posts()
+      bucketPosts.add(bucket.get('posts'))
       @view = new WEB.Views.Posts.IndexView(posts: bucketPosts)
       $("#posts").html(@view.render(title).el)
       $("#pointer").fadeOut(100)

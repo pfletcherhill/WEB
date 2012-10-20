@@ -24,11 +24,15 @@ class UsersController < ApplicationController
   end  
  
   def create
-    @user = User.new(params[:user])
-    
+    @user = User.new(:name => params[:user][:name], :email => params[:user][:email])
     if @user.save
-      UserMailer.welcome_email(@user).deliver
-      redirect_to '/admin'
+      @access_control = AccessControl.new(:team_id => params[:user][:team_id], :user_id => @user.id)
+      if @access_control.save
+        UserMailer.welcome_email(@user).deliver
+        redirect_to '/admin'
+      else
+        render :action => "new"
+      end
     else
       render :action => "new"
     end

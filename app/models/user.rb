@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   attr_accessible :password, :password_confirmation, :bio, :year, :school, :name, :email, :admin
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :team_id
   
   before_save :encrypt_password    
 	
@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   validates_presence_of :password_confirmation, :on => :onboard
   validates_presence_of :password, :on => :onboard
   validates_confirmation_of :password, :on => :onboard
-  validates_presence_of :access_controls
 	
 	has_many :posts
 	has_many :access_controls
