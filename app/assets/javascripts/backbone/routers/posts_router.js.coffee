@@ -2,7 +2,8 @@ class WEB.Routers.PostsRouter extends Backbone.Router
   
   initialize: (options) ->
     @fetchUser()
-    @initializeComments()
+    #@initializeComments()
+    @initializeSidebar()
   
   fetchBuckets: (teamId) =>
     @buckets = new WEB.Collections.Buckets()
@@ -29,6 +30,10 @@ class WEB.Routers.PostsRouter extends Backbone.Router
   
   initializeComments: =>
     view = new WEB.Views.Comments.IndexView()
+    view.initialize()
+  
+  initializeSidebar: =>
+    view = new WEB.Views.Sidebar.IndexView()
     view.initialize()
       
   routes:

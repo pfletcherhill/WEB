@@ -2,7 +2,7 @@
   <div class="body"><%= body %></div>
   <%= image ? '<img data-id="' + id + '" src=' + image.image.thumb.url + ' />' : '' %>
   <div class="details">
-    <div class="author"><%= user ? user.name : '' %></div>
+    <div class="author" data-user_id="<%= user ? user.id : '' %>"><%= user ? user.name : '' %></div>
     <div class="likes" data-id="<%= id %>">
       <span class="comments" data-id="<%= id %>">&#9998;</span>
       <%= comments ? comments.length : '' %>

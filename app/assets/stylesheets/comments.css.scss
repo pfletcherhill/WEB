@@ -1,7 +1,7 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#comments {
+#panel {
   position: fixed;
   top: 0px;
   right: -300px;
@@ -10,13 +10,10 @@
   background: #fafafa;
   border-left: 1px solid #dadada;
   overflow: scroll;
-  .post {
+  .post, .user {
     min-height: 100px;
     width: 280px;
-    border-bottom: 1px solid #dadada;
     padding: 10px;
-    font-size: 15px;
-    line-height: 22px;
     font-family: Helveticaneue;
     color: #333;
     margin-top: 50px;
@@ -30,6 +27,62 @@
         opacity: 0.8;
       }
     }
+  }
+  .user {
+    .name {
+      font-size: 20px;
+      line-height: 22px;
+      font-family: Helveticaneuebold;
+      color: #000;
+    }
+    .details {
+      font-size: 15px;
+      line-height: auto;
+      margin: 5px 0px;
+    }
+    .bio {
+      font-size: 12px;
+      font-family: Helveticaneuelight;
+      margin-bottom: 5px;
+    }
+    label {
+      font-size: 12px;
+      border-bottom: 1px solid #333;
+    }
+    .teams {
+      padding-top: 5px;
+      .team {
+        padding: 2px 0px;
+        font-size: 13px;
+        cursor: pointer;
+        color: #333;
+        font-family: Helveticaneuebold;
+        -webkit-transition: 0.2s;
+        &:hover {
+          color: #000;
+          text-decoration: underline;
+        }
+      }
+    }
+    .number {
+      margin-top: 10px;
+      width: 140px;
+      float: left;
+      label {
+        font-size: 12px;
+        border-bottom: 1px solid #333;
+      }
+      .count {
+        font-size: 30px;
+        padding: 5px;
+        font-family: Helveticaneuebold;
+      }
+    }
+  }
+  .post {
+    border-bottom: 1px solid #dadada;
+    font-size: 15px;
+    line-height: 22px;
   }
   .header {
     background: #222;

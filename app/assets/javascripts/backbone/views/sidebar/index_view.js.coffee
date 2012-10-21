@@ -1,6 +1,8 @@
-WEB.Views.Comments ||= {}
+WEB.Views.Sidebar ||= {}
 
-class WEB.Views.Comments.IndexView extends Backbone.View
+class WEB.Views.Sidebar.IndexView extends Backbone.View
+  commentsContainer: JST["backbone/templates/sidebar/comments"]
+  userTemplate: JST["backbone/templates/sidebar/user"]
   commentTemplate: JST["backbone/templates/comments/comment"]
   postTemplate: JST["backbone/templates/comments/post"]
   form: JST["backbone/templates/comments/form"]
@@ -12,36 +14,50 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     _.bindAll(@) 
     @comments = new WEB.Collections.Comments
     @selectedPost = new WEB.Models.Post
+    @team = new WEB.Models.Team
+    @user = new WEB.Models.User
   
-  addAll: (comments) =>
-    $("#comments").removeClass "loading"
-    @$("#comments .items").append (comments.map (comment) =>
+  openSidebar: ->
+    $('.sidebar').animate({'right':'-300px'}, 300)
+    $('#panel').delay(300).animate({'right':'0px'}, 400).addClass('loading')
+    
+  addComments: (comments) =>
+    $("#panel").removeClass "loading"
+    @$("#panel .items").append (comments.map (comment) =>
       @commentTemplate( comment.asJSON() )
     ).join('')
   
-  addOne: (comment) =>
-    @$("#comments .items").append(@commentTemplate( comment.asJSON() ))
+  addComment: (comment) =>
+    @$("#panel .items").append(@commentTemplate( comment.asJSON() ))
       
   renderPost: (postId) =>
     @selectedPost.url = "/posts/" + postId
     @selectedPost.fetch success: (post) =>
       @renderPostTemplate(post)
-      @setHeader(post)
+      @setHeader(post.get('user').name)
   
   renderPostTemplate: (post) =>
-    $("#comments .post").html @postTemplate( post.asJSON() )
+    $("#panel .post").html @postTemplate( post.asJSON() )
     
-  setHeader: (post) =>
-    console.log post
-    name = post.get('user').name
-    $("#comments .header h1").html name + ":"    
+  setHeader: (name) =>
+    $("#panel .header h1").html name + ":"    
         
-  render: (postId) =>
-    $("#comments .items").html @form(id: postId)
+  renderComments: (postId) =>
+    $("#panel .items").html @form(id: postId)
     @comments.url = "/posts/" + postId + "/comments"
     @comments.fetch success: (comments) =>
-      @addAll(comments)
+      @addComments(comments)
     @renderPost(postId)
+    return this
+  
+  renderUser: (userId) =>
+    @user.url = "/users/" + userId
+    @user.fetch success: (user) =>
+      $("#panel").removeClass "loading"
+      $("#panel #content").html @userTemplate( user.asJSON() )
+      for team in user.get('teams')
+        $("#panel #content .teams").append('<div class="team">' + team.name + '</div>')
+      @setHeader("User")
     return this
 
   linkify: (text) ->
@@ -50,9 +66,10 @@ class WEB.Views.Comments.IndexView extends Backbone.View
       
   events: 
     "click .post .likes .comments" : "openComments"
-    "click #comments .header .close" : "closeComments"
+    "click .post .author" : "openUser"
+    "click #panel .header .close" : "closePanel"
     'keypress form#new_comment textarea' : 'newComment'
-    "click #comments .post img" : "openImage"
+    "click #panel .post img" : "openImage"
  
   openImage: (event) ->
     $("#photobox").addClass('active')
@@ -62,13 +79,19 @@ class WEB.Views.Comments.IndexView extends Backbone.View
     $("#photobox .image img").on 'load', ->
       $("#photobox .image").removeClass 'loading'
   
-  openComments: (event) ->
-    $('.sidebar').animate({'right':'-300px'}, 300)
-    $('#panel').delay(300).animate({'right':'0px'}, 400).addClass('loading')
+  openComments: (event) =>
+    @openSidebar()
+    $('#panel #content').html @commentsContainer
     postId = $(event.target).data('id')
-    @render(postId)
+    @renderComments(postId)
+  
+  openUser: (event) =>
+    @openSidebar()
+    $('#panel #content').html @userContainer
+    userId = $(event.target).data('user_id')
+    @renderUser(userId)
     
-  closeComments: ->
+  closePanel: =>
     $('#panel').animate({'right':'-300px'}, 300)
     $('.sidebar').delay(300).animate({'right':'0px'}, 400)
   
@@ -84,7 +107,7 @@ class WEB.Views.Comments.IndexView extends Backbone.View
       @comments.create(newComment,
         success: (comment) =>
           $("form#new_comment textarea").val('')
-          @addOne(comment)
+          @addComment(comment)
           comment.sendNewCommentEmail()
         error: (post, jqXHR) =>
           newComment.set({errors: $.parseJSON(jqXHR.responseText)})

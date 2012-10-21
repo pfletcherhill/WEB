@@ -53,7 +53,9 @@ class User < ActiveRecord::Base
     "school" => read_attribute(:school),
     "year" => read_attribute(:year),
     "team_id" => read_attribute(:team_id),
-    "teams" => teams
+    "teams" => teams,
+    "posts" => posts.length,
+    "likes" => posts.map{|p| p.likes.count}.sum
    }
   end
 end
