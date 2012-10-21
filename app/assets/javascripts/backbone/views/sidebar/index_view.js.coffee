@@ -3,6 +3,7 @@ WEB.Views.Sidebar ||= {}
 class WEB.Views.Sidebar.IndexView extends Backbone.View
   commentsContainer: JST["backbone/templates/sidebar/comments"]
   userTemplate: JST["backbone/templates/sidebar/user"]
+  teamTemplate: JST["backbone/templates/sidebar/team"]
   commentTemplate: JST["backbone/templates/comments/comment"]
   postTemplate: JST["backbone/templates/comments/post"]
   form: JST["backbone/templates/comments/form"]
@@ -19,7 +20,11 @@ class WEB.Views.Sidebar.IndexView extends Backbone.View
   
   openSidebar: ->
     $('.sidebar').animate({'right':'-300px'}, 300)
-    $('#panel').delay(300).animate({'right':'0px'}, 400).addClass('loading')
+    if $('#panel').hasClass 'open'
+      $('#panel').animate({'right':'-300px'}, 300).animate({'right':'0px'}, 400).addClass('loading open')
+    else
+      $('#panel').delay(300).animate({'right':'0px'}, 400).addClass('loading open')
+      
     
   addComments: (comments) =>
     $("#panel").removeClass "loading"
@@ -56,8 +61,18 @@ class WEB.Views.Sidebar.IndexView extends Backbone.View
       $("#panel").removeClass "loading"
       $("#panel #content").html @userTemplate( user.asJSON() )
       for team in user.get('teams')
-        $("#panel #content .teams").append('<div class="team">' + team.name + '</div>')
+        $("#panel #content .teams").append('<div class="user_team" data-team_id=' + team.id + '>' + team.name + '</div>')
       @setHeader("User")
+    return this
+  
+  renderTeam: (teamId) =>
+    @team.url = "/teams/" + teamId
+    @team.fetch success: (team) =>
+      $("#panel").removeClass "loading"
+      $("#panel #content").html @teamTemplate( team.toJSON() )
+      for user in team.get('users')
+        $("#panel #content .users").append('<div class="team_user" data-user_id=' + user.id + '>' + user.name + '</div>')
+      @setHeader("Team")
     return this
 
   linkify: (text) ->
@@ -67,6 +82,9 @@ class WEB.Views.Sidebar.IndexView extends Backbone.View
   events: 
     "click .post .likes .comments" : "openComments"
     "click .post .author" : "openUser"
+    "click .users .team_user" : "openUser"
+    "click .team_profile .team" : "openTeam"
+    "click .teams .user_team" : "openTeam"
     "click #panel .header .close" : "closePanel"
     'keypress form#new_comment textarea' : 'newComment'
     "click #panel .post img" : "openImage"
@@ -87,12 +105,16 @@ class WEB.Views.Sidebar.IndexView extends Backbone.View
   
   openUser: (event) =>
     @openSidebar()
-    $('#panel #content').html @userContainer
     userId = $(event.target).data('user_id')
     @renderUser(userId)
+  
+  openTeam: (event) =>
+    @openSidebar()
+    teamId = $(event.target).data('team_id')
+    @renderTeam(teamId)
     
   closePanel: =>
-    $('#panel').animate({'right':'-300px'}, 300)
+    $('#panel').animate({'right':'-300px'}, 300).removeClass 'open'
     $('.sidebar').delay(300).animate({'right':'0px'}, 400)
   
   newComment: (event) =>

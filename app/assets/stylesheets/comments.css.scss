@@ -10,7 +10,7 @@
   background: #fafafa;
   border-left: 1px solid #dadada;
   overflow: scroll;
-  .post, .user {
+  .post, .user, .team {
     min-height: 100px;
     width: 280px;
     padding: 10px;
@@ -28,7 +28,12 @@
       }
     }
   }
-  .user {
+  .team {
+    .bio {
+      margin-top: 5px;
+    }
+  }
+  .user, .team {
     .name {
       font-size: 20px;
       line-height: 22px;
@@ -49,9 +54,9 @@
       font-size: 12px;
       border-bottom: 1px solid #333;
     }
-    .teams {
+    .teams, .users {
       padding-top: 5px;
-      .team {
+      .user_team, .team_user {
         padding: 2px 0px;
         font-size: 13px;
         cursor: pointer;
@@ -127,7 +132,7 @@
       padding: 10px;
       border-bottom: 1px solid #dadada;
       -webkit-transition: opacity 0.5s;
-      .user {
+      .comment_user {
         font-size: 10px;
         font-family: Helveticaneuelight;
         line-height: 10px;

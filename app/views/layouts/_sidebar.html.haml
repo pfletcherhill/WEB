@@ -7,14 +7,14 @@
     
   .team_profile
     -current_user.teams.each do |team|
-      .name.team( data-id="#{team.id}" )= team.name
-      .collapsible( data-id="#{team.id}" )
-        .collapse
-          .description= team.description
-          %ul.members
-            -team.users.each do |member|
-              %li.member
-                =member.name
+      .name.team( data-team_id="#{team.id}" )= team.name
+      / .collapsible( data-id="#{team.id}" )
+      /         .collapse
+      /           .description= team.description
+      /           %ul.members
+      /             -team.users.each do |member|
+      /               %li.member
+      /                 =member.name
   .buckets
     .name.buckets( data-id="buckets" ) Buckets
     .collapsible( data-id="buckets" )

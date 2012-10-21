@@ -8,4 +8,15 @@ class Team < ActiveRecord::Base
   has_many :buckets
   
   accepts_nested_attributes_for :posts
+  
+  def as_embedded_json
+  {
+    "id" => read_attribute(:id),
+    "name" => read_attribute(:name),
+    "description" => read_attribute(:description),
+    "users" => users,
+    "posts" => posts.count,
+    "likes" => posts.map{|p| p.likes.count}.sum
+   }
+  end
 end

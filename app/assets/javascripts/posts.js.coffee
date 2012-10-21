@@ -31,9 +31,7 @@ jQuery ->
   $(".sidebar .name").click ->
     $(".collapsible.open").slideUp(200)
     div = $(this).parent()
-    console.log(div)
     id = $(this).data('id')
-    console.log(id)
     if $('.collapsible', div).hasClass 'open'
       $('.collapsible.open').removeClass 'open'
     else

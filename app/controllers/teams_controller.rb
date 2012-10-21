@@ -74,7 +74,7 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
-    render json: @team
+    render json: @team.as_embedded_json
   end
   
   def destroy
