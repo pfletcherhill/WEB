@@ -1,7 +1,7 @@
 <div class="user">
   <div class="name"><%= name %></div>
   <div class="details">
-    <span><%= school %>, </span>
+    <span><%= school ? school + ", " : "" %></span>
     <span><%= year %></span>
   </div>
   <div class="bio"><%= bio %></div>
