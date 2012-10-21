@@ -5,13 +5,13 @@
   </head>
   <body>
     <p>Hi <%= @user.name %>,</p>
-    <p><b><%= @comment.user.name %></b> responded to your comment on a <a href="http://thewebproject.org/#post/<%= @comment.post.id %>">post</a>:</p>
+    <p><b><%= @comment.user.name %></b> responded to your comment on a <a href="http://xscollaborative.us/#post/<%= @comment.post.id %>">post</a>:</p>
     <div style="border-top: 1px solid #dadada; border-bottom: 1px solid #dadada; width: 100%; padding: 15px 0; text-align: center;">
       <p style="font-size: 1.3em">"<%= @comment.body %>"</p>
     </div>
     <br/>
-    <a href="http://thewebproject.org/#team">Go to your workspace</a>
+    <a href="http://xscollaborative.us/#team">Go to your workspace</a>
     <span> or </span>
-    <a href="http://thewebproject.org/#post/<%= @comment.post.id %>">See the post</a>
+    <a href="http://xscollaborative.us/#post/<%= @comment.post.id %>">See the post</a>
   </body>
 </html>
