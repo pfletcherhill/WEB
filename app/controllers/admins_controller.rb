@@ -32,7 +32,7 @@ class AdminsController < ApplicationController
     
     if user  
       session[:user_id] = user.id
-      redirect_to "/", :notice => "Welcome back #{user.name}"  
+      redirect_to "/#team/#{user.teams.first.id}", :notice => "Welcome back #{user.name}"  
     else
       flash[:notice] = 'Invalid Email or Password'
       render "new"
