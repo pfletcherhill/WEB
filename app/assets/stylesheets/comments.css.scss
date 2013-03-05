@@ -1,6 +1,9 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 #panel {
   position: fixed;
   top: 0px;
@@ -14,7 +17,7 @@
     min-height: 100px;
     width: 280px;
     padding: 10px;
-    font-family: Helveticaneue;
+    @include HN-Regular;
     color: #333;
     margin-top: 50px;
     img {
@@ -37,7 +40,7 @@
     .name {
       font-size: 20px;
       line-height: 22px;
-      font-family: Helveticaneuebold;
+      @include HN-Bold;
       color: #000;
     }
     .details {
@@ -47,7 +50,7 @@
     }
     .bio {
       font-size: 12px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       margin-bottom: 5px;
     }
     label {
@@ -61,7 +64,7 @@
         font-size: 13px;
         cursor: pointer;
         color: #333;
-        font-family: Helveticaneuebold;
+        @include HN-Bold;
         -webkit-transition: 0.2s;
         &:hover {
           color: #000;
@@ -80,7 +83,7 @@
       .count {
         font-size: 30px;
         padding: 5px;
-        font-family: Helveticaneuebold;
+        @include HN-Bold;
       }
     }
   }
@@ -118,7 +121,7 @@
       padding: 10px;
       margin: 0px;
       color: #fff;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       font-size: 18px;
       line-height: 30px;
     }
@@ -128,13 +131,13 @@
     padding-bottom: 100px;
     .comment {
       font-size: 13px;
-      font-family: Helveticaneue;
+      @include HN-Regular;
       padding: 10px;
       border-bottom: 1px solid #dadada;
       -webkit-transition: opacity 0.5s;
       .comment_user {
         font-size: 10px;
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         line-height: 10px;
         padding-top: 5px;
       }
@@ -150,7 +153,7 @@
         width: 280px;
         padding: 10px;
         height: 60px;
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         font-size: 13px;
         color: #444;
         border: 0px;
@@ -168,7 +171,7 @@
     text-align: center;
     font-size: 20px;
     line-height: 20px;
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     color: #dadada;
   }
   &.loading {

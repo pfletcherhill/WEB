@@ -2,9 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@font-face { font-family: Helveticaneue; src: url('/assets/helveticaneue.otf'); } 
-@font-face { font-family: Helveticaneuebold; src: url('/assets/helveticaneuebold.otf'); }
-@font-face { font-family: Helveticaneuelight; src: url('/assets/helveticaneuelight.otf'); }
+@import "mixins";
 
 .wrapper {
   width: 380px;
@@ -14,6 +12,10 @@
     margin-top: 50px;
     margin-bottom: 20px;
     .logo {
+      text-align: center;
+      font-size: 120px;
+      @include HN-Bold;
+      color: #ddd;
       img {
         width: 300px;
         margin-left: 40px;
@@ -27,8 +29,7 @@
       font-size: 15px;
       line-height: 25px;
       color: #444;
-      font-family: georgia;
-      font-weight: light;
+      @include HN-Light;
       border: 1px solid #dadada;
       padding: 10px;
       outline: none;
@@ -45,7 +46,7 @@
       width: 382px;
       background: #a0a0a0;
       color: #fafafa;
-      font-family: georgia;
+      @include HN-Regular;
       text-align: center;
       border: 0px;
       cursor: pointer;
@@ -56,5 +57,18 @@
         color: #fff;
       }
     }
+  }
+}
+
+.demo_link {
+  @include HN-Bold;
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  color: #aaa;
+  text-decoration: none;
+  -webkit-transition: 0.2s;
+  &:hover {
+    color: #333;
   }
 }

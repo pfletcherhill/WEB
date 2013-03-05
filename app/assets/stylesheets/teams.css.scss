@@ -1,6 +1,9 @@
 // Place all the styles related to the Teams controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 body {
   background: #FCFCFC;
   margin: 0px;
@@ -35,7 +38,7 @@ body {
     }
     h5 {
       z-index: 0;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       color: #fafafa;
       font-size: 13px;
       position: absolute;
@@ -95,7 +98,7 @@ body {
           background: #222;
           color: white;
           text-decoration: none;
-          font-family: Helveticaneuelight;
+          @include HN-Light;
           font-size: 12px;
           -webkit-transition: background 0.2s;
           &:hover {
@@ -192,7 +195,7 @@ body {
       line-height: 45px;
       font-size: 14px;
       color: #fafafa;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       text-align: center;
       text-decoration: none;
       cursor: pointer;
@@ -208,7 +211,7 @@ body {
     padding: 15px;
     font-size: 18px;
     color: #fff;
-    font-family: Helveticaneuelight;
+    @include HN-Light;
     cursor: pointer;
     -webkit-transition: 0.2s;
     &.user {
@@ -235,11 +238,11 @@ body {
     .collapse {
       padding: 15px;
       .info {
-        font-family: Helveticaneuebold;
+        @include HN-Bold;
         font-size: 15px;
       }
       .bio, .description {
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         padding: 5px 0px;
         font-size: 13px;
         line-height: 18px;
@@ -249,7 +252,7 @@ body {
         padding-left: 0px;
         margin-left: 20px;
         li.member {
-          font-family: Helveticaneuelight;
+          @include HN-Light;
           color: #333;
           padding: 3px 0;
         }

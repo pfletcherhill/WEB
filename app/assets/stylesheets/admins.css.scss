@@ -1,11 +1,14 @@
 // Place all the styles related to the Admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 .container.admin {
   .back {
     margin-top: 10px;
     a {
-      font-family: Helveticaneuebold;
+      @include HN-Bold;
       color: #333;
       &:hover {
         background: #000;
@@ -14,7 +17,7 @@
     }
   }
   h1 {
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     width: 100%;
     border-bottom: 1px solid #eee;
     a {
@@ -28,7 +31,7 @@
       float: right;
     }
     h3 {
-      font-family: Helveticaneue;
+      @include HN-Regular;
       color: #222;
       a {
         float: right;
@@ -37,18 +40,18 @@
       }
     }
     p {
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       color: #333;
       font-size: 14px;
     }
     h4 {
-      font-family: Helveticaneue;
+      @include HN-Regular;
       color: #222;
     }
     table {
       border-collapse:collapse;
       width: 100%;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       font-size: 13px;
     }
     table, th, td {

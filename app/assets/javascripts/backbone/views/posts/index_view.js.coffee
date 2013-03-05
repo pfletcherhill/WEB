@@ -89,7 +89,7 @@ class WEB.Views.Posts.IndexView extends Backbone.View
     $("#photobox .image").html(@photobox( post.asJSON() ))
     $("#photobox .image").addClass 'loading'
     $("#photobox .image img").on 'load', ->
-      $("#photobox .image").removeClass 'loading'
+    $("#photobox .image").removeClass 'loading'
   
   closeImage: (event) ->
     $("#photobox").removeClass 'active'
@@ -128,7 +128,6 @@ class WEB.Views.Posts.IndexView extends Backbone.View
         @setupWorkspace()
         @addOne(post)
         post.sendNewPostEmail()
-        
       error: (post, jqXHR) =>
         $("#posts").removeClass 'loading'
         @post.set({errors: $.parseJSON(jqXHR.responseText)})

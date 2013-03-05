@@ -1,10 +1,13 @@
 // Place all the styles related to the Buckets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 #buckets_form {
   .show_form {
     text-align: center;
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     color: #aaa;
     font-size: 15px;
     padding: 10px 0px;
@@ -24,7 +27,7 @@
       width: 260px;
       padding: 5px;
       font-size: 12px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       color: #333;
       border: 1px solid #ccc;
       outline: none;
@@ -49,7 +52,7 @@
       color: #fff;
       text-align: center;
       border: 0px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       cursor: pointer;
       -webkit-transition: 0.2s;
       outline: none;
@@ -87,7 +90,7 @@
         opacity: 0;
       }
       h5 {
-          font-family: Helveticaneuebold;
+          @include HN-Bold;
           font-size: 15px;
           padding: 0px;
           margin: 0px;
@@ -95,7 +98,7 @@
           color: #333;
       }
       .user {
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         font-size: 12px;
         color: #333;
       }
@@ -111,7 +114,7 @@
         border-radius: 18px;
         color: #fff;
         font-size: 13px;
-        font-family: Helveticaneuebold;
+        @include HN-Bold;
         line-height: 31px;
         text-align: center;
       }

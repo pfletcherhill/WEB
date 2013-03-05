@@ -1,9 +1,11 @@
 .wrapper
   .header
     .logo
-      %img(src='/assets/WEB_logo.jpg')
+      XS
+      / %img(src='/assets/WEB_logo.jpg')
   .form
     = form_tag sessions_path do
       = text_field_tag :email, params[:email], :placeholder => 'Email Address'
       = password_field_tag :password, params[:password], :placeholder => 'Password'
       = submit_tag "Login", :class => 'login'
+  =link_to "Or log in as a guest to demo...", "/demo/login", :class => "demo_link"

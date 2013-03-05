@@ -51,4 +51,5 @@ WEB::Application.routes.draw do
   match "/new_notice" => "posts#new_notice"
   match "/new_image" => "images#new"
   match "/admin/teams/:id" => "admins#team"
+  match "/demo/login" => "admins#demo_login"
 end

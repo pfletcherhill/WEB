@@ -1,6 +1,9 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 .container {
   margin-left: 100px;
   padding-left: 10px;
@@ -12,7 +15,7 @@
   .workspace_label {
     width: 100%;
     text-align: center;
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     color: #dadada;
     font-size: 20px;
     line-height: 40px;
@@ -32,7 +35,7 @@
       text-align: center;
       line-height: 250px;
       color: #dadada;
-      font-family: Helveticaneuebold;
+      @include HN-Bold;
       font-size: 20px;
     }
     .form {
@@ -49,7 +52,7 @@
         width: 160px;
         height: 60px;
         color: #fff;
-        font-family: Helveticaneuebold;
+        @include HN-Bold;
         text-align: center;
         -webkit-transition: background 0.2s;
         z-index: 4;
@@ -109,7 +112,7 @@
           color: #333;
           font-size: 13px;
           line-height: 18px;
-          font-family: Helveticaneue;
+          @include HN-Regular;
         }
         input.add_post {
           width: 60px;
@@ -125,7 +128,7 @@
           line-height: 60px;
           padding: 0px;
           outline: none;
-          font-family: Helveticaneuebold;
+          @include HN-Bold;
           font-size: 40px;
           opacity: 0.8;
           -webkit-transition: 0.5s;
@@ -156,7 +159,7 @@
     text-align: center;
     font-size: 30px;
     line-height: 30px;
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     color: #dadada;
   }
   &.centered {
@@ -174,7 +177,7 @@
         width: 460px;
         min-height: 100px;
         padding: 20px;
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         font-size: 15px;
         color: #111;
         line-height: 24px;
@@ -213,7 +216,7 @@
             margin-top: 5px;
           }
           h4 {
-            font-family: Helveticaneuebold;
+            @include HN-Bold;
             color: #222;
             padding: 5px 0;
             margin: 0px;
@@ -222,7 +225,7 @@
           }
         }
         .team {
-          font-family: Helveticaneuelight;
+          @include HN-Light;
           color:#333;
           width: 100%;
           border-bottom: 1px solid #eee;
@@ -230,7 +233,7 @@
         }
         .likes {
           padding-top: 5px;
-          font-family: Helveticaneuelight;
+          @include HN-Light;
           font-size: 30px;
           line-height: 35px;
           color: #66FF99;
@@ -262,7 +265,7 @@
   .no_posts {
     text-align: center;
     padding-top: 100px;
-    font-family: Helveticaneuebold;
+    @include HN-Bold;
     color: #dadada;
     font-size: 30px;
     display: none;
@@ -299,7 +302,7 @@
       opacity: 0;
     }
     a {
-      font-family: Helveticaneue;
+      @include HN-Regular;
       color: #222;
       white-space: pre;           /* CSS 2.0 */
       white-space: pre-wrap;      /* CSS 2.1 */
@@ -315,7 +318,7 @@
     }
     .body {
       color: #333;
-      font-family: Helveticaneue;
+      @include HN-Regular;
       font-size: 13px;
       line-height: 18px;
       overflow: scroll;
@@ -342,13 +345,13 @@
         font-size: 28px;
         color: #66FF99;
         line-height: 30px;
-        font-family: Helveticaneue;
+        @include HN-Regular;
         &.liked {
           color: #3399FF;
           span.unicode {
             &:hover {
               color: #e60000;
-              font-family: Helveticaneuelight;
+              @include HN-Light;
             }
           }
         }
@@ -365,7 +368,7 @@
         }
       }
       .author {
-        font-family: Helveticaneuelight;
+        @include HN-Light;
         font-size: 18px;
         line-height: 18px;
         padding-bottom: 3px;
@@ -397,7 +400,7 @@
     }
     .likes {
       padding-top: 5px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       font-size: 30px;
       line-height: 35px;
       color: #66FF99;
@@ -493,7 +496,7 @@
   .details {
     width: 100%;
     border-bottom: 1px solid #dadada;
-    font-family: Helveticaneuelight;
+    @include HN-Light;
     color: #666;
     overflow: auto;
     .user {
@@ -524,7 +527,7 @@
   .body {
     width: 100%;
     padding: 10px 0;
-    font-family: Helveticaneue;
+    @include HN-Regular;
     font-size: 20px;
     line-height: 30px;
     color: #333;

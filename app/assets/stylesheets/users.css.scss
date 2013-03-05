@@ -1,6 +1,9 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "mixins";
+
 .preferences {
   position: fixed;
   top: 0px;
@@ -34,7 +37,7 @@
       padding: 10px;
       margin: 0px;
       color: #fff;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       font-size: 18px;
       line-height: 30px;
     }
@@ -45,14 +48,14 @@
     label {
       font-size: 14px;
       color: #999;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       margin-bottom: 3px;
     }
     input {
       width: 255px;
       padding: 10px;
       font-size: 15px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       color: #333;
       border: 1px solid #ccc;
       outline: none;
@@ -70,7 +73,7 @@
       padding: 10px;
       font-size: 13px;
       line-height: 18px;
-      font-family: Helveticaneuelight;
+      @include HN-Light;
       color: #333;
       border: 1px solid #ccc;
       outline: none;
@@ -92,7 +95,7 @@
     color: #fff;
     text-align: center;
     border: 0px;
-    font-family: Helveticaneuelight;
+    @include HN-Light;
     margin-left: 10px;
     cursor: pointer;
     -webkit-transition: 0.2s;
