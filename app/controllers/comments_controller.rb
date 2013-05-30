@@ -94,8 +94,8 @@ class CommentsController < ApplicationController
     all_users = related_users - [@comment.user]
     users = all_users - [post_user]
     puts "users: #{users}"
-    users.map{ |user| UserMailer.new_related_comment_email(user, @comment).deliver }
-    UserMailer.new_comment_email(post_user, @comment).deliver
+    #users.map{ |user| UserMailer.new_related_comment_email(user, @comment).deliver }
+    #UserMailer.new_comment_email(post_user, @comment).deliver
     
     respond_to do |format|
       format.html

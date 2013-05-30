@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if @user.save
       @access_control = AccessControl.new(:team_id => params[:user][:team_id], :user_id => @user.id)
       if @access_control.save
-        UserMailer.welcome_email(@user).deliver
+        #UserMailer.welcome_email(@user).deliver
         redirect_to '/admin'
       else
         render :action => "new"

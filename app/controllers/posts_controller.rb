@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   def new_post_mailer
     @post = Post.find(params[:id])
     @users = @post.team.users
-    @users.map{ |user| UserMailer.new_post_email(user, @post).deliver }
+    #@users.map{ |user| UserMailer.new_post_email(user, @post).deliver }
     
     respond_to do |format|
       format.html
