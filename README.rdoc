@@ -1,1 +1,5 @@
 XS Collaborative (formerly called WEB) is a Ruby on Rails and Backbone.js application built to improve online collaboration between architects, designers, forestry students, and artists participating in the XS Project at Yale University.
+
+You can demo the app here: http://webproject.herokuapp.com
+
+Or see the promo site here: http://thewebproject.herokuapp.com
